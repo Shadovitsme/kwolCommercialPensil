@@ -20,7 +20,7 @@ function redirect() {
         <div
           class="w-full md:mr-16 grid grid-cols-1 md:grid-cols-4 gap-y-5 md:gap-y-5 md:gap-x-[52px]"
         >
-          <LabelAdditional v-for="item in arr" :text="item"></LabelAdditional>
+          <LabelAdditional :short="true" v-for="item in arr" :text="item"></LabelAdditional>
           <YellowButton
             type="button"
             class="w-full"

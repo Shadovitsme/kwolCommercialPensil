@@ -3,6 +3,7 @@ import mainData from '@/mainDataPage.vue'
 import mainPage from '@/main.vue'
 import ChooseYourRoom from '@/chooseYourRoom.vue'
 import WishPage from '@/wishPage.vue'
+import Rooms from '@/rooms.vue'
 
 const routes = [
   {
@@ -21,6 +22,7 @@ const routes = [
     component: ChooseYourRoom,
   },
   { path: '/wishPage', name: 'wishPage', component: WishPage },
+  { path: '/rooms', name: 'rooms', component: Rooms },
 ]
 
 const router = createRouter({

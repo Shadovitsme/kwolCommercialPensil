@@ -1,32 +1,45 @@
 <script setup>
-   import $ from 'jquery';
-import { ref } from 'vue';
-defineProps({
+import $ from 'jquery'
+import { ref } from 'vue'
+const props = defineProps({
   text: {
     type: String,
   },
+  short:{
+    type:Boolean
+  }
 })
 
 let count = ref(0)
 
-function plus () {
+function plus() {
   count.value = count.value + 1
   count.value = count.value >= 5 ? 5 : count.value
   return false
 }
 
-function minus () {
-    count.value = count.value - 1
+function minus() {
+  count.value = count.value - 1
   count.value = count.value <= 0 ? 0 : count.value
   return false
   return false
 }
+let padd
+let labelStyle
+if (props.short){
+  labelStyle='labelWrapper md:mr-5 w-full md:w-[220px] absolute md:static top-0 z-20 flex my-auto'
+padd = "md:flex md:h-[56px] md:static relative h-[143px]"
+}
+else{
+  labelStyle = "labelWrapper md:mr-5 w-full md:w-[460px] absolute md:static top-0 z-20 flex my-auto"
+  padd='md:flex md:h-[58px] mb-[32px] md:static relative h-[143px]'
+}
 </script>
 
 <template>
-  <div class="md:flex md:h-[56px] md:static relative h-[143px]">
+  <div :class="padd">
     <div
-      class="labelWrapper md:mr-5 w-full md:w-[220px] absolute md:static top-0 z-20 flex my-auto"
+      :class='labelStyle'
     >
       <p class="p3 Text my-auto">{{ text }}</p>
     </div>
@@ -36,7 +49,6 @@ function minus () {
       <button
         name="minusButton"
         :onclick="minus"
-
         type="button"
         class="disabled:opacity-50 h-[48px] w-[48px] shrink-0 my-auto minusButton"
       ></button>
