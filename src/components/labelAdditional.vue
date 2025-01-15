@@ -1,9 +1,26 @@
 <script setup>
+   import $ from 'jquery';
+import { ref } from 'vue';
 defineProps({
   text: {
     type: String,
   },
 })
+
+let count = ref(0)
+
+function plus () {
+  count.value = count.value + 1
+  count.value = count.value >= 5 ? 5 : count.value
+  return false
+}
+
+function minus () {
+    count.value = count.value - 1
+  count.value = count.value <= 0 ? 0 : count.value
+  return false
+  return false
+}
 </script>
 
 <template>
@@ -18,12 +35,15 @@ defineProps({
     >
       <button
         name="minusButton"
+        :onclick="minus"
+
         type="button"
         class="disabled:opacity-50 h-[48px] w-[48px] shrink-0 my-auto minusButton"
       ></button>
-      <input class="input text-center h-14 my-auto md:w-[52px] mx-3" value="0" />
+      <input class="input text-center h-14 my-auto md:w-[52px] mx-3" :value="count" />
       <button
         type="button"
+        :onclick="plus"
         name="plusButton"
         class="disabled:opacity-50 h-[48px] w-[48px] shrink-0 my-auto plusButton"
       ></button>

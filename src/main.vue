@@ -1,11 +1,12 @@
 <script setup>
 import YellowButton from './components/yellowButton.vue'
-import router from './router';
+import router from './router'
 </script>
 
 <script>
 function redirect() {
-    router.replace({ path: '/mainData' })}
+  router.replace({ path: '/mainData' })
+}
 </script>
 
 <template>
@@ -29,7 +30,7 @@ function redirect() {
             <input class="input" type="text" name="city" placeholder="Ваш город" />
             <YellowButton
               :onclick="redirect"
-              class="mt-[34px]"
+              class="mt-[34px] md:w-[318px]"
               text="Перейти к брифу"
             ></YellowButton>
           </form>

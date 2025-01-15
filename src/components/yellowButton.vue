@@ -1,15 +1,16 @@
 <script setup>
-defineProps({
+const props = defineProps({
   text: {
     type: String,
   },
+  arrow:{type: Boolean, require:false}
 })
 </script>
 <template>
-  <button class="md:w-[318px] w-full h-[40px] md:h-[60px] flex yellowButton" type="submit">
+  <button class=" h-[40px] md:h-[60px] flex yellowButton" type="submit">
     <div class="flex mx-auto my-auto">
       <p class="p3">{{ text }}</p>
-      <div class="rightArrow md:visible md:block hidden h-6 w-6 ml-6 mt-1"></div>
+      <div v-if="props.arrow" class="rightArrow md:visible md:block hidden h-6 w-6 ml-6 mt-1"></div>
     </div>
   </button>
 </template>
