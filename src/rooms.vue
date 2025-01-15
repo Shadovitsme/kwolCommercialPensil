@@ -2,26 +2,25 @@
 import LabelGroup from './components/labelGroup.vue'
 import YellowButton from './components/yellowButton.vue'
 import $ from 'jquery'
-import { jquery } from 'globals';
+import { jquery } from 'globals'
 
-function work(e) {
-    e.preventDefault();
+function sendRoomData(e) {
+  e.preventDefault()
 
-
-    $.ajax({
-      url: "http://localhost:8000/save_data.php ",
-      type: "POST",
-      data: {
-        funk: "addNamePhone",
-        name: '$(this)[0][0].value',
-        phone: '$(this)[0][1].value',
-        town: '$(this)[0][2].value',
-      },
-      success: function (data) {
-        console.log(data);
-      },
-    });
-  }
+  $.ajax({
+    url: 'http://localhost:8000/save_data.php ',
+    type: 'POST',
+    data: {
+      funk: 'addNamePhone',
+      name: '$(this)[0][0].value',
+      phone: '$(this)[0][1].value',
+      town: '$(this)[0][2].value',
+    },
+    success: function (data) {
+      console.log(data)
+    },
+  })
+}
 
 let textArray = [
   'Ресепшн',
@@ -61,11 +60,7 @@ let textArray = [
                 placeholder="Опишите предпочтения по отделке потолков (натяжной, подвесной, многоуровневый, или просто окрашенный.) Укажите предпочтения по материалам и цвету. Если нужен декоративный элемент (карнизы, лепнина, балки), уточните."
               ></textarea>
               <p class="p4 Text mb-2">Метраж помещения</p>
-              <input
-                class="input mb-3"
-                type="number"
-                placeholder="Если есть другие пожелания, опишите их здесь"
-              ></input>
+              <input class="input mb-3" type="number" placeholder="Укажите число" />
               <p class="p4 Text mb-2">Другое</p>
               <textarea
                 class="textarea h-[140px]"
@@ -76,11 +71,7 @@ let textArray = [
           </div>
         </div>
         <div class="w-full flex md:justify-end mt-9 md:mt-12">
-          <YellowButton
-          :onclick="work"
-            class="mt-[34px] md:w-[212px]"
-            text="Далее"
-          ></YellowButton>
+          <YellowButton :onclick="sendRoomData" class="mt-[34px] md:w-[212px]" text="Далее"></YellowButton>
         </div>
       </form>
     </div>

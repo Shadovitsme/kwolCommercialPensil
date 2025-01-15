@@ -1,12 +1,26 @@
 <script setup>
 import YellowButton from './components/yellowButton.vue'
 import router from './router'
-</script>
+import $ from 'jquery'
+import { jquery } from 'globals'
 
-<script>
-function redirect() {
-  router.replace({ path: '/mainData' })
-}
+function getFormValues(e){
+$.ajax({
+  url: 'http://localhost:8000/save_data.php ',
+  type: 'POST',
+  data: {
+    funk: 'addNamePhone',
+    name: e.target[0].value,
+    phone: e.target[1].value,
+    town: e.target[2].value,
+  },
+  success: function (data) {
+    console.log(data)
+  },
+})}
+
+  // router.replace({ path: '/mainData' })
+
 </script>
 
 <template>
@@ -24,12 +38,11 @@ function redirect() {
         </p>
         <div class="md:p-[60px] p-5 md:ml-1 border-[1px] border-[#E4A85E] rounded-[10px]">
           <h class="H3 Text uppercase"> Основные данные</h>
-          <form class="md:mt-8 mt-4" id="page1">
+          <form @submit.prevent="getFormValues" class="md:mt-8 mt-4" id="page1">
             <input type="text" class="input mb-6" name="name" placeholder="Введите имя" />
             <input class="input mb-6" type="tel" name="phone" placeholder="Введите телефон" />
             <input class="input" type="text" name="city" placeholder="Ваш город" />
             <YellowButton
-              :onclick="redirect"
               class="mt-[34px] md:w-[318px]"
               text="Перейти к брифу"
             ></YellowButton>
