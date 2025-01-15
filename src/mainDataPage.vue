@@ -92,7 +92,7 @@ function redirect() {
           <p class="H6 Accent">Количество рабочих мест</p>
           <input class="input mb-4 md:mb-10" type="number" placeholder="Укажите число" />
           <div class="w-full md:mt-[75px] flex md:justify-end">
-            <YellowButton :onclick="redirect" text="Далее"></YellowButton>
+            <YellowButton class=" md:w-[212px]" :onclick="redirect" text="Далее"></YellowButton>
           </div>
         </div>
       </form>
