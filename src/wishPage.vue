@@ -1,5 +1,5 @@
 <template>
-<div class="flex px-[22px] md:px-[100px]">
+  <div class="flex px-[22px] md:px-[100px]">
     <div class="md:mx-auto w-full max-w-[1920px]">
       <h1 class="H1 Text mb-10 uppercase">Пожелания ко всем комнатам</h1>
       <form id="wishPage">
@@ -28,18 +28,10 @@
             ></textarea>
 
             <p class="p4 Text mb-2">Бюджет на помещение</p>
-            <input
-              class="input mb-5"
-              type="text"
-              placeholder="Укажите в рублях"
-            />
+            <input class="input mb-5" type="text" placeholder="Укажите в рублях" />
 
             <p class="p4 Text mb-2">Ограничения по срокам</p>
-            <input
-              class="input mb-5"
-              type="text"
-              placeholder="Укажите в днях"
-            />
+            <input class="input mb-5" type="text" placeholder="Укажите в днях" />
           </div>
           <div class="md:w-[828px]">
             <p class="p4 mb-2 Text">Кондиционирование</p>
@@ -49,8 +41,7 @@
               placeholder="Опишите зоны, в которых нужно кондиционирование"
             />
             <p class="p4 Text mb-2">
-              Какой стиль вы хотите видеть? Какие цвета должны преобладать
-              в интерьере?
+              Какой стиль вы хотите видеть? Какие цвета должны преобладать в интерьере?
             </p>
             <textarea
               class="textarea mb-5"
@@ -59,18 +50,10 @@
             ></textarea>
 
             <p class="p4 Text mb-2">Хочу видеть в будущем интерьере:</p>
-            <textarea
-              class="textarea mb-5"
-              placeholder="Опишите как можно подробнее"
-            ></textarea>
+            <textarea class="textarea mb-5" placeholder="Опишите как можно подробнее"></textarea>
 
-            <p class="p4 Text mb-2">
-              Категорически не хочу видеть в будущем интерьере:
-            </p>
-            <textarea
-              class="textarea mb-5"
-              placeholder="Опишите как можно подробнее"
-            ></textarea>
+            <p class="p4 Text mb-2">Категорически не хочу видеть в будущем интерьере:</p>
+            <textarea class="textarea mb-5" placeholder="Опишите как можно подробнее"></textarea>
 
             <p class="p4 Text mb-2">Дополнительный комментарий</p>
             <textarea
@@ -82,7 +65,7 @@
               <button class="yellowButton w-full md:w-[212px] h-10 md:h-[60px] flex" type="submit">
                 <div class="flex mx-auto my-auto">
                   <p class="p3">Далее</p>
-                <div class="rightArrow h-6 w-6 ml-6 md:visible hidden md:block"></div>
+                  <div class="rightArrow h-6 w-6 ml-6 md:visible hidden md:block"></div>
                 </div>
               </button>
             </div>
@@ -90,6 +73,5 @@
         </div>
       </form>
     </div>
-</div>
-
+  </div>
 </template>

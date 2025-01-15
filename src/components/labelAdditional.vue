@@ -5,9 +5,9 @@ const props = defineProps({
   text: {
     type: String,
   },
-  short:{
-    type:Boolean
-  }
+  short: {
+    type: Boolean,
+  },
 })
 
 let count = ref(0)
@@ -26,21 +26,18 @@ function minus() {
 }
 let padd
 let labelStyle
-if (props.short){
-  labelStyle='labelWrapper md:mr-5 w-full md:w-[220px] absolute md:static top-0 z-20 flex my-auto'
-padd = "md:flex md:h-[56px] md:static relative h-[143px]"
-}
-else{
-  labelStyle = "labelWrapper md:mr-5 w-full md:w-[460px] absolute md:static top-0 z-20 flex my-auto"
-  padd='md:flex md:h-[58px] mb-[32px] md:static relative h-[143px]'
+if (props.short) {
+  labelStyle = 'labelWrapper md:mr-5 w-full md:w-[220px] absolute md:static top-0 z-20 flex my-auto'
+  padd = 'md:flex md:h-[56px] md:static relative h-[143px]'
+} else {
+  labelStyle = 'labelWrapper md:mr-5 w-full md:w-[460px] absolute md:static top-0 z-20 flex my-auto'
+  padd = 'md:flex md:h-[58px] mb-[32px] md:static relative h-[143px]'
 }
 </script>
 
 <template>
   <div :class="padd">
-    <div
-      :class='labelStyle'
-    >
+    <div :class="labelStyle">
       <p class="p3 Text my-auto">{{ text }}</p>
     </div>
     <div

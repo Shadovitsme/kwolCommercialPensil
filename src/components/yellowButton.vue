@@ -3,14 +3,17 @@ const props = defineProps({
   text: {
     type: String,
   },
-  arrow:{type: Boolean, require:false}
+  arrow: { type: Boolean, require: false },
 })
 </script>
 <template>
-  <button class=" h-[40px] md:h-[60px] flex yellowButton">
+  <button class="h-[40px] md:h-[60px] flex yellowButton">
     <div class="flex mx-auto my-auto">
       <p class="p3">{{ text }}</p>
-      <div v-if="!props.arrow" class="rightArrow md:visible md:block hidden h-6 w-6 ml-6 mt-1"></div>
+      <div
+        v-if="!props.arrow"
+        class="rightArrow md:visible md:block hidden h-6 w-6 ml-6 mt-1"
+      ></div>
     </div>
   </button>
 </template>

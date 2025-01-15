@@ -12,7 +12,7 @@ console.log(props.textArray.length)
 if (props.textArray.length > 7) {
   gridStyle =
     'w-full md:w-[964px] md:mr-[64px] grid grid-cols-1 md:grid-cols-2 gap-y-5 md:gap-y-[32px] md:gap-x-[52px]'
-    short = true
+  short = true
 } else {
   gridStyle = 'md:w-[652px] md:mr-[64px]'
   short = false
