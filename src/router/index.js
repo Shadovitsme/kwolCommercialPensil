@@ -1,6 +1,7 @@
 import { createWebHistory, createRouter } from 'vue-router'
-import Home from '@/secondPage.vue'
-import mainPage from '@/mainPage.vue'
+import mainData from '@/mainDataPage.vue'
+import mainPage from '@/main.vue'
+import ChooseYourRoom from '@/chooseYourRoom.vue'
 
 const routes = [
   {
@@ -9,9 +10,14 @@ const routes = [
     component: mainPage,
   },
   {
-    path: '/test',
-    name: 'Home',
-    component: Home,
+    path: '/mainData',
+    name: 'data',
+    component: mainData,
+  },
+  {
+    path: '/chooseRoom',
+    name: 'chooseRoom',
+    component: ChooseYourRoom,
   },
 ]
 

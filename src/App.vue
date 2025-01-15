@@ -1,6 +1,6 @@
 <script setup>
 import YellowButton from './components/yellowButton.vue'
-import MainPage from './mainPage.vue';
+import MainPage from './main.vue';
 </script>
 
 <script>

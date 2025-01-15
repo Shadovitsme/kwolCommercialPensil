@@ -1,0 +1,300 @@
+<template>
+  <div class="flex px-[22px] md:px-[100px]">
+    <div class="md:mx-auto w-full max-w-[1920px]">
+      <form id="page3" class="w-full h-full">
+        <h1 class="H1 Text pb-10 uppercase">Выберите комнаты</h1>
+        <div class="md:flex w-full">
+          <div
+            class="w-full md:w-[876px] md:mr-16 grid grid-cols-1 md:grid-cols-2 gap-y-5 md:gap-y-5 md:gap-x-[52px]"
+          >
+            <div class="md:flex md:h-[56px] md:static relative h-[143px]">
+              <div
+                class="labelWrapper md:mr-5 w-full md:w-[220px] absolute md:static top-0 z-20 flex my-auto"
+              >
+                <p class="p3 Text my-auto">Прихожая</p>
+              </div>
+              <div
+                class="flex justify-center md:no-flex md:border-0 border-b-[1px] md:static absolute top-10 border-x-[1px] md:p-0 px-4 py-6 border-QuietText rounded-b-[5px]"
+              >
+                <button
+                  name="minusButton"
+                  type="button"
+                  class="disabled:opacity-50 h-[48px] w-[48px] shrink-0 my-auto minusButton"
+                ></button>
+                <input class="input text-center h-14 my-auto md:w-[52px] mx-3" value="0" />
+                <button
+                  type="button"
+                  name="plusButton"
+                  class="disabled:opacity-50 h-[48px] w-[48px] shrink-0 my-auto plusButton"
+                ></button>
+              </div>
+            </div>
+
+            <div class="md:flex md:h-[56px] md:static relative h-[143px]">
+              <div
+                class="labelWrapper md:mr-5 w-full md:w-[220px] absolute md:static top-0 z-20 flex my-auto"
+              >
+                <p class="p3 Text my-auto">Детская</p>
+              </div>
+              <div
+                class="flex justify-center md:no-flex md:border-0 border-b-[1px] md:static absolute top-10 border-x-[1px] md:p-0 px-4 py-6 border-QuietText rounded-b-[5px]"
+              >
+                <button
+                  name="minusButton"
+                  type="button"
+                  class="disabled:opacity-50 h-[48px] w-[48px] shrink-0 my-auto minusButton"
+                ></button>
+                <input class="input text-center h-14 my-auto md:w-[52px] mx-3" value="0" />
+                <button
+                  type="button"
+                  name="plusButton"
+                  class="disabled:opacity-50 h-[48px] w-[48px] shrink-0 my-auto plusButton"
+                ></button>
+              </div>
+            </div>
+            <div class="md:flex md:h-[56px] md:static relative h-[143px]">
+              <div
+                class="labelWrapper md:mr-5 w-full md:w-[220px] absolute md:static top-0 z-20 flex my-auto"
+              >
+                <p class="p3 Text my-auto">Кухня</p>
+              </div>
+              <div
+                class="flex justify-center md:no-flex md:border-0 border-b-[1px] md:static absolute top-10 border-x-[1px] md:p-0 px-4 py-6 border-QuietText rounded-b-[5px]"
+              >
+                <button
+                  name="minusButton"
+                  type="button"
+                  class="disabled:opacity-50 h-[48px] w-[48px] shrink-0 my-auto minusButton"
+                ></button>
+                <input class="input text-center h-14 my-auto md:w-[52px] mx-3" value="0" />
+                <button
+                  type="button"
+                  name="plusButton"
+                  class="disabled:opacity-50 h-[48px] w-[48px] shrink-0 my-auto plusButton"
+                ></button>
+              </div>
+            </div>
+            <div class="md:flex md:h-[56px] md:static relative h-[143px]">
+              <div
+                class="labelWrapper md:mr-5 w-full md:w-[220px] absolute md:static top-0 z-20 flex my-auto"
+              >
+                <p class="p3 Text my-auto">Гостиная</p>
+              </div>
+              <div
+                class="flex justify-center md:no-flex md:border-0 border-b-[1px] md:static absolute top-10 border-x-[1px] md:p-0 px-4 py-6 border-QuietText rounded-b-[5px]"
+              >
+                <button
+                  name="minusButton"
+                  type="button"
+                  class="disabled:opacity-50 h-[48px] w-[48px] shrink-0 my-auto minusButton"
+                ></button>
+                <input class="input text-center h-14 my-auto md:w-[52px] mx-3" value="0" />
+                <button
+                  type="button"
+                  name="plusButton"
+                  class="disabled:opacity-50 h-[48px] w-[48px] shrink-0 my-auto plusButton"
+                ></button>
+              </div>
+            </div>
+            <div class="md:flex md:h-[56px] md:static relative h-[143px]">
+              <div
+                class="labelWrapper md:mr-5 w-full md:w-[220px] absolute md:static top-0 z-20 flex my-auto"
+              >
+                <p class="p3 Text my-auto">Спальня</p>
+              </div>
+              <div
+                class="flex justify-center md:no-flex md:border-0 border-b-[1px] md:static absolute top-10 border-x-[1px] md:p-0 px-4 py-6 border-QuietText rounded-b-[5px]"
+              >
+                <button
+                  name="minusButton"
+                  type="button"
+                  class="disabled:opacity-50 h-[48px] w-[48px] shrink-0 my-auto minusButton"
+                ></button>
+                <input class="input text-center h-14 my-auto md:w-[52px] mx-3" value="0" />
+                <button
+                  type="button"
+                  name="plusButton"
+                  class="disabled:opacity-50 h-[48px] w-[48px] shrink-0 my-auto plusButton"
+                ></button>
+              </div>
+            </div>
+            <div class="md:flex md:h-[56px] md:static relative h-[143px]">
+              <div
+                class="labelWrapper md:mr-5 w-full md:w-[220px] absolute md:static top-0 z-20 flex my-auto"
+              >
+                <p class="p3 Text my-auto">Гардеробная</p>
+              </div>
+              <div
+                class="flex justify-center md:no-flex md:border-0 border-b-[1px] md:static absolute top-10 border-x-[1px] md:p-0 px-4 py-6 border-QuietText rounded-b-[5px]"
+              >
+                <button
+                  name="minusButton"
+                  type="button"
+                  class="disabled:opacity-50 h-[48px] w-[48px] shrink-0 my-auto minusButton"
+                ></button>
+                <input class="input text-center h-14 my-auto md:w-[52px] mx-3" value="0" />
+                <button
+                  type="button"
+                  name="plusButton"
+                  class="disabled:opacity-50 h-[48px] w-[48px] shrink-0 my-auto plusButton"
+                ></button>
+              </div>
+            </div>
+            <div class="md:flex md:h-[56px] md:static relative h-[143px]">
+              <div
+                class="labelWrapper md:mr-5 w-full md:w-[220px] absolute md:static top-0 z-20 flex my-auto"
+              >
+                <p class="p3 Text my-auto">Балкон</p>
+              </div>
+              <div
+                class="flex justify-center md:no-flex md:border-0 border-b-[1px] md:static absolute top-10 border-x-[1px] md:p-0 px-4 py-6 border-QuietText rounded-b-[5px]"
+              >
+                <button
+                  name="minusButton"
+                  type="button"
+                  class="disabled:opacity-50 h-[48px] w-[48px] shrink-0 my-auto minusButton"
+                ></button>
+                <input class="input text-center h-14 my-auto md:w-[52px] mx-3" value="0" />
+                <button
+                  type="button"
+                  name="plusButton"
+                  class="disabled:opacity-50 h-[48px] w-[48px] shrink-0 my-auto plusButton"
+                ></button>
+              </div>
+            </div>
+            <div class="md:flex md:h-[56px] md:static relative h-[143px]">
+              <div
+                class="labelWrapper md:mr-5 w-full md:w-[220px] absolute md:static top-0 z-20 flex my-auto"
+              >
+                <p class="p3 Text my-auto">Столовая</p>
+              </div>
+              <div
+                class="flex justify-center md:no-flex md:border-0 border-b-[1px] md:static absolute top-10 border-x-[1px] md:p-0 px-4 py-6 border-QuietText rounded-b-[5px]"
+              >
+                <button
+                  name="minusButton"
+                  type="button"
+                  class="disabled:opacity-50 h-[48px] w-[48px] shrink-0 my-auto minusButton"
+                ></button>
+                <input class="input text-center h-14 my-auto md:w-[52px] mx-3" value="0" />
+                <button
+                  type="button"
+                  name="plusButton"
+                  class="disabled:opacity-50 h-[48px] w-[48px] shrink-0 my-auto plusButton"
+                ></button>
+              </div>
+            </div>
+            <div class="md:flex md:h-[56px] md:static relative h-[143px]">
+              <div
+                class="labelWrapper md:mr-5 w-full md:w-[220px] absolute md:static top-0 z-20 flex my-auto"
+              >
+                <p class="p3 Text my-auto">Кладовая</p>
+              </div>
+              <div
+                class="flex justify-center md:no-flex md:border-0 border-b-[1px] md:static absolute top-10 border-x-[1px] md:p-0 px-4 py-6 border-QuietText rounded-b-[5px]"
+              >
+                <button
+                  name="minusButton"
+                  type="button"
+                  class="disabled:opacity-50 h-[48px] w-[48px] shrink-0 my-auto minusButton"
+                ></button>
+                <input class="input text-center h-14 my-auto md:w-[52px] mx-3" value="0" />
+                <button
+                  type="button"
+                  name="plusButton"
+                  class="disabled:opacity-50 h-[48px] w-[48px] shrink-0 my-auto plusButton"
+                ></button>
+              </div>
+            </div>
+            <div class="md:flex md:h-[56px] md:static relative h-[143px]">
+              <div
+                class="labelWrapper md:mr-5 w-full md:w-[220px] absolute md:static top-0 z-20 flex my-auto"
+              >
+                <p class="p3 Text my-auto">Ванная</p>
+              </div>
+              <div
+                class="flex justify-center md:no-flex md:border-0 border-b-[1px] md:static absolute top-10 border-x-[1px] md:p-0 px-4 py-6 border-QuietText rounded-b-[5px]"
+              >
+                <button
+                  name="minusButton"
+                  type="button"
+                  class="disabled:opacity-50 h-[48px] w-[48px] shrink-0 my-auto minusButton"
+                ></button>
+                <input class="input text-center h-14 my-auto md:w-[52px] mx-3" value="0" />
+                <button
+                  type="button"
+                  name="plusButton"
+                  class="disabled:opacity-50 h-[48px] w-[48px] shrink-0 my-auto plusButton"
+                ></button>
+              </div>
+            </div>
+            <div class="md:flex md:h-[56px] md:static relative h-[143px]">
+              <div
+                class="labelWrapper md:mr-5 w-full md:w-[220px] absolute md:static top-0 z-20 flex my-auto"
+              >
+                <p class="p3 Text my-auto">Кабинет</p>
+              </div>
+              <div
+                class="flex justify-center md:no-flex md:border-0 border-b-[1px] md:static absolute top-10 border-x-[1px] md:p-0 px-4 py-6 border-QuietText rounded-b-[5px]"
+              >
+                <button
+                  name="minusButton"
+                  type="button"
+                  class="disabled:opacity-50 h-[48px] w-[48px] shrink-0 my-auto minusButton"
+                ></button>
+                <input class="input text-center h-14 my-auto md:w-[52px] mx-3" value="0" />
+                <button
+                  type="button"
+                  name="plusButton"
+                  class="disabled:opacity-50 h-[48px] w-[48px] shrink-0 my-auto plusButton"
+                ></button>
+              </div>
+            </div>
+            <div class="md:flex md:h-[56px] md:static relative h-[143px]">
+              <div
+                class="labelWrapper md:mr-5 w-full md:w-[220px] absolute md:static top-0 z-20 flex my-auto"
+              >
+                <p class="p3 Text my-auto">Гост. санузел</p>
+              </div>
+              <div
+                class="flex justify-center md:no-flex md:border-0 border-b-[1px] md:static absolute top-10 border-x-[1px] md:p-0 px-4 py-6 border-QuietText rounded-b-[5px]"
+              >
+                <button
+                  name="minusButton"
+                  type="button"
+                  class="disabled:opacity-50 h-[48px] w-[48px] shrink-0 my-auto minusButton"
+                ></button>
+                <input class="input text-center h-14 my-auto md:w-[52px] mx-3" value="0" />
+                <button
+                  type="button"
+                  name="plusButton"
+                  class="disabled:opacity-50 h-[48px] w-[48px] shrink-0 my-auto plusButton"
+                ></button>
+              </div>
+            </div>
+          </div>
+          <div class="md:w-[780px] w-full">
+            <p class="p4 Text mt-5 md:mb-0 pb-2">Другое</p>
+            <textarea
+              class="textarea w-full mb-3"
+              placeholder="Если нужны другие комнаты, опишите их здесь"
+            ></textarea>
+            <div>
+              <input type="checkbox" checked="true" class="check" /><label class="p3 Text"
+                >Другие комнаты не нужны</label
+              >
+            </div>
+          </div>
+        </div>
+        <div class="w-full flex md:justify-end mt-9 md:mt-12">
+          <button class="yellowButton w-full md:w-[212px] h-10 md:h-[60px] flex" type="submit">
+            <div class="flex mx-auto my-auto">
+              <p class="p3">Далее</p>
+              <div class="rightArrow h-6 w-6 ml-6 md:visible hidden md:block"></div>
+            </div>
+          </button>
+        </div>
+      </form>
+    </div>
+</div>
+</template>

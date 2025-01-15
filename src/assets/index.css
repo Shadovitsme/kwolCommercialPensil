@@ -125,15 +125,7 @@ body {
 
 /* button style */
 
-.labelWrapper {
-  background-color: var(--DarkAccent);
-  border-width: 1px;
-  border-color: var(--Accent);
-  border-radius: 5px;
-  padding-block: 12px;
-  padding-left: 16px;
-  height: 48px;
-}
+
 
 /* input medium */
 .input {
@@ -384,8 +376,5 @@ body {
     line-height: 20px;
   }
 
-  .labelWrapper {
-    height: 44px;
-    padding-left: 12px;
-  }
+
 }

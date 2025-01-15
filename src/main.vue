@@ -1,15 +1,15 @@
 <script setup>
 import YellowButton from './components/yellowButton.vue'
+import router from './router';
 </script>
 
 <script>
 function redirect() {
-  alert('hi')
-}
+    router.replace({ path: '/mainData' })}
 </script>
 
 <template>
-    <div class="flex px-[22px] md:px-0">
+  <div class="flex px-[22px] md:px-0">
     <div class="flex md:justify-between md:mx-auto max-w-[1920px] z-20">
       <div class="md:ml-[100px] md:w-full">
         <div class="mt-10 md:w-[51.75rem] md:ml-5">
