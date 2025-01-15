@@ -1,3 +1,391 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --background: #0c0c0c;
+  --DarkAccent: #111111;
+  --QuietText: #7e7a72;
+  --Accent: #e4a85e;
+  --BrightAccent: #f99d2b;
+  --Text: #f5f2ec;
+}
+
+body {
+  background-color: var(--background);
+  background-size: cover;
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyMCIgaGVpZ2h0PSIxMDgwIiB2aWV3Qm94PSIwIDAgMTkyMCAxMDgwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cGF0aCBkPSJNNjIuNDgxNyAyNzAuMDA1QzU3LjYyOTcgMjIxLjc4NCAxOS4zMTQ5IDE4My40NTcgLTI4Ljg0NTkgMTc4LjY4OEMxOS40Mzk0IDE3My45MDcgNTcuODI4MyAxMzUuMzkzIDYyLjUxODIgODYuOTk1OUM2Ny4zNjk5IDEzNS4yMTcgMTA1LjY4NSAxNzMuNTQzIDE1My44NDYgMTc4LjMxMkMxMDUuNTYgMTgzLjA5MyA2Ny4xNzEzIDIyMS42MDggNjIuNDgxNyAyNzAuMDA1WiIgc3Ryb2tlPSIjRTRBODVFIiBzdHJva2Utb3BhY2l0eT0iMC40Ii8+CjxwYXRoIGQ9Ik0xMjE2Ljk4IDQ3NC41MUMxMjExLjg0IDQyMC44OTYgMTE2OS4yMSAzNzguMjUzIDExMTUuNjcgMzczLjIwOEMxMTY5LjM1IDM2OC4xNDkgMTIxMi4wNiAzMjUuMjk4IDEyMTcuMDIgMjcxLjQ5MUMxMjIyLjE2IDMyNS4xMDQgMTI2NC43OSAzNjcuNzQ3IDEzMTguMzMgMzcyLjc5MkMxMjY0LjY1IDM3Ny44NTEgMTIyMS45NCA0MjAuNzAyIDEyMTYuOTggNDc0LjUxWiIgc3Ryb2tlPSIjRTRBODVFIiBzdHJva2Utb3BhY2l0eT0iMC40Ii8+CjxwYXRoIGQ9Ik0xNTMwLjk4IDI4My4yNDRDMTUyNC41MSAyMDEuMTIzIDE0NTkuMDQgMTM1LjYzIDEzNzcuMDMgMTI5LjMwOUMxNDU5LjI1IDEyMi45NzMgMTUyNC44NCA1Ny4xNjU5IDE1MzEuMDIgLTI1LjI0MjZDMTUzNy40OSA1Ni44NzcyIDE2MDIuOTYgMTIyLjM3IDE2ODQuOTcgMTI4LjY5MUMxNjAyLjc1IDEzNS4wMjcgMTUzNy4xNiAyMDAuODM1IDE1MzAuOTggMjgzLjI0NFoiIHN0cm9rZT0iI0U0QTg1RSIgc3Ryb2tlLW9wYWNpdHk9IjAuNCIvPgo8cGF0aCBkPSJNOTExLjQ4IDExMTkuOTVDOTA2LjAxNyAxMDU5Ljg5IDg1OC4yMjggMTAxMi4wOSA3OTguMjQ3IDEwMDYuNzNDODU4LjM4MSAxMDAxLjM2IDkwNi4yNjEgOTUzLjMyMyA5MTEuNTIgODkzLjA0OUM5MTYuOTgzIDk1My4xMDcgOTY0Ljc3MiAxMDAwLjkxIDEwMjQuNzUgMTAwNi4yN0M5NjQuNjE4IDEwMTEuNjQgOTE2LjczOSAxMDU5LjY4IDkxMS40OCAxMTE5Ljk1WiIgc3Ryb2tlPSIjRTRBODVFIiBzdHJva2Utb3BhY2l0eT0iMC40Ii8+Cjwvc3ZnPg==');
+  padding-top: 100px;
+}
+
+.rightArrow {
+  background: no-repeat
+    url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxMCAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEuNDUxMTcgMC45MTg0NTdMNy45NzExNyA3LjQzODQ2QzguNzQxMTcgOC4yMDg0NiA4Ljc0MTE3IDkuNDY4NDYgNy45NzExNyAxMC4yMzg1TDEuNDUxMTcgMTYuNzU4NSIgc3Ryb2tlPSIjMTExMTExIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPC9zdmc+Cg==');
+}
+
+.plusButton {
+  background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3QgeD0iMC41IiB5PSIwLjUiIHdpZHRoPSI0NyIgaGVpZ2h0PSI0NyIgcng9IjIzLjUiIHN0cm9rZT0iI0Y1RjJFQyIvPgo8cGF0aCBkPSJNMTQuNSAyNEgzMy41IiBzdHJva2U9IiNGNUYyRUMiIHN0cm9rZS13aWR0aD0iMC45NDczNjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8cGF0aCBkPSJNMjQgMzMuNVYxNC41IiBzdHJva2U9IiNGNUYyRUMiIHN0cm9rZS13aWR0aD0iMC45NDczNjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8L3N2Zz4K');
+}
+
+.minusButton {
+  background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3QgeD0iMC41IiB5PSIwLjUiIHdpZHRoPSI0NyIgaGVpZ2h0PSI0NyIgcng9IjIzLjUiIHN0cm9rZT0iI0Y1RjJFQyIvPgo8cGF0aCBkPSJNMTQuNSAyNEgzMy41IiBzdHJva2U9IiNGNUYyRUMiIHN0cm9rZS13aWR0aD0iMC45NDczNjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8L3N2Zz4=');
+}
+
+.H1 {
+  font-family: Cruinn;
+  font-weight: 300;
+  font-size: 60px;
+  line-height: 60px;
+}
+
+.H2 {
+  font-family: Cruinn;
+
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 40px;
+}
+
+.H3 {
+  font-family: Cruinn;
+
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 32px;
+}
+
+.H4 {
+  font-family: Cruinn;
+
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 38.4px;
+}
+
+.H5 {
+  font-family: Cruinn;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 24px;
+}
+
+.H6 {
+  font-family: Cruinn;
+
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 38px;
+}
+
+.p1 {
+  font-family: 'Corsa Grotesk Regular';
+
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 36px;
+}
+
+.p2 {
+  font-family: 'Corsa Grotesk Regular';
+
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.p3 {
+  font-family: 'Corsa Grotesk Regular';
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.p4 {
+  font-family: 'Corsa Grotesk Regular';
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.p5 {
+  font-family: 'Corsa Grotesk Regular';
+
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 12%px;
+}
+
+.Accent {
+  color: var(--Accent);
+}
+
+.Text {
+  color: var(--Text);
+}
+
+/* button style */
+
+.labelWrapper {
+  background-color: var(--DarkAccent);
+  border-width: 1px;
+  border-color: var(--Accent);
+  border-radius: 5px;
+  padding-block: 12px;
+  padding-left: 16px;
+  height: 48px;
+}
+
+/* input medium */
+.input {
+  background-color: var(--DarkAccent);
+  padding: 20px;
+  height: 68px;
+  width: 100%;
+  color: var(--Text);
+  border-radius: 5px;
+  vertical-align: top;
+}
+
+.textarea {
+  background-color: var(--DarkAccent);
+  padding: 20px;
+  height: 140px;
+  width: 100%;
+  color: var(--Text);
+  border-radius: 5px;
+  vertical-align: top;
+}
+
+.textarea::placeholder {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--QuietText);
+}
+
+.textarea:focus {
+  border-color: var(--Accent);
+  outline: none;
+  border-width: 1px;
+}
+
+.textarea:active {
+  border-color: var(--Accent);
+  outline: none;
+  border-width: 1px;
+}
+
+.speciall {
+  color: var(--Accent);
+  font-family: Nexa;
+  font-weight: 400;
+  font-size: 104px;
+  line-height: 72px;
+}
+
+.input::placeholder {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--QuietText);
+}
+
+.input:focus {
+  border-color: var(--Accent);
+  outline: none;
+  border-width: 1px;
+}
+
+.input:active {
+  border-color: var(--Accent);
+  outline: none;
+  border-width: 1px;
+}
+
+.input:focus::placeholder {
+  transform: translateY(-20px);
+  font-size: 12px;
+  line-height: 12px;
+}
+
+.check {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  border-radius: 4px;
+  width: 16px;
+  height: 16px;
+
+  border: 2px solid #999;
+  transition: 0.2s all linear;
+  outline: none;
+  margin-right: 4px;
+}
+
+.check:checked {
+  border-color: var(--Accent);
+  background-color: var(--Accent);
+}
+
+.radio {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+
+  border: 2px solid #999;
+  transition: 0.2s all linear;
+  outline: none;
+  margin-right: 4px;
+}
+
+.radio:checked {
+  border: 8px solid var(--Accent);
+}
+
+/* Подключение шрифта Cruinn */
+@font-face {
+  font-family: 'Cruinn';
+  src: url('./fonts/Cruinn Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Cruinn';
+  src: url('./fonts/Cruinn Thin.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Cruinn';
+  src: url('./fonts/Cruinn Light.ttf') format('truetype');
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Cruinn';
+  src: url('./fonts/Cruinn Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Cruinn';
+  src: url('./fonts/Cruinn Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Cruinn';
+  src: url('./fonts/Cruinn Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Nexa';
+  src: url('./fonts/ofont.ru_Nexa Script.ttf') format('truetype');
+
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Corsa Grotesk Regular';
+  src:
+    url('./fonts/CorsaGrotesk-Regular.woff2') format('woff2'),
+    url('./fonts/CorsaGrotesk-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Corsa Grotesk Thin';
+  src:
+    url('./fonts/CorsaGrotesk-Thin.woff2') format('woff2'),
+    url('./fonts/CorsaGrotesk-Thin.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
+/* Подключение шрифта Corsa Grotesk */
+@font-face {
+  font-family: 'Corsa Grotesk';
+  src: url('./fonts/Corsa Grotesk Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Corsa Grotesk';
+  src: url('./fonts/Corsa Grotesk Thin.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@media screen and (max-width: 1024px) {
+  .speciall {
+    font-size: 40px;
+    line-height: 28px;
+  }
+
+  .input {
+    height: 58px;
+  }
+
+  .textarea {
+    height: 120px;
+  }
+
+  .input::placeholder {
+    font-family: 'Corsa Grotesk Regular';
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+  }
+
+  .H1 {
+    font-family: Cruinn;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 24px;
+  }
+
+  .H3 {
+    font-family: Cruinn;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 24px;
+  }
+
+  .H6 {
+    font-family: 'Corsa Grotesk Regular';
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+  }
+
+  .p2 {
+    font-family: 'Corsa Grotesk Regular';
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+  }
+
+  .p3 {
+    font-family: 'Corsa Grotesk Regular';
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+  }
+
+  .labelWrapper {
+    height: 44px;
+    padding-left: 12px;
+  }
+}
