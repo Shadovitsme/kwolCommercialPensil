@@ -31,6 +31,7 @@ function redirect() {
 
         <div class="w-full flex md:justify-end mt-9 md:mt-12">
           <YellowButton
+          :arrow="true"
             :onclick="redirect"
             class="mt-[34px] md:w-[212px]"
             text="Далее"

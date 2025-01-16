@@ -72,7 +72,7 @@ function replace(e) {
               placeholder="Если есть какая‑либо информация, которую вы считаете важной, укажите её здесь"
             ></textarea>
             <div class="w-full flex md:justify-end mt-9 md:mt-12">
-              <YellowButton class="md:w-[212px]" text="Далее"></YellowButton>
+              <YellowButton :arrow="true" class="md:w-[212px]" text="Далее"></YellowButton>
             </div>
           </div>
         </div>
