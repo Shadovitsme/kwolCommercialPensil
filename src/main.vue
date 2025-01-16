@@ -4,23 +4,22 @@ import router from './router'
 import $ from 'jquery'
 import { jquery } from 'globals'
 
-function getFormValues(e){
-$.ajax({
-  url: 'http://localhost:8000/save_data.php ',
-  type: 'POST',
-  data: {
-    funk: 'addNamePhone',
-    name: e.target[0].value,
-    phone: e.target[1].value,
-    town: e.target[2].value,
-  },
-  success: function (data) {
-    console.log(data)
-  },
-})}
-
-  // router.replace({ path: '/mainData' })
-
+function getFormValues(e) {
+  $.ajax({
+    url: 'https://karandash.pro/brief/save_data.php ',
+    type: 'POST',
+    data: {
+      funk: 'addNamePhone',
+      name: e.target[0].value,
+      phone: e.target[1].value,
+      town: e.target[2].value,
+    },
+    success: function (data) {
+      console.log(data)
+      router.replace({ path: '/mainData' })
+    },
+  })
+}
 </script>
 
 <template>
@@ -42,10 +41,7 @@ $.ajax({
             <input type="text" class="input mb-6" name="name" placeholder="Введите имя" />
             <input class="input mb-6" type="tel" name="phone" placeholder="Введите телефон" />
             <input class="input" type="text" name="city" placeholder="Ваш город" />
-            <YellowButton
-              class="mt-[34px] md:w-[318px]"
-              text="Перейти к брифу"
-            ></YellowButton>
+            <YellowButton class="mt-[34px] md:w-[318px]" text="Перейти к брифу"></YellowButton>
           </form>
         </div>
       </div>

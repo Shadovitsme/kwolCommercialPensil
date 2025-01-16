@@ -8,15 +8,17 @@ const props = defineProps({
 </script>
 <template>
   <button class="h-[40px] md:h-[60px] flex yellowButton">
-    <div class="flex mx-auto my-auto">
+    <div class="flex mx-auto md:ml-14 my-auto">
       <p class="p3">{{ text }}</p>
       <div
         v-if="!props.arrow"
-        class="rightArrow md:visible md:block hidden h-6 w-6 ml-6 mt-1"
+        class="rightArrow h-6 w-6 ml-4 mt-1 md:visible hidden md:block"
       ></div>
     </div>
   </button>
 </template>
+
+
 
 <style>
 .yellowButton {

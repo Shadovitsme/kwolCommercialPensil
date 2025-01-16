@@ -17,7 +17,7 @@ const routes = [
     component: mainData,
   },
   {
-    path: '/dist/chooseRoom',
+    path: '/chooseRoom',
     name: 'chooseRoom',
     component: ChooseYourRoom,
   },

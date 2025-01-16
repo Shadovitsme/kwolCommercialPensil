@@ -8,7 +8,7 @@ function sendRoomData(e) {
   e.preventDefault()
 
   $.ajax({
-    url: 'http://localhost:8000/save_data.php ',
+    url: 'https://karandash.pro/brief/save_data.php ',
     type: 'POST',
     data: {
       funk: 'addNamePhone',
@@ -67,11 +67,14 @@ let textArray = [
                 placeholder="Если есть другие пожелания, опишите их здесь"
               ></textarea>
             </div>
-            <hr class="bg-white my-5" />
           </div>
         </div>
         <div class="w-full flex md:justify-end mt-9 md:mt-12">
-          <YellowButton :onclick="sendRoomData" class="mt-[34px] md:w-[212px]" text="Далее"></YellowButton>
+          <YellowButton
+            :onclick="sendRoomData"
+            class="mt-[34px] md:w-[212px]"
+            text="Далее"
+          ></YellowButton>
         </div>
       </form>
     </div>

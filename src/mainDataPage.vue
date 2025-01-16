@@ -1,11 +1,52 @@
 <script setup>
 import YellowButton from './components/yellowButton.vue'
+import $ from 'jquery'
+
 import router from './router'
 </script>
 
 <script>
-function redirect() {
-  router.replace({ path: '/chooseRoom' })
+function redirect(e) {
+  e.preventDefault() // предотвращаем стандартное поведение формы
+  let familyMembers = e.target[0].value
+  let pets = e.target[1].value
+  let soundless = e.target[2].checked
+  let furniture = e.target[4].checked
+  let hobby
+  if (!e.target[7].checked) {
+    hobby = e.target[6].value
+  } else {
+    hobby = '0'
+  }
+  let replane = e.target[8].checked
+  let visitors
+  if (e.target[10].checked) {
+    visitors = e.target[10].value
+  } else if (e.target[11].checked) {
+    visitors = e.target[11].value
+  } else {
+    visitors = e.target[12].value
+  }
+  console.log(e.target[0].value)
+  $.ajax({
+    url: 'https://karandash.pro/brief/save_data.php ',
+    type: 'POST',
+    data: {
+      funk: 'addCommonData',
+      familyMembers: familyMembers,
+      pets: pets,
+      soundless: soundless,
+      furniture: furniture,
+      hobby: hobby,
+      replane: replane,
+      visitors: visitors,
+    },
+
+    success: function (data) {
+      console.log(data)
+      router.replace({ path: '/chooseRoom' })
+    },
+  })
 }
 </script>
 
@@ -13,7 +54,7 @@ function redirect() {
   <div class="flex px-[22px] md:px-[100px]">
     <div class="md:mx-auto max-w-[1920px]">
       <h1 class="H1 Text mb-11 md:mb-9 uppercase">Укажите необходимые данные</h1>
-      <form class="md:flex justify-between max-w-[1920px]" id="page2">
+      <form @submit.prevent="redirect" class="md:flex justify-between max-w-[1920px]" id="page2">
         <div class="md:mr-16 md:w-[36vw]">
           <p class="p4 Text mb-2">Какое количество членов семьи собирается проживать?</p>
           <input class="input mb-4 md:mb-10" type="number" placeholder="Укажите число" />
@@ -92,7 +133,7 @@ function redirect() {
           <p class="H6 Accent">Количество рабочих мест</p>
           <input class="input mb-4 md:mb-10" type="number" placeholder="Укажите число" />
           <div class="w-full md:mt-[75px] flex md:justify-end">
-            <YellowButton class="md:w-[212px]" :onclick="redirect" text="Далее"></YellowButton>
+            <YellowButton class="md:w-[212px]" text="Далее"></YellowButton>
           </div>
         </div>
       </form>
