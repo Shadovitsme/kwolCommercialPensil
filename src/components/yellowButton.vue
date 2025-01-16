@@ -18,8 +18,6 @@ const props = defineProps({
   </button>
 </template>
 
-
-
 <style>
 .yellowButton {
   border-radius: 5px;

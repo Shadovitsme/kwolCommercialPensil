@@ -3,47 +3,70 @@ import LabelGroup from './components/labelGroup.vue'
 import YellowButton from './components/yellowButton.vue'
 import $ from 'jquery'
 import { jquery } from 'globals'
+import { ref,watch } from 'vue'
 
-function sendRoomData(e) {
+function sendRoomDetailData(e) {
   e.preventDefault()
-
-  $.ajax({
-    url: 'https://karandash.pro/brief/save_data.php ',
-    type: 'POST',
-    data: {
-      funk: 'addNamePhone',
-      name: '$(this)[0][0].value',
-      phone: '$(this)[0][1].value',
-      town: '$(this)[0][2].value',
-    },
-    success: function (data) {
-      console.log(data)
-    },
-  })
+  if (i.value++ < roomArray.length - 1) {
+    roomName.value = roomArray[i.value][0]
+    textArray.value = roomArray[i.value][1]
+  } else i.value--
+  // $.ajax({
+  //   url: 'https://karandash.pro/brief/save_data.php ',
+  //   type: 'POST',
+  //   data: {
+  //     funk: 'addNamePhone',
+  //     name: '$(this)[0][0].value',
+  //     phone: '$(this)[0][1].value',
+  //     town: '$(this)[0][2].value',
+  //   },
+  //   success: function (data) {
+  //     // console.log(data)
+  //   },
+  // })
 }
 
-let textArray = [
-  'Ресепшн',
-  'Кабинет',
-  'Кухня',
-  'Санузел',
-  'Переговорные',
-  'Санузел',
-  'Санузел',
-  'Санузел',
-  'Санузел',
+const roomArray = [
+  ['Ресепшн', ['Стойка администратора', 'Стул для администратора', 'Диван или кресла для клиентов', 'Журнальный столик','Подставка для брошюр, визиток','Теплый пол', 'Кондиционирование']],
+  ['Кухня', ['Водонагреватель', 'Посудомойка', 'Фильтр для воды', 'Духовой шкаф', 'Холодильник', 'Измельчитель отходов','Подсветка','Мойка','Микроволновка','Защита от протечек','Вытяжка','Теплый пол']],
+  ['Санузел', [2, 2, 2, 2]],
+  ['Зона ожидания', [2, 2, 2, 2]],
+  ['Переговорная', [2, 2, 2, 2]],
+  ['Кладовая', [2, 2, 2, 2]],
+  ['Склад', [2, 2, 2, 2]],
+  ['Кабинет', [2, 2, 2, 2]],
+  ['Большая переговорная', [2, 2, 2, 2]]
 ]
+let i = ref(0)
+let roomName = ref(roomArray[i.value][0])
+let textArray = ref(roomArray[i.value][1])
+let testareaStyle = ref()
+
+const updateStyles = () => {
+  if(roomArray[i.value][1].length<7){
+    testareaStyle.value = 'md:w-[1004px] w-full mt-5 md:mt-0'
+  }
+  else{
+    testareaStyle.value = 'md:w-[916px] w-full mt-5 md:mt-0'
+
+  }
+}
+// Initial check
+updateStyles()
+
+// Watch for changes in short prop
+watch(() => roomArray[i.value], updateStyles)
 </script>
 <!-- в общем в рутах передавать сюда параметры и по ним выбирать значения -->
 <template>
   <div class="flex px-[22px] md:px-[100px]">
     <div class="md:mx-auto w-full max-w-[1920px]">
-      <form id="bedroom" class="w-full">
+      <form @submit.prevent="sendRoomDetailData" id="bedroom" class="w-full">
         <div id="bedroom">
-          <h1 class="H1 Text pb-10 uppercase">Выберите комнаты</h1>
+          <h1 class="H1 Text pb-10 uppercase">{{ roomName }}</h1>
           <div id="bedroom0" class="w-full md:flex">
             <LabelGroup :textArray="textArray"></LabelGroup>
-            <div class="md:w-[1004px] w-full mt-5 md:mt-0">
+            <div :class="testareaStyle">
               <p class="p4 Text mb-2">Пожелания по напольному покрытию</p>
               <textarea
                 class="textarea w-full mb-3 h-[140px]"
@@ -70,11 +93,7 @@ let textArray = [
           </div>
         </div>
         <div class="w-full flex md:justify-end mt-9 md:mt-12">
-          <YellowButton
-            :onclick="sendRoomData"
-            class="mt-[34px] md:w-[212px]"
-            text="Далее"
-          ></YellowButton>
+          <YellowButton class="mt-[34px] md:w-[212px]" text="Далее"></YellowButton>
         </div>
       </form>
     </div>

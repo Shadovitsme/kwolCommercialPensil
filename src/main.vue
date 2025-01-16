@@ -4,21 +4,26 @@ import router from './router'
 import $ from 'jquery'
 import { jquery } from 'globals'
 
-function getFormValues(e) {
-  $.ajax({
-    url: 'https://karandash.pro/brief/save_data.php ',
-    type: 'POST',
-    data: {
-      funk: 'addNamePhone',
-      name: e.target[0].value,
-      phone: e.target[1].value,
-      town: e.target[2].value,
-    },
-    success: function (data) {
-      console.log(data)
-      router.replace({ path: '/mainData' })
-    },
-  })
+function getMainUserData(e) {
+  let name = e.target[0].value
+  let phone = e.target[1].value
+  let town = e.target[2].value
+  if ((name, phone, town)) {
+    $.ajax({
+      url: 'https://karandash.pro/brief/save_data.php ',
+      type: 'POST',
+      data: {
+        funk: 'addNamePhone',
+        name: e.target[0].value,
+        phone: e.target[1].value,
+        town: e.target[2].value,
+      },
+      success: function (data) {
+        console.log(data)
+        router.replace({ path: '/mainData' })
+      },
+    })
+  } else alert('Не все поля заполнены!!!')
 }
 </script>
 
@@ -37,10 +42,22 @@ function getFormValues(e) {
         </p>
         <div class="md:p-[60px] p-5 md:ml-1 border-[1px] border-[#E4A85E] rounded-[10px]">
           <h class="H3 Text uppercase"> Основные данные</h>
-          <form @submit.prevent="getFormValues" class="md:mt-8 mt-4" id="page1">
-            <input type="text" class="input mb-6" name="name" placeholder="Введите имя" />
-            <input class="input mb-6" type="tel" name="phone" placeholder="Введите телефон" />
-            <input class="input" type="text" name="city" placeholder="Ваш город" />
+          <form @submit.prevent="getMainUserData" class="md:mt-8 mt-4" id="page1">
+            <input
+              maxlength="30"
+              type="text"
+              class="input mb-6"
+              name="name"
+              placeholder="Введите имя"
+            />
+            <input
+              maxlength="30"
+              class="input mb-6"
+              type="number"
+              name="phone"
+              placeholder="Введите телефон"
+            />
+            <input maxlength="30" class="input" type="text" name="city" placeholder="Ваш город" />
             <YellowButton class="mt-[34px] md:w-[318px]" text="Перейти к брифу"></YellowButton>
           </form>
         </div>

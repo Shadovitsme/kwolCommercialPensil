@@ -1,4 +1,5 @@
 <script setup>
+import { ref,watch } from 'vue'
 import LabelAdditional from './labelAdditional.vue'
 
 const props = defineProps({
@@ -6,17 +7,24 @@ const props = defineProps({
     type: Array,
   },
 })
-let gridStyle
-let short
-console.log(props.textArray.length)
-if (props.textArray.length > 7) {
-  gridStyle =
-    'w-full md:w-[964px] md:mr-[64px] grid grid-cols-1 md:grid-cols-2 gap-y-5 md:gap-y-[32px] md:gap-x-[52px]'
-  short = true
-} else {
-  gridStyle = 'md:w-[652px] md:mr-[64px]'
-  short = false
+let gridStyle = ref()
+let short = ref()
+const updateStyles = () => {
+  if (props.textArray.length > 7) {
+    gridStyle.value =
+      'w-full md:w-[964px] md:mr-[64px] grid grid-cols-1 md:grid-cols-2 gap-y-5 md:gap-y-[32px] md:gap-x-[52px]'
+    short.value = true
+  } else {
+    gridStyle.value = 'md:w-[652px] md:mr-[64px]'
+    short.value = false
+  }
 }
+
+// Initial check
+updateStyles()
+
+// Watch for changes in textArray
+watch(() => props.textArray, updateStyles, { deep: true })
 </script>
 
 <template>
