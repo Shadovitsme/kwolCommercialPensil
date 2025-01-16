@@ -59,7 +59,7 @@ watch(() => props.short, updateStyles)
         type="button"
         class="disabled:opacity-50 h-[48px] w-[48px] shrink-0 my-auto minusButton"
       ></button>
-      <input class="input text-center h-14 my-auto md:w-[52px] mx-3" :value="count" />
+      <input class="input text-center my-auto mx-3" :value="count" />
       <button
         type="button"
         :onclick="plus"
@@ -70,7 +70,7 @@ watch(() => props.short, updateStyles)
   </div>
 </template>
 
-<style>
+<style scoped>
 .labelWrapper {
   background-color: var(--DarkAccent);
   border-width: 1px;
@@ -81,10 +81,60 @@ watch(() => props.short, updateStyles)
   height: 48px;
 }
 
+.input {
+  background-color: var(--DarkAccent);
+  padding: 20px;
+  width: 52px;
+  height: 58px;
+  color: var(--Text);
+  border-radius: 5px;
+  vertical-align: top;
+}
+
+.input::placeholder {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--QuietText);
+}
+
+.input:focus {
+  border-color: var(--Accent);
+  outline: none;
+  border-width: 1px;
+}
+
+.input:active {
+  border-color: var(--Accent);
+  outline: none;
+  border-width: 1px;
+}
+
+.input:focus::placeholder {
+  transform: translateY(-20px);
+  font-size: 12px;
+  line-height: 12px;
+}
+
 @media screen and (max-width: 1024px) {
   .labelWrapper {
     height: 44px;
     padding-left: 12px;
+  }
+  .input {
+    height: 58px;
+    width: 100%;
+  }
+
+  .textarea {
+    height: 120px;
+  }
+
+  .input::placeholder {
+    font-family: 'Corsa Grotesk Regular';
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
   }
 }
 </style>

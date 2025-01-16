@@ -7,33 +7,30 @@ let showTextarea = ref(false)
 let textInputValue = ref('')
 let fileInputValue = ref(null)
 
-let inputs = ref(1);
+let inputs = ref(1)
 
-
-function test(e){
-    console.log(e.target.value)
+function test(e) {
+  console.log(e.target.value)
 }
 
 watch([textInputValue, fileInputValue], ([newTextValue, newFileValue]) => {
-  showTextarea.value = newTextValue.length > 0 || newFileValue !== null; 
+  showTextarea.value = newTextValue.length > 0 || newFileValue !== null
 })
-
-
 </script>
 <!-- TODO ограничеть допустимые форматы файлов -->
 <template>
   <div v-for="{ item } in inputs">
     <p class="p4 mb-2 text-Text">Ссылка на референс</p>
     <div class="flex mb-5">
-        <div class=" mr-5 w-[607px]">
-      <input
-        :disabled="fileInputValue"
-        class="input"
-        type="text"
-        placeholder="Вставьте ссылку"
-        v-model="textInputValue"
-      />
-    </div>
+      <div class="mr-5 w-[607px]">
+        <input
+          :disabled="fileInputValue"
+          class="input"
+          type="text"
+          placeholder="Вставьте ссылку"
+          v-model="textInputValue"
+        />
+      </div>
       <label
         :disabled="textInputValue"
         class="yellowButton w-[816px] flex justify-center cursor-pointer"

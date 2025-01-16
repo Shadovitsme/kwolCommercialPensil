@@ -37,9 +37,6 @@ function replace(e) {
               placeholder="Укажите тип покрытия для пола (плитка, ламинат и т. д.) "
             ></textarea>
 
-            <p class="p4 Text mb-2">Бюджет на помещение</p>
-            <input class="input mb-5" type="text" placeholder="Укажите в рублях" />
-
             <p class="p4 Text mb-2">Ограничения по срокам</p>
             <input class="input mb-5" type="text" placeholder="Укажите в днях" />
           </div>

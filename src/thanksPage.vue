@@ -2,10 +2,9 @@
 import YellowButton from './components/yellowButton.vue'
 import router from './router'
 
-function redirect() { 
-    router.replace({ path: '/' })
-
- }
+function redirect() {
+  router.replace({ path: '/' })
+}
 </script>
 
 <template>

@@ -34,7 +34,7 @@ watch(() => props.textArray, updateStyles, { deep: true })
     <YellowButton
       type="button"
       class="w-full"
-      text="Добавить помещение"
+      text="Добавить другое"
       :arrow="false"
     ></YellowButton>
   </div>

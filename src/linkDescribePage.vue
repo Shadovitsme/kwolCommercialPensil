@@ -5,7 +5,8 @@ import YellowButton from './components/yellowButton.vue'
 import router from './router'
 
 function changeInputCount(e) {
-    router.replace({ path: '/thanksPage' })}
+  router.replace({ path: '/thanksPage' })
+}
 </script>
 <template>
   <div class="flex px-[22px] md:px-[100px]">
