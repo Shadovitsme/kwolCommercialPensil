@@ -4,13 +4,16 @@ import YellowButton from './components/yellowButton.vue'
 import $ from 'jquery'
 import { jquery } from 'globals'
 import { ref, watch } from 'vue'
+import router from './router'
+
 
 function sendRoomDetailData(e) {
   e.preventDefault()
   if (i.value++ < roomArray.length - 1) {
     roomName.value = roomArray[i.value][0]
     textArray.value = roomArray[i.value][1]
-  } else i.value--
+  } else   router.replace({ path: '/linkDescribePage' })
+
   // $.ajax({
   //   url: 'https://karandash.pro/brief/save_data.php ',
   //   type: 'POST',

@@ -1,6 +1,6 @@
 <script setup>
 import $ from 'jquery'
-import { ref,watch } from 'vue'
+import { ref, watch } from 'vue'
 const props = defineProps({
   text: {
     type: String,
@@ -24,14 +24,16 @@ function minus() {
   return false
   return false
 }
-let padd=ref()
-let labelStyle =ref()
+let padd = ref()
+let labelStyle = ref()
 const updateStyles = () => {
   if (props.short) {
-    labelStyle.value = 'labelWrapper md:mr-5 w-full md:w-[264px] absolute md:static top-0 z-20 flex my-auto'
+    labelStyle.value =
+      'labelWrapper md:mr-5 w-full md:w-[264px] absolute md:static top-0 z-20 flex my-auto'
     padd.value = 'md:flex md:h-[56px] md:static relative h-[143px]'
   } else {
-    labelStyle.value = 'labelWrapper md:mr-5 w-full md:w-[460px] absolute md:static top-0 z-20 flex my-auto'
+    labelStyle.value =
+      'labelWrapper md:mr-5 w-full md:w-[460px] absolute md:static top-0 z-20 flex my-auto'
     padd.value = 'md:flex md:h-[58px] mb-[32px] md:static relative h-[143px]'
   }
 }

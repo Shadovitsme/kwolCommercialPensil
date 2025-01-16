@@ -1,5 +1,5 @@
 <script setup>
-import { ref,watch } from 'vue'
+import { ref, watch } from 'vue'
 import LabelAdditional from './labelAdditional.vue'
 import YellowButton from './yellowButton.vue'
 
@@ -32,9 +32,10 @@ watch(() => props.textArray, updateStyles, { deep: true })
   <div :class="gridStyle">
     <LabelAdditional :short="short" v-for="item in props.textArray" :text="item"></LabelAdditional>
     <YellowButton
-            type="button"
-            class="w-full"
-            text="Добавить помещение"
-            :arrow="false"
-          ></YellowButton>  </div>
+      type="button"
+      class="w-full"
+      text="Добавить помещение"
+      :arrow="false"
+    ></YellowButton>
+  </div>
 </template>

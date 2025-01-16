@@ -58,7 +58,11 @@ function getMainUserData(e) {
               placeholder="Введите телефон"
             />
             <input maxlength="30" class="input" type="text" name="city" placeholder="Ваш город" />
-            <YellowButton :arrow="true" class="mt-[34px] md:w-[318px]" text="Перейти к брифу"></YellowButton>
+            <YellowButton
+              :arrow="true"
+              class="mt-[34px] md:w-[318px]"
+              text="Перейти к брифу"
+            ></YellowButton>
           </form>
         </div>
       </div>
