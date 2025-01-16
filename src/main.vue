@@ -33,7 +33,7 @@ function getMainUserData(e) {
       <div class="md:ml-[100px] md:w-full">
         <div class="mt-10 md:w-[51.75rem] md:ml-5">
           <h1 class="H1 Text uppercase text-justify">Бриф, подготовленный</h1>
-          <h1 class="speciall text-justify">специально для вас</h1>
+          <h1 class="speciall text-justify text-[104px]">специально для вас</h1>
         </div>
         <p
           class="p3 h-12 Text min-[100px]:mt-4 laptop:mt-5 mb-[50px] md:mb-[64px] md:ml-5 tracking-tighter"
