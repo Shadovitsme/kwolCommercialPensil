@@ -20,7 +20,7 @@ function getMainUserData(e) {
       },
       success: function (data) {
         console.log(data)
-        router.replace({ path: '/mainData' })
+        router.replace({ path: '/brief_com/mainData' })
       },
     })
   } else alert('Не все поля заполнены!!!')

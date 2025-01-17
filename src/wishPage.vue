@@ -5,7 +5,7 @@ import YellowButton from './components/yellowButton.vue'
 import router from './router'
 
 function replace(e) {
-  router.replace({ path: '/rooms' })
+  router.replace({ path: '/brief_com/rooms' })
 }
 </script>
 <template>

@@ -8,7 +8,7 @@ let arr = ['Ресепшн', 'Кабинет', 'Кухня', 'Санузел', '
 
 <script>
 function redirect() {
-  router.replace({ path: '/wishPage' })
+  router.replace({ path: '/brief_com/wishPage' })
 }
 </script>
 

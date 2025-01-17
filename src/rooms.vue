@@ -11,7 +11,7 @@ function sendRoomDetailData(e) {
   if (i.value++ < roomArray.length - 1) {
     roomName.value = roomArray[i.value][0]
     textArray.value = roomArray[i.value][1]
-  } else router.replace({ path: '/linkDescribePage' })
+  } else router.replace({ path: '/brief_com/linkDescribePage' })
 
   // $.ajax({
   //   url: 'https://karandash.pro/brief/save_data.php ',
@@ -123,7 +123,8 @@ const roomArray = [
       'Настольная лампа',
       'Центральное освещение',
     ],
-  ]]
+  ],
+]
 let i = ref(0)
 let roomName = ref(roomArray[i.value][0])
 let textArray = ref(roomArray[i.value][1])

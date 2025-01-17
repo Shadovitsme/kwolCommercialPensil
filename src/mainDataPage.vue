@@ -8,7 +8,7 @@ import router from './router'
 <script>
 function sendMainUserData(e) {
   e.preventDefault() // предотвращаем стандартное поведение формы
-  router.replace({ path: '/chooseRoom' })
+  router.replace({ path: '/brief_com/chooseRoom' })
 
   // let familyMembers = e.target[0].value
   // let pets = e.target[1].value
@@ -64,7 +64,7 @@ function sendMainUserData(e) {
         <div class="md:mr-16 md:w-[36vw]">
           <p class="p4 Text mb-2">Сфера деятельности (магазин, офис, кафе, салон красоты и т.д)</p>
           <input class="input mb-4 md:mb-10" type="text" placeholder="Укажите сферу деятельности" />
-          <p class="p4 Text mb-2">Площадь помещения в м² </p>
+          <p class="p4 Text mb-2">Площадь помещения в м²</p>
           <input class="input mb-5 md:mb-10" type="number" placeholder="Укажите число" />
           <p class="H6 Accent">Есть необходимость звукоизоляции?</p>
           <div class="md:flex mt-5 md:mt-1 mb-5 md:mb-8">
@@ -91,8 +91,14 @@ function sendMainUserData(e) {
           </div>
         </div>
         <div class="md:w-[36vw]">
-          <p class="p4 Text mb-2">Особенности зонирования (например, отдельные кабинеты, открытая планировка, зоны отдыха)</p>
-          <textarea type="text" class="textarea mb-10" placeholder="Перечислите особенности зонирования"></textarea>
+          <p class="p4 Text mb-2">
+            Особенности зонирования (например, отдельные кабинеты, открытая планировка, зоны отдыха)
+          </p>
+          <textarea
+            type="text"
+            class="textarea mb-10"
+            placeholder="Перечислите особенности зонирования"
+          ></textarea>
           <p class="H6 Accent">Требуется ли перепланировка?</p>
           <div class="flex mt-4 md:mt-1.5 mb-4 md:mb-8">
             <div class="mr-5">

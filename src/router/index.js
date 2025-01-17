@@ -4,29 +4,29 @@ import mainPage from '@/main.vue'
 import ChooseYourRoom from '@/chooseYourRoom.vue'
 import WishPage from '@/wishPage.vue'
 import Rooms from '@/rooms.vue'
-import LinkDescribePage from '@/linkDescribePage.vue'
+import addRefPage from '@/addRefPage.vue'
 import ThanksPage from '@/thanksPage.vue'
 
 const routes = [
   {
-    path: '/',
+    path: '/brief_com',
     name: 'main',
     component: mainPage,
   },
   {
-    path: '/mainData',
+    path: '/brief_com/mainData',
     name: 'data',
     component: mainData,
   },
   {
-    path: '/chooseRoom',
+    path: '/brief_com/chooseRoom',
     name: 'chooseRoom',
     component: ChooseYourRoom,
   },
-  { path: '/wishPage', name: 'wishPage', component: WishPage },
-  { path: '/rooms', name: 'rooms', component: Rooms },
-  { path: '/linkDescribePage', name: 'linkDescribePage', component: LinkDescribePage },
-  { path: '/thanksPage', name: 'thanksPage', component: ThanksPage },
+  { path: '/brief_com/wishPage', name: 'wishPage', component: WishPage },
+  { path: '/brief_com/rooms', name: 'rooms', component: Rooms },
+  { path: '/brief_com/addRefPage', name: 'linkDescribePage', component: addRefPage },
+  { path: '/brief_com/thanksPage', name: 'thanksPage', component: ThanksPage },
 ]
 
 const router = createRouter({
