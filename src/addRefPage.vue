@@ -23,7 +23,7 @@ function changeInputCount(e) {
 function addRef(e) {
   // TODO добавить маску чтобы проверять на что ссылка
   e.preventDefault()
-  let description = textareaValue
+  let description = textareaValue.value
   let file = ref()
   if (textInputValue.value) {
     file.value = textInputValue.value
@@ -34,13 +34,20 @@ function addRef(e) {
     haveLink.value = false
     refArray.value.push([file.value, description, file.value.name, haveLink.value])
   }
-  console.log(refArray.value)
+
+ textInputValue.value=''
+ fileInputValue.value=''
+ textareaValue.value=''
   toggleModal()
 }
 
 let src = ref('')
 function changeSrc() {
   src.value = URL.createObjectURL(fileInputValue.value)
+}
+
+function removeCard(getItem){
+ refArray.value = refArray.value.filter(item => item !== getItem);
 }
 </script>
 <template>
@@ -69,10 +76,11 @@ function changeSrc() {
         v-model="textInputValue"
       />
 
-      <div v-if="fileInputValue" class="p-3 mb-2 rounded-[5px] flex bg-DarkAccent h-16 relative ">
-        <img :src="src" class="h-full my-auto rounded-[2px]"/>
+      <div v-if="fileInputValue" class="p-3 mb-2 rounded-[5px] flex bg-DarkAccent h-16 relative">
+        <img :src="src" class="h-full my-auto rounded-[2px]" />
         <p class="text-Text p3 ml-3 my-auto">{{ fileInputValue.name }}</p>
-        <div class="trash top-5 absolute right-3"></div>
+        <button @click="              fileInputValue = ''
+" class="trash top-5 absolute right-3"></button>
       </div>
       <p class="text-Text mb-2 p4">Или загрузите файл с вашего устройста</p>
 
@@ -98,7 +106,8 @@ function changeSrc() {
       <!-- fileInput -->
 
       <textarea
-v-model="textareaValue"        placeholder="Опишите, что вам понравилось, а что, наоборот, не хотели бы реализовывать"
+        v-model="textareaValue"
+        placeholder="Опишите, что вам понравилось, а что, наоборот, не хотели бы реализовывать"
         class="bg-DarkAccent hover:bg-background active:bg-DarkAccent w-full flex justify-center cursor-pointer max-h-[360px] h-[360px] rounded-[10px] text-Text p-5 placeholder:text-QuietText p3 active:border-[1px] active:border-Accent outline-none focus:border-[1px] focus:border-Accent"
         v-if="textInputValue || fileInputValue"
       ></textarea>
@@ -129,8 +138,8 @@ v-model="textareaValue"        placeholder="Опишите, что вам по
             :href="item[2]"
             :file="item[0]"
             :haveLink="item[3]"
-            @click=""
-          ></ContentRefCard>
+            @click="removeCard(item)"
+            ></ContentRefCard>
         </div>
         <div class="w-full flex md:justify-end mt-9 md:mt-12">
           <YellowButton
@@ -157,8 +166,9 @@ v-model="textareaValue"        placeholder="Опишите, что вам по
   background: no-repeat
     url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjgiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAyOCAyOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE4Ljg5MDYgNy4xMTg2NUwxMy45NDA1IDEyLjA2NzdMOC45OTE0NiA3LjExODY1TDcuMzQxOCA4Ljc2ODMyTDEyLjI5MDggMTMuNzE3M0w3LjM0MTggMTguNjY2M0w4Ljk5MTQ2IDIwLjMxNkwxMy45NDA1IDE1LjM2N0wxOC44OTA2IDIwLjMxNkwyMC41NDAzIDE4LjY2NjNMMTUuNTkxMyAxMy43MTczTDIwLjU0MDMgOC43NjgzMkwxOC44OTA2IDcuMTE4NjVaIiBmaWxsPSIjRjVGMkVDIi8+Cjwvc3ZnPg==');
 }
-.trash{
-  background: no-repeat url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xNy4zMzM1IDhWMTcuMzMzM0MxNy4zMzM1IDE4LjgwNjEgMTYuMTM5NiAyMCAxNC42NjY4IDIwSDkuMzMzNUM3Ljg2MDc0IDIwIDYuNjY2ODMgMTguODA2MSA2LjY2NjgzIDE3LjMzMzNWOEg1LjMzMzVWNi42NjY2N0g5LjMzMzVWNS4zMzMzM0M5LjMzMzUgNC41OTY5NSA5LjkzMDQ1IDQgMTAuNjY2OCA0SDEzLjMzMzVDMTQuMDY5OSA0IDE0LjY2NjggNC41OTY5NSAxNC42NjY4IDUuMzMzMzNWNi42NjY2N0gxOC42NjY4VjhIMTcuMzMzNVpNOC4wMDAxNiA4VjE3LjMzMzNDOC4wMDAxNiAxOC4wNjk3IDguNTk3MTIgMTguNjY2NyA5LjMzMzUgMTguNjY2N0gxNC42NjY4QzE1LjQwMzIgMTguNjY2NyAxNi4wMDAyIDE4LjA2OTcgMTYuMDAwMiAxNy4zMzMzVjhIOC4wMDAxNlpNMTAuNjY2OCA1LjMzMzMzVjYuNjY2NjdIMTMuMzMzNVY1LjMzMzMzSDEwLjY2NjhaIiBmaWxsPSIjRjVGMkVDIi8+Cjwvc3ZnPg==');
+.trash {
+  background: no-repeat
+    url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xNy4zMzM1IDhWMTcuMzMzM0MxNy4zMzM1IDE4LjgwNjEgMTYuMTM5NiAyMCAxNC42NjY4IDIwSDkuMzMzNUM3Ljg2MDc0IDIwIDYuNjY2ODMgMTguODA2MSA2LjY2NjgzIDE3LjMzMzNWOEg1LjMzMzVWNi42NjY2N0g5LjMzMzVWNS4zMzMzM0M5LjMzMzUgNC41OTY5NSA5LjkzMDQ1IDQgMTAuNjY2OCA0SDEzLjMzMzVDMTQuMDY5OSA0IDE0LjY2NjggNC41OTY5NSAxNC42NjY4IDUuMzMzMzNWNi42NjY2N0gxOC42NjY4VjhIMTcuMzMzNVpNOC4wMDAxNiA4VjE3LjMzMzNDOC4wMDAxNiAxOC4wNjk3IDguNTk3MTIgMTguNjY2NyA5LjMzMzUgMTguNjY2N0gxNC42NjY4QzE1LjQwMzIgMTguNjY2NyAxNi4wMDAyIDE4LjA2OTcgMTYuMDAwMiAxNy4zMzMzVjhIOC4wMDAxNlpNMTAuNjY2OCA1LjMzMzMzVjYuNjY2NjdIMTMuMzMzNVY1LjMzMzMzSDEwLjY2NjhaIiBmaWxsPSIjRjVGMkVDIi8+Cjwvc3ZnPg==');
   width: 24px;
   height: 24px;
 }

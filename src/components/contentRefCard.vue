@@ -12,7 +12,7 @@ const props = defineProps({
   haveLink: { type: Boolean },
 })
 let link
-if (!(props.haveLink)) {
+if (!props.haveLink) {
   link = URL.createObjectURL(props.file)
 } else {
   link = props.href
