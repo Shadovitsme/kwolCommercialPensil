@@ -6,6 +6,7 @@ import AddCardButton from './components/addCardButton.vue'
 import ContentRefCard from './components/contentRefCard.vue'
 
 let refArray = ref([])
+let haveLink = ref()
 let textInputValue = ref('')
 let fileInputValue = ref('')
 
@@ -21,10 +22,20 @@ function changeInputCount(e) {
 function addRef(e) {
   e.preventDefault()
   let description = e.target[1].value
-  let file = e.target[0].value;
+  let file = ref();
+  let href = ref()
+  if(e.target[0].value) {
+    file.value = textInputValue.value 
+    haveLink.value = true
+    refArray.value.push([ file.value ,description,textInputValue.value ,haveLink.value])
 
-  refArray.value.push([file,description])
-  console.log(refArray)
+  } 
+  else{
+    file.value=fileInputValue.value
+    haveLink.value = false
+    refArray.value.push([ file.value ,description, file.value.name ,haveLink.value])
+
+  }
   toggleModal()
   
 }
@@ -55,17 +66,19 @@ function addRef(e) {
       />
       <p class="text-Text mb-2 p4">Или загрузите файл с вашего устройста</p>
 
-      <!-- fileInput -->
       <textarea
         placeholder="Опишите, что вам понравилось, а что, наоборот, не хотели бы реализовывать"
         class="bg-DarkAccent hover:bg-background active:bg-DarkAccent w-full flex justify-center cursor-pointer max-h-[360px] h-[360px] rounded-[10px] text-Text p-5 placeholder:text-QuietText p3 active:border-[1px] active:border-Accent outline-none focus:border-[1px] focus:border-Accent"
         v-if="textInputValue || fileInputValue"
       ></textarea>
+
+      <!-- fileInput -->
+
       <label
         v-if="!textInputValue"
         class="bg-DarkAccent hover:bg-background active:bg-DarkAccent w-full flex justify-center cursor-pointer h-[360px] rounded-[10px]"
       >
-        <input type="file" class="hidden" />
+        <input accept=".jpg,.jpeg,.png,.webp" type="file" class="hidden" @change="(e)=>{fileInputValue = (e.target.files[0])}"/>
         <div class="download"></div>
       </label>
       <!-- fileInput -->
@@ -92,7 +105,9 @@ function addRef(e) {
           <AddCardButton v-if="refArray.length<10" @click="toggleModal"></AddCardButton>
           <ContentRefCard v-for="item in refArray"
             :comment='item[1]'
-            :href='item[0]'
+            :href='item[2]'
+            :file="item[0]"
+            :haveLink="item[3]"
             @click=""
           ></ContentRefCard>
         </div>
