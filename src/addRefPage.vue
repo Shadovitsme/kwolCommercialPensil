@@ -88,11 +88,12 @@ function addRef(e) {
         <p class="p3 text-Text pb-10">
           Вы можете добавить <a class="speciall font-[28px] inline-block">до 10 референсов.</a>
         </p>
-        <div class="grid grid-cols-4 gap-2">
-          <AddCardButton @click="toggleModal"></AddCardButton>
+        <div class="grid grid-cols-6 gap-x-5 gap-y-20">
+          <AddCardButton v-if="refArray.length<10" @click="toggleModal"></AddCardButton>
           <ContentRefCard v-for="item in refArray"
             :comment='item[1]'
             :href='item[0]'
+            @click=""
           ></ContentRefCard>
         </div>
         <div class="w-full flex md:justify-end mt-9 md:mt-12">
