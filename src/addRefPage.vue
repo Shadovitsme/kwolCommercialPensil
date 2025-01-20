@@ -5,7 +5,7 @@ import router from './router'
 import AddCardButton from './components/addCardButton.vue'
 import ContentRefCard from './components/contentRefCard.vue'
 
-let refArray = []
+let refArray = ref([])
 let textInputValue = ref('')
 let fileInputValue = ref('')
 
@@ -20,9 +20,13 @@ function changeInputCount(e) {
 
 function addRef(e) {
   e.preventDefault()
-  let link = e.target[0].value
-  let file = e.target[1].value
-  // toggleModal()
+  let description = e.target[1].value
+  let file = e.target[0].value;
+
+  refArray.value.push([file,description])
+  console.log(refArray)
+  toggleModal()
+  
 }
 </script>
 <template>
@@ -47,11 +51,7 @@ function addRef(e) {
         class="input mb-8"
         placeholder="Вставьте ссылку"
         type="text"
-        @change="
-          (e) => {
-            textInputValue = e.target.value
-          }
-        "
+        v-model="textInputValue"
       />
       <p class="text-Text mb-2 p4">Или загрузите файл с вашего устройста</p>
 
@@ -90,9 +90,9 @@ function addRef(e) {
         </p>
         <div class="grid grid-cols-4 gap-2">
           <AddCardButton @click="toggleModal"></AddCardButton>
-          <ContentRefCard
-            comment="Понравился как общий стиль, так и детали. Нравятся светлые тона, акценты. Будет здорово, если получится найти так..."
-            href="https://ru.pinterest.com/..."
+          <ContentRefCard v-for="item in refArray"
+            :comment='item[1]'
+            :href='item[0]'
           ></ContentRefCard>
         </div>
         <div class="w-full flex md:justify-end mt-9 md:mt-12">
