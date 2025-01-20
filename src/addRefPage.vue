@@ -9,6 +9,7 @@ let refArray = ref([])
 let haveLink = ref()
 let textInputValue = ref('')
 let fileInputValue = ref('')
+let textareaValue = ref('')
 
 const modalVisible = ref(false)
 function toggleModal() {
@@ -20,24 +21,26 @@ function changeInputCount(e) {
 }
 
 function addRef(e) {
+  // TODO добавить маску чтобы проверять на что ссылка
   e.preventDefault()
-  let description = e.target[1].value
-  let file = ref();
-  let href = ref()
-  if(e.target[0].value) {
-    file.value = textInputValue.value 
+  let description = textareaValue
+  let file = ref()
+  if (textInputValue.value) {
+    file.value = textInputValue.value
     haveLink.value = true
-    refArray.value.push([ file.value ,description,textInputValue.value ,haveLink.value])
-
-  } 
-  else{
-    file.value=fileInputValue.value
+    refArray.value.push([file.value, description, textInputValue.value, haveLink.value])
+  } else {
+    file.value = fileInputValue.value
     haveLink.value = false
-    refArray.value.push([ file.value ,description, file.value.name ,haveLink.value])
-
+    refArray.value.push([file.value, description, file.value.name, haveLink.value])
   }
+  console.log(refArray.value)
   toggleModal()
-  
+}
+
+let src = ref('')
+function changeSrc() {
+  src.value = URL.createObjectURL(fileInputValue.value)
 }
 </script>
 <template>
@@ -59,29 +62,46 @@ function addRef(e) {
       </p>
       <p class="text-Text mb-2 p4">Добавьте ссылку на изображение, которое вам понравилось</p>
       <input
+        v-if="!fileInputValue"
         class="input mb-8"
         placeholder="Вставьте ссылку"
         type="text"
         v-model="textInputValue"
       />
-      <p class="text-Text mb-2 p4">Или загрузите файл с вашего устройста</p>
 
-      <textarea
-        placeholder="Опишите, что вам понравилось, а что, наоборот, не хотели бы реализовывать"
-        class="bg-DarkAccent hover:bg-background active:bg-DarkAccent w-full flex justify-center cursor-pointer max-h-[360px] h-[360px] rounded-[10px] text-Text p-5 placeholder:text-QuietText p3 active:border-[1px] active:border-Accent outline-none focus:border-[1px] focus:border-Accent"
-        v-if="textInputValue || fileInputValue"
-      ></textarea>
+      <div v-if="fileInputValue" class="p-3 mb-2 rounded-[5px] flex bg-DarkAccent h-16 relative ">
+        <img :src="src" class="h-full my-auto rounded-[2px]"/>
+        <p class="text-Text p3 ml-3 my-auto">{{ fileInputValue.name }}</p>
+        <div class="trash top-5 absolute right-3"></div>
+      </div>
+      <p class="text-Text mb-2 p4">Или загрузите файл с вашего устройста</p>
 
       <!-- fileInput -->
 
       <label
-        v-if="!textInputValue"
+        v-if="!textInputValue && !fileInputValue"
         class="bg-DarkAccent hover:bg-background active:bg-DarkAccent w-full flex justify-center cursor-pointer h-[360px] rounded-[10px]"
       >
-        <input accept=".jpg,.jpeg,.png,.webp" type="file" class="hidden" @change="(e)=>{fileInputValue = (e.target.files[0])}"/>
+        <input
+          accept=".jpg,.jpeg,.png,.webp"
+          type="file"
+          class="hidden"
+          @change="
+            (e) => {
+              fileInputValue = e.target.files[0]
+              changeSrc()
+            }
+          "
+        />
         <div class="download"></div>
       </label>
       <!-- fileInput -->
+
+      <textarea
+v-model="textareaValue"        placeholder="Опишите, что вам понравилось, а что, наоборот, не хотели бы реализовывать"
+        class="bg-DarkAccent hover:bg-background active:bg-DarkAccent w-full flex justify-center cursor-pointer max-h-[360px] h-[360px] rounded-[10px] text-Text p-5 placeholder:text-QuietText p3 active:border-[1px] active:border-Accent outline-none focus:border-[1px] focus:border-Accent"
+        v-if="textInputValue || fileInputValue"
+      ></textarea>
 
       <p class="p5 text-QuietText">Максимальный размер 10 Мб</p>
       <p class="p5 text-QuietText mb-8">Доступные форматы JPG, PNG, WEBP</p>
@@ -102,10 +122,11 @@ function addRef(e) {
           Вы можете добавить <a class="speciall font-[28px] inline-block">до 10 референсов.</a>
         </p>
         <div class="grid grid-cols-6 gap-x-5 gap-y-20">
-          <AddCardButton v-if="refArray.length<10" @click="toggleModal"></AddCardButton>
-          <ContentRefCard v-for="item in refArray"
-            :comment='item[1]'
-            :href='item[2]'
+          <AddCardButton v-if="refArray.length < 10" @click="toggleModal"></AddCardButton>
+          <ContentRefCard
+            v-for="item in refArray"
+            :comment="item[1]"
+            :href="item[2]"
             :file="item[0]"
             :haveLink="item[3]"
             @click=""
@@ -135,5 +156,10 @@ function addRef(e) {
 .cross {
   background: no-repeat
     url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjgiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAyOCAyOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE4Ljg5MDYgNy4xMTg2NUwxMy45NDA1IDEyLjA2NzdMOC45OTE0NiA3LjExODY1TDcuMzQxOCA4Ljc2ODMyTDEyLjI5MDggMTMuNzE3M0w3LjM0MTggMTguNjY2M0w4Ljk5MTQ2IDIwLjMxNkwxMy45NDA1IDE1LjM2N0wxOC44OTA2IDIwLjMxNkwyMC41NDAzIDE4LjY2NjNMMTUuNTkxMyAxMy43MTczTDIwLjU0MDMgOC43NjgzMkwxOC44OTA2IDcuMTE4NjVaIiBmaWxsPSIjRjVGMkVDIi8+Cjwvc3ZnPg==');
+}
+.trash{
+  background: no-repeat url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xNy4zMzM1IDhWMTcuMzMzM0MxNy4zMzM1IDE4LjgwNjEgMTYuMTM5NiAyMCAxNC42NjY4IDIwSDkuMzMzNUM3Ljg2MDc0IDIwIDYuNjY2ODMgMTguODA2MSA2LjY2NjgzIDE3LjMzMzNWOEg1LjMzMzVWNi42NjY2N0g5LjMzMzVWNS4zMzMzM0M5LjMzMzUgNC41OTY5NSA5LjkzMDQ1IDQgMTAuNjY2OCA0SDEzLjMzMzVDMTQuMDY5OSA0IDE0LjY2NjggNC41OTY5NSAxNC42NjY4IDUuMzMzMzNWNi42NjY2N0gxOC42NjY4VjhIMTcuMzMzNVpNOC4wMDAxNiA4VjE3LjMzMzNDOC4wMDAxNiAxOC4wNjk3IDguNTk3MTIgMTguNjY2NyA5LjMzMzUgMTguNjY2N0gxNC42NjY4QzE1LjQwMzIgMTguNjY2NyAxNi4wMDAyIDE4LjA2OTcgMTYuMDAwMiAxNy4zMzMzVjhIOC4wMDAxNlpNMTAuNjY2OCA1LjMzMzMzVjYuNjY2NjdIMTMuMzMzNVY1LjMzMzMzSDEwLjY2NjhaIiBmaWxsPSIjRjVGMkVDIi8+Cjwvc3ZnPg==');
+  width: 24px;
+  height: 24px;
 }
 </style>
