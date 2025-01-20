@@ -8,22 +8,29 @@ function getMainUserData(e) {
   let name = e.target[0].value
   let phone = e.target[1].value
   let town = e.target[2].value
+  const phoneRegex = /^[789]\d{10}$/
   if ((name, phone, town)) {
-    $.ajax({
-      url: 'https://karandash.pro/brief/save_data.php ',
-      type: 'POST',
-      data: {
-        funk: 'addNamePhone',
-        name: e.target[0].value,
-        phone: e.target[1].value,
-        town: e.target[2].value,
-      },
-      success: function (data) {
-        console.log(data)
-        router.replace({ path: '/brief_com/mainData' })
-      },
-    })
-  } else alert('Не все поля заполнены!!!')
+    if (phoneRegex.test(phone)) {
+      $.ajax({
+        url: 'https://karandash.pro/brief/save_data.php ',
+        type: 'POST',
+        data: {
+          funk: 'addNamePhone',
+          name: e.target[0].value,
+          phone: e.target[1].value,
+          town: e.target[2].value,
+        },
+        success: function (data) {
+          console.log(data)
+          router.replace({ path: '/brief_com/mainData' })
+        },
+      })
+    } else {
+      alert('not a number!')
+    }
+  } else {
+    alert('Не все поля заполнены!!!')
+  }
 }
 </script>
 

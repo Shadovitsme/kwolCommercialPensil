@@ -11,7 +11,7 @@ function sendRoomDetailData(e) {
   if (i.value++ < roomArray.length - 1) {
     roomName.value = roomArray[i.value][0]
     textArray.value = roomArray[i.value][1]
-  } else router.replace({ path: '/brief_com/linkDescribePage' })
+  } else router.replace({ path: '/brief_com/addRefPage' })
 
   // $.ajax({
   //   url: 'https://karandash.pro/brief/save_data.php ',

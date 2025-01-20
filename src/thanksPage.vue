@@ -1,10 +1,6 @@
 <script setup>
 import YellowButton from './components/yellowButton.vue'
 import router from './router'
-
-function redirect() {
-  router.replace({ path: '/' })
-}
 </script>
 
 <template>
@@ -16,12 +12,13 @@ function redirect() {
           <p class="p3 Text pb-10">
             Мы обязательно учтём ваши пожелания и постараемся воплотить все ваши идеи в реальность
           </p>
-          <YellowButton
-            :arrow="false"
-            :onclick="redirect"
-            class="mt-[34px] md:w-[207px]"
-            text="На главную"
-          ></YellowButton>
+          <a href="/">
+            <YellowButton
+              :arrow="false"
+              class="mt-[34px] md:w-[207px]"
+              text="На главную"
+            ></YellowButton>
+          </a>
         </div>
         <div class="md:flex md:visible hidden">
           <img src="./images/thank1.png" alt="" />

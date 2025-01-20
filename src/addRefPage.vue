@@ -35,9 +35,9 @@ function addRef(e) {
     refArray.value.push([file.value, description, file.value.name, haveLink.value])
   }
 
- textInputValue.value=''
- fileInputValue.value=''
- textareaValue.value=''
+  textInputValue.value = ''
+  fileInputValue.value = ''
+  textareaValue.value = ''
   toggleModal()
 }
 
@@ -46,8 +46,8 @@ function changeSrc() {
   src.value = URL.createObjectURL(fileInputValue.value)
 }
 
-function removeCard(getItem){
- refArray.value = refArray.value.filter(item => item !== getItem);
+function removeCard(getItem) {
+  refArray.value = refArray.value.filter((item) => item !== getItem)
 }
 </script>
 <template>
@@ -79,8 +79,7 @@ function removeCard(getItem){
       <div v-if="fileInputValue" class="p-3 mb-2 rounded-[5px] flex bg-DarkAccent h-16 relative">
         <img :src="src" class="h-full my-auto rounded-[2px]" />
         <p class="text-Text p3 ml-3 my-auto">{{ fileInputValue.name }}</p>
-        <button @click="              fileInputValue = ''
-" class="trash top-5 absolute right-3"></button>
+        <button @click="fileInputValue = ''" class="trash top-5 absolute right-3"></button>
       </div>
       <p class="text-Text mb-2 p4">Или загрузите файл с вашего устройста</p>
 
@@ -139,7 +138,7 @@ function removeCard(getItem){
             :file="item[0]"
             :haveLink="item[3]"
             @click="removeCard(item)"
-            ></ContentRefCard>
+          ></ContentRefCard>
         </div>
         <div class="w-full flex md:justify-end mt-9 md:mt-12">
           <YellowButton

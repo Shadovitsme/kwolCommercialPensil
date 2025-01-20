@@ -9,7 +9,7 @@ import ThanksPage from '@/thanksPage.vue'
 
 const routes = [
   {
-    path: '/',
+    path: '/brief_com/',
     name: 'main',
     component: mainPage,
   },
