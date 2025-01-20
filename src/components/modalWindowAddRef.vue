@@ -1,6 +1,5 @@
 <script setup>
-import YellowButton from './yellowButton.vue';
-
+import YellowButton from './yellowButton.vue'
 </script>
 
 <template>
@@ -20,12 +19,10 @@ import YellowButton from './yellowButton.vue';
       <label
         class="bg-DarkAccent w-full flex justify-center cursor-pointer h-[360px] rounded-[10px]"
       >
-        <input
-          type="file"
-          class="hidden"
-        />
+        <input type="file" class="hidden" />
         <span class="p3 text-Text">или загрузите изображение</span>
-      </label>      <p class="text-gray-300">jsaklfjsakdlfjsdl</p>
+      </label>
+      <p class="text-gray-300">jsaklfjsakdlfjsdl</p>
       <YellowButton text="Добавить" :arrow="false" class="w-full"></YellowButton>
     </div>
   </div>

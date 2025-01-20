@@ -2,7 +2,8 @@
 <template>
   <button
     type="button"
-    class="h-[10.625rem] md:h-[25rem] bg-DarkAccent border-[0.0625rem] border-Accent w-full md:w-[16.75rem] rounded-[0.625rem] flex hover:bg-background active:bg-DarkAccent"  >
+    class="h-[10.625rem] md:h-[25rem] bg-DarkAccent border-[0.0625rem] border-Accent w-full md:w-[16.75rem] rounded-[0.625rem] flex hover:bg-background active:bg-DarkAccent"
+  >
     <div class="plus my-auto mx-auto h-20 w-20"></div>
   </button>
 </template>
