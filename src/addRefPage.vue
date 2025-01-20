@@ -1,10 +1,13 @@
 <script setup>
 import { ref, watch } from 'vue'
-import LinkPicBlock from './components/linkPicBlock.vue'
 import YellowButton from './components/yellowButton.vue'
 import router from './router'
 import AddCardButton from './components/addCardButton.vue'
-import ModalWindowAddRef from './components/modalWindowAddRef.vue'
+import ContentRefCard from './components/contentRefCard.vue'
+
+let refArray = []
+let textInputValue = ref('')
+let fileInputValue = ref('')
 
 const modalVisible = ref(false)
 function toggleModal() {
@@ -13,6 +16,13 @@ function toggleModal() {
 
 function changeInputCount(e) {
   router.replace({ path: '/brief_com/thanksPage' })
+}
+
+function addRef(e) {
+  e.preventDefault()
+  let link = e.target[0].value
+  let file = e.target[1].value
+  // toggleModal()
 }
 </script>
 <template>
@@ -23,20 +33,36 @@ function changeInputCount(e) {
       class="fixed z-30 bottom-0 top-0 right-0 left-0 backdrop-blur-md backdrop-brightness-[0.3]"
     ></div>
 
-    <div
+    <form
+      @submit.prevent="addRef"
       class="h-[60rem] relative z-50 w-[47.9375rem] mx-auto p-[3.75rem] rounded-[0.625rem] border-[0.0625rem] bg-background border-Accent"
     >
-      <div @click="toggleModal" class="cross absolute right-8 top-8"></div>
+      <div @click="toggleModal" class="cross absolute right-8 top-8 h-7 w-7"></div>
       <p class="text-Text H2 text-center">ДОПОЛНИТЕЛЬНЫЕ ПОЖЕЛАНИЯ</p>
       <p class="text-Text p3 text-center my-8">
         Вы можете поделиться примерами интерьеров, которые отражают ваши пожелания и предпочтения
       </p>
       <p class="text-Text mb-2 p4">Добавьте ссылку на изображение, которое вам понравилось</p>
-      <input class="input mb-8" placeholder="Вставьте ссылку" type="text" />
+      <input
+        class="input mb-8"
+        placeholder="Вставьте ссылку"
+        type="text"
+        @change="
+          (e) => {
+            textInputValue = e.target.value
+          }
+        "
+      />
       <p class="text-Text mb-2 p4">Или загрузите файл с вашего устройста</p>
 
       <!-- fileInput -->
+      <textarea
+        placeholder="Опишите, что вам понравилось, а что, наоборот, не хотели бы реализовывать"
+        class="bg-DarkAccent hover:bg-background active:bg-DarkAccent w-full flex justify-center cursor-pointer max-h-[360px] h-[360px] rounded-[10px] text-Text p-5 placeholder:text-QuietText p3 active:border-[1px] active:border-Accent outline-none focus:border-[1px] focus:border-Accent"
+        v-if="textInputValue || fileInputValue"
+      ></textarea>
       <label
+        v-if="!textInputValue"
         class="bg-DarkAccent hover:bg-background active:bg-DarkAccent w-full flex justify-center cursor-pointer h-[360px] rounded-[10px]"
       >
         <input type="file" class="hidden" />
@@ -48,7 +74,7 @@ function changeInputCount(e) {
       <p class="p5 text-QuietText mb-8">Доступные форматы JPG, PNG, WEBP</p>
 
       <YellowButton text="Добавить" :arrow="false" class="w-full"></YellowButton>
-    </div>
+    </form>
   </div>
   <!-- modal -->
   <div class="flex relative px-[22px] md:px-[100px]">
@@ -62,8 +88,13 @@ function changeInputCount(e) {
         <p class="p3 text-Text pb-10">
           Вы можете добавить <a class="speciall font-[28px] inline-block">до 10 референсов.</a>
         </p>
-
-        <AddCardButton @click="toggleModal"></AddCardButton>
+        <div class="grid grid-cols-4 gap-2">
+          <AddCardButton @click="toggleModal"></AddCardButton>
+          <ContentRefCard
+            comment="Понравился как общий стиль, так и детали. Нравятся светлые тона, акценты. Будет здорово, если получится найти так..."
+            href="https://ru.pinterest.com/..."
+          ></ContentRefCard>
+        </div>
         <div class="w-full flex md:justify-end mt-9 md:mt-12">
           <YellowButton
             :onclick="changeInputCount"
@@ -88,7 +119,5 @@ function changeInputCount(e) {
 .cross {
   background: no-repeat
     url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjgiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAyOCAyOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE4Ljg5MDYgNy4xMTg2NUwxMy45NDA1IDEyLjA2NzdMOC45OTE0NiA3LjExODY1TDcuMzQxOCA4Ljc2ODMyTDEyLjI5MDggMTMuNzE3M0w3LjM0MTggMTguNjY2M0w4Ljk5MTQ2IDIwLjMxNkwxMy45NDA1IDE1LjM2N0wxOC44OTA2IDIwLjMxNkwyMC41NDAzIDE4LjY2NjNMMTUuNTkxMyAxMy43MTczTDIwLjU0MDMgOC43NjgzMkwxOC44OTA2IDcuMTE4NjVaIiBmaWxsPSIjRjVGMkVDIi8+Cjwvc3ZnPg==');
-  height: 28px;
-  width: 28px;
 }
 </style>
