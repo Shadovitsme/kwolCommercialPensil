@@ -9,11 +9,10 @@ import { getCookie } from './utility/getCookie'
 
 function sendRoomDetailData(e) {
   e.preventDefault()
-  i.value = findChoosenRoom(4)
-  console.log(i.value)
+  i.value = findChoosenRoom(i.value + 1)
   roomName.value = roomArray[i.value][0]
   textArray.value = roomArray[i.value][1]
-
+  roomCounter.value = Number(getCookie(roomName.value))
   // $.ajax({
   //   url: 'https://karandash.pro/brief/save_data.php ',
   //   type: 'POST',
@@ -130,7 +129,6 @@ let i = ref(findChoosenRoom(0))
 let roomName = ref(roomArray[i.value][0])
 let textArray = ref(roomArray[i.value][1])
 let roomCounter = ref(Number(getCookie(roomName.value)))
-console.log(roomCounter.value)
 let testareaStyle = ref()
 
 function findChoosenRoom(index) {
