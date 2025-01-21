@@ -7,8 +7,36 @@ import { ref, watch } from 'vue'
 import router from './router'
 import { getCookie } from './utility/getCookie'
 
+function createArrayForAjax(e) {
+  let m = 1
+  let roomArr = []
+  const staticFields = ['пол', 'стены', 'потолки', 'метраж', 'другое']
+
+  for (let i = 0; i <= roomCounter.value; i++) {
+    let roomContentArr = []
+
+    textArray.value.forEach((element) => {
+      roomContentArr.push([element, e.target[m].value])
+      m += 3
+    })
+    for (let i = 0; i < 5; i++) {
+      roomContentArr.push([staticFields[i], e.target[m].value])
+      m++
+    }
+    m++
+
+    roomArr.push([`${roomName.value}${i}`, roomContentArr])
+
+    if (i == roomCounter.value - 1) {
+      break
+    }
+  }
+  return roomArr
+}
+
 function sendRoomDetailData(e) {
   e.preventDefault()
+  console.log(createArrayForAjax(e))
   i.value = findChoosenRoom(i.value + 1)
   roomName.value = roomArray[i.value][0]
   textArray.value = roomArray[i.value][1]
@@ -17,10 +45,6 @@ function sendRoomDetailData(e) {
   //   url: 'https://karandash.pro/brief/save_data.php ',
   //   type: 'POST',
   //   data: {
-  //     funk: 'addNamePhone',
-  //     name: '$(this)[0][0].value',
-  //     phone: '$(this)[0][1].value',
-  //     town: '$(this)[0][2].value',
   //   },
   //   success: function (data) {
   //     // console.log(data)
