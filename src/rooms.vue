@@ -5,13 +5,14 @@ import $ from 'jquery'
 import { jquery } from 'globals'
 import { ref, watch } from 'vue'
 import router from './router'
+import { getCookie } from './utility/getCookie'
 
 function sendRoomDetailData(e) {
   e.preventDefault()
-  if (i.value++ < roomArray.length - 1) {
-    roomName.value = roomArray[i.value][0]
-    textArray.value = roomArray[i.value][1]
-  } else router.replace({ path: '/brief_com/addRefPage' })
+  i.value = findChoosenRoom(4)
+  console.log(i.value)
+  roomName.value = roomArray[i.value][0]
+  textArray.value = roomArray[i.value][1]
 
   // $.ajax({
   //   url: 'https://karandash.pro/brief/save_data.php ',
@@ -39,6 +40,17 @@ const roomArray = [
       'Подставка для брошюр, визиток',
       'Теплый пол',
       'Кондиционирование',
+    ],
+  ],
+  [
+    'Кабинет',
+    [
+      'Рабочий стол',
+      'Кресло/стул',
+      'Полки для хранения книг',
+      'Организация места для документов',
+      'Настольная лампа',
+      'Центральное освещение',
     ],
   ],
   [
@@ -113,22 +125,23 @@ const roomArray = [
       'Рабочий стол для учета и сортировки ',
     ],
   ],
-  [
-    'Кабинет',
-    [
-      'Рабочий стол',
-      'Кресло/стул',
-      'Полки для хранения книг',
-      'Организация места для документов',
-      'Настольная лампа',
-      'Центральное освещение',
-    ],
-  ],
 ]
-let i = ref(0)
+let i = ref(findChoosenRoom(0))
 let roomName = ref(roomArray[i.value][0])
 let textArray = ref(roomArray[i.value][1])
+let roomCounter = ref(Number(getCookie(roomName.value)))
+console.log(roomCounter.value)
 let testareaStyle = ref()
+
+function findChoosenRoom(index) {
+  let result
+  for (let i = index; i <= roomArray.length; i++) {
+    result = getCookie(roomArray[i][0])
+    if (result != '0' && result) {
+      return i
+    }
+  }
+}
 
 const updateStyles = () => {
   if (roomArray[i.value][1].length < 7) {
@@ -148,7 +161,7 @@ watch(() => roomArray[i.value], updateStyles)
   <div class="flex px-[22px] md:px-[100px]">
     <div class="md:mx-auto w-full max-w-[1920px]">
       <form @submit.prevent="sendRoomDetailData" id="bedroom" class="w-full">
-        <div id="bedroom">
+        <div v-for="(item, index) in roomCounter" :key="index">
           <h1 class="H1 Text pb-10 uppercase">{{ roomName }}</h1>
           <div id="bedroom0" class="w-full md:flex">
             <LabelGroup :textArray="textArray"></LabelGroup>

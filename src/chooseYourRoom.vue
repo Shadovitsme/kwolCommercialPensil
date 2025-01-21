@@ -8,7 +8,7 @@ import { ref } from 'vue'
 import { getCookie } from './utility/getCookie'
 import $ from 'jquery'
 
-let arr = ['Ресепшн', 'Кабинет', 'Кухня', 'Санузел', 'Переговорные', 'Кладовая', 'Склад']
+let arr = ['Ресепшн', 'Кабинет', 'Кухня', 'Санузел', 'Переговорные', 'Кладовая', 'Склад','Зона ожидания']
 </script>
 
 <script>
@@ -34,10 +34,11 @@ function setRoomCookie(customUserRoomNames) {
 }
 
 function setStaticRoomCookie(valueArr) {
-  let arr = ['Ресепшн', 'Кабинет', 'кухня', 'Санузел', 'переговорные', 'кладовая', 'склад']
+  let arr = ['Ресепшн', 'Кабинет', 'Кухня', 'Санузел', 'Переговорные', 'Кладовая', 'Склад','Зона ожидания']
+
   for (let i = 0; i <= arr.length; i++) {
     
-    if (valueArr[i]) {
+    if (valueArr[i]!='0') {
       document.cookie = `${arr[i]}=${valueArr[i]}; path=/; max-age=3600`
     }
   }
@@ -52,11 +53,12 @@ function redirect(e) {
   let speakingRoom = e.target[13].value
   let storeRoom = e.target[16].value
   let sclad = e.target[19].value
-  let valueArr = [reception, cabinet, kitchen, tualet, speakingRoom, storeRoom, sclad]
+  let waitingRoom=e.target[22].value
+  let valueArr = [reception, cabinet, kitchen, tualet, speakingRoom, storeRoom, sclad,waitingRoom]
   let ID = getCookie('userId')
   let customUserRoomNames = new Array(20).fill(0)
 
-  let m = 21
+  let m = 24
 
   if (
     (reception && reception !== '0') ||
@@ -86,6 +88,7 @@ function redirect(e) {
         переговорные: speakingRoom,
         кладовая: storeRoom,
         склад: sclad,
+        Зона_ожидания:waitingRoom,
         ...customUserRoomNames.reduce((acc, name, index) => {
           if (name) {
             acc[name] = count.value[index]
@@ -98,7 +101,7 @@ function redirect(e) {
         setStaticRoomCookie(valueArr);
         setRoomCookie(customUserRoomNames);
 
-        // router.replace({ path: '/brief_com/chooseRoom' })
+        router.replace({ path: '/brief_com/wishPage' })
       },
     })
   } else {
