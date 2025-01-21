@@ -9,7 +9,6 @@ import router from './router'
 <script>
 function sendMainUserData(e) {
   e.preventDefault() // предотвращаем стандартное поведение формы
-  console.log(1)
   let ID = getCookie('userId')
   let actvitySphere = e.target[0].value
   let area = e.target[1].value

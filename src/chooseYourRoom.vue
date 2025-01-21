@@ -13,13 +13,36 @@ let arr = ['Ресепшн', 'Кабинет', 'Кухня', 'Санузел', '
 
 <script>
 let userRoomCount = ref(0)
-let count = ref(new Array(20).fill(1))
+let count = ref(new Array(20).fill(0))
+
+function checkContentAdditionalRooms() {
+  return count.value.find((value) => value !== 0)
+}
 
 function addRoom() {
   userRoomCount.value++
   count.value.push(0)
 }
 let error = ref(false)
+
+function setRoomCookie(customUserRoomNames) {
+  for (let i = 0; i < userRoomCount.value; i++) {
+    if (count.value[i]) {
+      document.cookie = `${customUserRoomNames[i]}=${count.value[i]}; path=/; max-age=3600`
+    }
+  }
+}
+
+function setStaticRoomCookie(valueArr) {
+  let arr = ['Ресепшн', 'Кабинет', 'кухня', 'Санузел', 'переговорные', 'кладовая', 'склад']
+  for (let i = 0; i <= arr.length; i++) {
+    
+    if (valueArr[i]) {
+      document.cookie = `${arr[i]}=${valueArr[i]}; path=/; max-age=3600`
+    }
+  }
+}
+
 function redirect(e) {
   e.preventDefault() // предотвращаем стандартное поведение формы
   let reception = e.target[1].value
@@ -29,6 +52,7 @@ function redirect(e) {
   let speakingRoom = e.target[13].value
   let storeRoom = e.target[16].value
   let sclad = e.target[19].value
+  let valueArr = [reception, cabinet, kitchen, tualet, speakingRoom, storeRoom, sclad]
   let ID = getCookie('userId')
   let customUserRoomNames = new Array(20).fill(0)
 
@@ -41,13 +65,14 @@ function redirect(e) {
     (tualet && tualet !== '0') ||
     (speakingRoom && speakingRoom !== '0') ||
     (storeRoom && storeRoom !== '0') ||
-    (sclad && sclad !== '0')
+    (sclad && sclad !== '0') ||
+    checkContentAdditionalRooms
   ) {
     for (let i = 0; i < userRoomCount.value; i++) {
       customUserRoomNames[i] = e.target[m].value
       m += 4
     }
-    console.log(customUserRoomNames)
+    // console.log(customUserRoomNames)
     $.ajax({
       url: 'https://karandash.pro/brief/save_data.php',
       type: 'POST',
@@ -63,13 +88,17 @@ function redirect(e) {
         склад: sclad,
         ...customUserRoomNames.reduce((acc, name, index) => {
           if (name) {
-            acc[name] = count.value[index];
+            acc[name] = count.value[index]
           }
-          return acc;
-        }, {})
+          return acc
+        }, {}),
       },
       success: function (data) {
-        router.replace({ path: '/brief_com/chooseRoom' })
+        console.log(data);
+        setStaticRoomCookie(valueArr);
+        setRoomCookie(customUserRoomNames);
+
+        // router.replace({ path: '/brief_com/chooseRoom' })
       },
     })
   } else {
