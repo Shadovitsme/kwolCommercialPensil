@@ -1,20 +1,12 @@
 <script setup>
 import YellowButton from './components/yellowButton.vue'
 import $ from 'jquery'
+import { getCookie } from './utility/getCookie'
 
 import router from './router'
 </script>
 
 <script>
-
-// TODO вынести в отдельный фаил и вызывать
-function getCookie(name) {
-  let matches = document.cookie.match(
-    new RegExp('(?:^|; )' + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + '=([^;]*)'),
-  )
-  return matches ? decodeURIComponent(matches[1]) : undefined
-}
-
 function sendMainUserData(e) {
   e.preventDefault() // предотвращаем стандартное поведение формы
   console.log(1)

@@ -70,7 +70,7 @@ watch(() => props.short, updateStyles)
   </div>
 </template>
 
-<style>
+<style scoped>
 .labelWrapper {
   background-color: var(--DarkAccent);
   border-width: 1px;

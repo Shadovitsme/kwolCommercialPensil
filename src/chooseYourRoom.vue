@@ -5,13 +5,15 @@ import YellowButton from './components/yellowButton.vue'
 import router from './router'
 import errorMessage from './components/errorMessage.vue'
 import { ref } from 'vue'
+import { getCookie } from './utility/getCookie'
+import $ from 'jquery'
 
 let arr = ['Ресепшн', 'Кабинет', 'Кухня', 'Санузел', 'Переговорные', 'Кладовая', 'Склад']
 </script>
 
 <script>
 let userRoomCount = ref(0)
-let count = ref([0,0,0,0,0,0,0,0,0,0])
+let count = ref(new Array(20).fill(1))
 
 function addRoom() {
   userRoomCount.value++
@@ -20,50 +22,56 @@ function addRoom() {
 let error = ref(false)
 function redirect(e) {
   e.preventDefault() // предотвращаем стандартное поведение формы
-  let hallway = e.target[1].value
-  let childRoom = e.target[4].value
+  let reception = e.target[1].value
+  let cabinet = e.target[4].value
   let kitchen = e.target[7].value
-  let welcomeroom = e.target[10].value
-  let bedroom = e.target[13].value
-  let clotheRoom = e.target[16].value
-  let balcone = e.target[19].value
+  let tualet = e.target[10].value
+  let speakingRoom = e.target[13].value
+  let storeRoom = e.target[16].value
+  let sclad = e.target[19].value
+  let ID = getCookie('userId')
+  let customUserRoomNames = new Array(20).fill(0)
+
+  let m = 21
 
   if (
-    (hallway !== null && hallway !== undefined && hallway !== '' && hallway !== '0') ||
-    (childRoom !== null && childRoom !== undefined && childRoom !== '' && childRoom !== '0') ||
-    (kitchen !== null && kitchen !== undefined && kitchen !== '' && kitchen !== '0') ||
-    (welcomeroom !== null &&
-      welcomeroom !== undefined &&
-      welcomeroom !== '' &&
-      welcomeroom !== '0') ||
-    (bedroom !== null && bedroom !== undefined && bedroom !== '' && bedroom !== '0') ||
-    (clotheRoom !== null && clotheRoom !== undefined && clotheRoom !== '' && clotheRoom !== '0') ||
-    (balcone !== null && balcone !== undefined && balcone !== '' && balcone !== '0')
+    (reception && reception !== '0') ||
+    (cabinet && cabinet !== '0') ||
+    (kitchen && kitchen !== '0') ||
+    (tualet && tualet !== '0') ||
+    (speakingRoom && speakingRoom !== '0') ||
+    (storeRoom && storeRoom !== '0') ||
+    (sclad && sclad !== '0')
   ) {
-    router.replace({ path: '/brief_com/wishPage' })
-    // $.ajax({
-    //   url: "save_data.php",
-    //   type: "POST",
-    //   data: {
-    //     funk: "addRoomCount",
-    //     прихожая: hallway,
-    //     детская: childRoom,
-    //     кухня: kitchen,
-    //     гостиная: welcomeroom,
-    //     спальня: bedroom,
-    //     гардеробная: clotheRoom,
-    //     балкон: balcone,
-    //     столовая: dinnerRoom,
-    //     кладовая: storageRoom,
-    //     ванная: bathroom,
-    //     кабинет: cabinet,
-    //     гостевой_санузел: welcomeBathroom,
-    //     другое: otherRooms,
-    //   },
-    //   success: function (data) {
-    //     window.location.replace("./wishesPage.html");
-    //   },
-    // });
+    for (let i = 0; i < userRoomCount.value; i++) {
+      customUserRoomNames[i] = e.target[m].value
+      m += 4
+    }
+    console.log(customUserRoomNames)
+    $.ajax({
+      url: 'https://karandash.pro/brief/save_data.php',
+      type: 'POST',
+      data: {
+        funk: 'addRoomCount',
+        userId: ID,
+        Ресепшн: reception,
+        Кабинет: cabinet,
+        кухня: kitchen,
+        Санузел: tualet,
+        переговорные: speakingRoom,
+        кладовая: storeRoom,
+        склад: sclad,
+        ...customUserRoomNames.reduce((acc, name, index) => {
+          if (name) {
+            acc[name] = count.value[index];
+          }
+          return acc;
+        }, {})
+      },
+      success: function (data) {
+        router.replace({ path: '/brief_com/chooseRoom' })
+      },
+    })
   } else {
     showErrorMessage()
   }
@@ -77,27 +85,24 @@ function showErrorMessage() {
     error.value = false
   }, 3000)
 }
-// TODO вывести в отдельный фаил и вызвать
-
 
 function plus(index) {
-  if (index >= 0 && index < count.value.length) {
+  if (index >= 0 && index < 5) {
     count.value[index] = (count.value[index] || 0) + 1
+  }
+  if (count.value[index] > 5) {
+    count.value[index] = 5
   }
 }
 
 function minus(index) {
-  if (index >= 0 && index < count.value.length) {
+  if (index >= 0 && index < 5) {
     count.value[index] = (count.value[index] || 0) - 1
     if (count.value[index] < 0) {
       count.value[index] = 0
     }
   }
 }
-
-// function redirect() {
-//   router.replace({ path: '/brief_com/wishPage' })
-// }
 </script>
 
 <template>
@@ -111,7 +116,7 @@ function minus(index) {
         >
           <LabelAdditional :short="true" v-for="item in arr" :text="item"></LabelAdditional>
           <div
-            v-for="(item,index) in userRoomCount"
+            v-for="(item, index) in userRoomCount"
             class="md:flex md:h-[56px] md:static relative h-[143px]"
           >
             <input
@@ -127,7 +132,7 @@ function minus(index) {
                 type="button"
                 class="disabled:opacity-50 h-[48px] w-[48px] shrink-0 my-auto minusButton"
               ></button>
-              <input class="input text-center my-auto mx-3"  :value="count[index]"  />
+              <input class="input text-center my-auto mx-3" :value="count[index]" />
               <button
                 type="button"
                 @click="plus(index)"
@@ -137,7 +142,7 @@ function minus(index) {
             </div>
           </div>
           <YellowButton
-            v-if="userRoomCount < 9"
+            v-if="userRoomCount < 20"
             type="button"
             @click="addRoom"
             class="w-full"
