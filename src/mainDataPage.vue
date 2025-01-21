@@ -6,6 +6,8 @@ import router from './router'
 </script>
 
 <script>
+
+// TODO вынести в отдельный фаил и вызывать
 function getCookie(name) {
   let matches = document.cookie.match(
     new RegExp('(?:^|; )' + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + '=([^;]*)'),
@@ -45,7 +47,7 @@ function sendMainUserData(e) {
 
     success: function (data) {
       console.log(data)
-      // router.replace({ path: '/chooseRoom' })
+      router.replace({ path: '/brief_com/chooseRoom' })
     },
   })
 }
