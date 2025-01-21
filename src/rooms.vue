@@ -11,7 +11,6 @@ function createArrayForAjax(e) {
   let m = 1
   let roomArr = []
   const staticFields = ['пол', 'стены', 'потолки', 'метраж', 'другое']
-
   for (let i = 0; i <= roomCounter.value; i++) {
     let roomContentArr = []
 
@@ -31,25 +30,33 @@ function createArrayForAjax(e) {
       break
     }
   }
+
   return roomArr
 }
 
 function sendRoomDetailData(e) {
   e.preventDefault()
-  console.log(createArrayForAjax(e))
-  i.value = findChoosenRoom(i.value + 1)
+  let arr = createArrayForAjax(e)
+  i.value = findChoosenRoom(i.value + 1) 
+  if(i.value>=roomArray.length){console.log('aaaa')}
+
   roomName.value = roomArray[i.value][0]
   textArray.value = roomArray[i.value][1]
   roomCounter.value = Number(getCookie(roomName.value))
-  // $.ajax({
-  //   url: 'https://karandash.pro/brief/save_data.php ',
-  //   type: 'POST',
-  //   data: {
-  //   },
-  //   success: function (data) {
-  //     // console.log(data)
-  //   },
-  // })
+  let ID = getCookie('userId')
+
+  $.ajax({
+    url: 'https://karandash.pro/brief/save_data.php ',
+    type: 'POST',
+    data: {
+      funk: 'addDetailRoom',
+      userId: ID,
+      arr,
+    },
+    success: function (data) {
+      console.log(data)
+    },
+  })
 }
 
 const roomArray = [
@@ -157,16 +164,17 @@ let testareaStyle = ref()
 
 function findChoosenRoom(index) {
   let result
-  for (let i = index; i <= roomArray.length; i++) {
+  for (let i = index; i < roomArray.length; i++) {
     result = getCookie(roomArray[i][0])
-    if (result != '0' && result) {
+    if (result != '0' && result && result!=undefined) {
       return i
     }
   }
+  router.replace({ path: '/brief_com/wishPage' })
 }
 
 const updateStyles = () => {
-  if (roomArray[i.value][1].length < 7) {
+  if (roomArray[i.value][1].length < 8) {
     testareaStyle.value = 'md:w-[1004px] w-full mt-5 md:mt-0'
   } else {
     testareaStyle.value = 'md:w-[916px] w-full mt-5 md:mt-0'
