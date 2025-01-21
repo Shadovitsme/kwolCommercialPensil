@@ -6,49 +6,48 @@ import router from './router'
 </script>
 
 <script>
+function getCookie(name) {
+  let matches = document.cookie.match(
+    new RegExp('(?:^|; )' + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + '=([^;]*)'),
+  )
+  return matches ? decodeURIComponent(matches[1]) : undefined
+}
+
 function sendMainUserData(e) {
   e.preventDefault() // предотвращаем стандартное поведение формы
-  router.replace({ path: '/brief_com/chooseRoom' })
+  console.log(1)
+  let ID = getCookie('userId')
+  let actvitySphere = e.target[0].value
+  let area = e.target[1].value
+  let soundless = e.target[2].checked
+  let furniture = e.target[4].checked
+  let zones = e.target[6].value
+  let replane = e.target[7].checked
+  let workPlaces = e.target[9].value
+  $.ajax({
+    url: 'https://karandash.pro/brief/save_data.php ',
+    type: 'POST',
+    data: {
+      funk: 'addCommonData',
+      userId: ID,
+      actvitySphere: actvitySphere,
+      area: area,
+      soundless: soundless,
+      furniture: furniture,
+      zones: zones,
+      replane: replane,
+      workPlaces: workPlaces,
+      familyMembers: null,
+      pets: null,
+      hobby: null,
+      visitors: null,
+    },
 
-  // let familyMembers = e.target[0].value
-  // let pets = e.target[1].value
-  // let soundless = e.target[2].checked
-  // let furniture = e.target[4].checked
-  // let hobby
-  // if (!e.target[7].checked) {
-  //   hobby = e.target[6].value
-  // } else {
-  //   hobby = '0'
-  // }
-  // let replane = e.target[8].checked
-  // let visitors
-  // if (e.target[10].checked) {
-  //   visitors = e.target[10].value
-  // } else if (e.target[11].checked) {
-  //   visitors = e.target[11].value
-  // } else {
-  //   visitors = e.target[12].value
-  // }
-  // console.log(e.target[0].value)
-  // $.ajax({
-  //   url: 'https://karandash.pro/brief/save_data.php ',
-  //   type: 'POST',
-  //   data: {
-  //     funk: 'addCommonData',
-  //     familyMembers: familyMembers,
-  //     pets: pets,
-  //     soundless: soundless,
-  //     furniture: furniture,
-  //     hobby: hobby,
-  //     replane: replane,
-  //     visitors: visitors,
-  //   },
-
-  //   success: function (data) {
-  //     console.log(data)
-  //     router.replace({ path: '/chooseRoom' })
-  //   },
-  // })
+    success: function (data) {
+      console.log(data)
+      // router.replace({ path: '/chooseRoom' })
+    },
+  })
 }
 </script>
 

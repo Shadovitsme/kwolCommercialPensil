@@ -22,7 +22,7 @@ function getMainUserData(e) {
         },
         success: function (data) {
           console.log(data)
-          document.cookie = `userId=${data}; path=/; max-age=3600` 
+          document.cookie = `userId=${data}; path=/; max-age=3600`
           router.replace({ path: '/brief_com/mainData' })
         },
       })
@@ -41,7 +41,7 @@ function getMainUserData(e) {
       <div class="md:ml-[6.25rem] md:w-full">
         <div class="mt-10 md:w-[51.75rem] md:ml-5">
           <h1 class="H1 Text uppercase text-justify">Бриф, подготовленный</h1>
-          <h1 class="speciall text-justify text-[6.5rem]">специально для вас</h1>
+          <h1 class="speciall text-justify text-[104px] mb-6">специально для вас</h1>
         </div>
         <p
           class="p3 h-12 Text min-[6.25rem]:mt-4 laptop:mt-5 mb-[3.125rem] md:mb-[4rem] md:ml-5 tracking-tighter"
