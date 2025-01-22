@@ -34,7 +34,7 @@ function changeInputCount(e) {
     },
     success: function (data) {
       console.log(data)
-      // router.replace({ path: '/brief_com/thanksPage' })
+      router.replace({ path: '/brief_com/thanksPage' })
     },
   })
 }

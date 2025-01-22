@@ -31,7 +31,7 @@ const truncatedComment = computed(() => {
     <div class="cross absolute right-3 top-3 scale-[0.7] h-[1.25rem] w-[1.25rem]"></div>
     <p class="p4 text-BrightAccent">{{ truncatedHref }}</p>
     <img :src="link" class="h-[8.75rem] my-3" />
-    <p class="p3 text-Text text-balance">{{ truncatedComment }}</p>
+    <p class="p3 text-Text text-balance break-all">{{ truncatedComment }}</p>
   </div>
 </template>
 
