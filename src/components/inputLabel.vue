@@ -31,15 +31,14 @@ function minus(index) {
 }
 
 const updateStyles = () => {
-
   if (props.long) {
     labelStyle.value =
       'md:mr-5 rounded-[5px] text-Text p3 w-full md:w-[480px] absolute md:static top-0 z-20 flex my-auto outline-none placeholder:p3 placeholder:text-QuietText pl-4 py-3 border-[1px] border-Accent bg-DarkAccent'
-    padd.value = "input text-center my-auto mx-3 md:w-[52px]"
+    padd.value = 'input text-center my-auto mx-3 md:w-[52px]'
   } else {
     labelStyle.value =
       'md:mr-5 rounded-[5px] text-Text p3 w-full md:w-[199px] absolute md:static top-0 z-20 flex my-auto outline-none placeholder:p3 placeholder:text-QuietText pl-4 py-3 border-[1px] border-Accent bg-DarkAccent'
-    padd.value = "input text-center my-auto mx-3"
+    padd.value = 'input text-center my-auto mx-3'
   }
 }
 
@@ -63,7 +62,7 @@ watch(() => props.long, updateStyles)
         type="button"
         class="disabled:opacity-50 h-[48px] w-[48px] shrink-0 my-auto minusButton"
       ></button>
-      <input :class='padd' :value="props.count[index]" />
+      <input :class="padd" :value="props.count[index]" />
       <button
         type="button"
         @click="plus(index)"

@@ -11,6 +11,7 @@ function createArrayForAjax(e) {
   let m = 1
   let roomArr = []
   const staticFields = ['пол', 'стены', 'потолки', 'метраж', 'другое']
+
   for (let i = 0; i <= roomCounter.value; i++) {
     let roomContentArr = []
 
@@ -18,6 +19,19 @@ function createArrayForAjax(e) {
       roomContentArr.push([element, e.target[m].value])
       m += 3
     })
+
+    m--
+
+    for (let i = 0; i < 5; i++) {
+      let k = m + 2
+      if (!e.target[m].value) {
+        break
+      }
+      roomContentArr.push([e.target[m].value, e.target[k].value])
+      m = k + 2
+      k = m + 2
+    }
+    m++
     for (let i = 0; i < 5; i++) {
       roomContentArr.push([staticFields[i], e.target[m].value])
       m++
@@ -40,7 +54,6 @@ function sendRoomDetailData(e) {
   i.value = findChoosenRoom(i.value + 1)
   if (i.value >= roomArray.length) {
   }
-
   roomName.value = roomArray[i.value][0]
   textArray.value = roomArray[i.value][1]
   roomCounter.value = Number(getCookie(roomName.value))
@@ -157,6 +170,7 @@ const roomArray = [
     ],
   ],
 ]
+
 let i = ref(findChoosenRoom(0))
 let roomName = ref(roomArray[i.value][0])
 let textArray = ref(roomArray[i.value][1])

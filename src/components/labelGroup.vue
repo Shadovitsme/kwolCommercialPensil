@@ -16,7 +16,7 @@ let count = ref(new Array(5).fill(0))
 
 const updateStyles = () => {
   count.value = count.value.map(() => 0)
-  userAdditional.value=0
+  userAdditional.value = 0
   if (props.textArray.length > 7) {
     gridStyle.value =
       'w-full md:w-[964px] md:mr-[64px] grid grid-cols-1 md:grid-cols-2 gap-y-5 md:gap-y-[32px] md:gap-x-[52px] '
@@ -39,7 +39,7 @@ watch(() => props.textArray, updateStyles, { deep: true })
     <LabelAdditional :short="short" v-for="item in props.textArray" :text="item"></LabelAdditional>
     <InputLabel :long="!short" :count="count" :userRoomCount="userAdditional"></InputLabel>
     <YellowButton
-      v-if="userAdditional < 6"
+      v-if="userAdditional < 5"
       @click="userAdditional++"
       type="button"
       class="w-full"

@@ -164,7 +164,7 @@ function minus(index) {
           class="w-full md:mr-16 grid grid-cols-1 md:grid-cols-4 gap-y-5 md:gap-y-5 md:gap-x-[52px]"
         >
           <LabelAdditional :short="true" v-for="item in arr" :text="item"></LabelAdditional>
-<InputLabel :count="count" :userRoomCount="userRoomCount"></InputLabel>
+          <InputLabel :count="count" :userRoomCount="userRoomCount"></InputLabel>
           <YellowButton
             v-if="userRoomCount < 20"
             type="button"
