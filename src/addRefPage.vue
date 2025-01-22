@@ -4,7 +4,9 @@ import YellowButton from './components/yellowButton.vue'
 import router from './router'
 import AddCardButton from './components/addCardButton.vue'
 import ContentRefCard from './components/contentRefCard.vue'
-
+import $ from 'jquery'
+import { getCookie } from './utility/getCookie'
+// TODO сделать добавление файлов в бд
 let refArray = ref([])
 let haveLink = ref()
 let textInputValue = ref('')
@@ -17,7 +19,24 @@ function toggleModal() {
 }
 
 function changeInputCount(e) {
-  router.replace({ path: '/brief_com/thanksPage' })
+  e.preventDefault()
+  let ID = getCookie('userId')
+  let description = textareaValue.value
+  let picArray = refArray.value[0][0]
+  $.ajax({
+    url: 'http://localhost:8000/save_data.php ',
+    type: 'POST',
+    data: {
+      funk: 'addRefs',
+      userId: ID,
+      picArray,
+      description:description
+    },
+    success: function (data) {
+      console.log(data)
+      // router.replace({ path: '/brief_com/thanksPage' })
+    },
+  })
 }
 
 function addRef(e) {
@@ -120,7 +139,7 @@ function removeCard(getItem) {
   <!-- modal -->
   <div class="flex relative px-[22px] md:px-[100px]">
     <div class="md:mx-auto w-full max-w-[1920px]">
-      <form id="page3" class="w-full h-full">
+      <form @submit.prevent="changeInputCount" id="page3" class="w-full h-full">
         <h1 class="H1 Text pb-10 uppercase">ДОПОЛНИТЕЛЬНЫЕ ПОЖЕЛАНИЯ</h1>
         <p class="p3 Text">
           Если у вас есть референсы/примеры того, что вы бы хотели видеть, прикрепите их ниже
@@ -141,12 +160,7 @@ function removeCard(getItem) {
           ></ContentRefCard>
         </div>
         <div class="w-full flex md:justify-end mt-9 md:mt-12">
-          <YellowButton
-            :onclick="changeInputCount"
-            :arrow="true"
-            class="mt-[34px] md:w-[212px]"
-            text="Далее"
-          ></YellowButton>
+          <YellowButton :arrow="true" class="mt-[34px] md:w-[212px]" text="Далее"></YellowButton>
         </div>
       </form>
     </div>

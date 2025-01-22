@@ -37,8 +37,9 @@ function createArrayForAjax(e) {
 function sendRoomDetailData(e) {
   e.preventDefault()
   let arr = createArrayForAjax(e)
-  i.value = findChoosenRoom(i.value + 1) 
-  if(i.value>=roomArray.length){console.log('aaaa')}
+  i.value = findChoosenRoom(i.value + 1)
+  if (i.value >= roomArray.length) {
+  }
 
   roomName.value = roomArray[i.value][0]
   textArray.value = roomArray[i.value][1]
@@ -166,11 +167,11 @@ function findChoosenRoom(index) {
   let result
   for (let i = index; i < roomArray.length; i++) {
     result = getCookie(roomArray[i][0])
-    if (result != '0' && result && result!=undefined) {
+    if (result != '0' && result && result != undefined) {
       return i
     }
   }
-  router.replace({ path: '/brief_com/wishPage' })
+  router.replace({ path: '/brief_com/addRefPage' })
 }
 
 const updateStyles = () => {

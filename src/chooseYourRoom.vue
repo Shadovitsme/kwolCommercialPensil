@@ -8,7 +8,16 @@ import { ref } from 'vue'
 import { getCookie } from './utility/getCookie'
 import $ from 'jquery'
 
-let arr = ['Ресепшн', 'Кабинет', 'Кухня', 'Санузел', 'Переговорные', 'Кладовая', 'Склад','Зона ожидания']
+let arr = [
+  'Ресепшн',
+  'Кабинет',
+  'Кухня',
+  'Санузел',
+  'Переговорные',
+  'Кладовая',
+  'Склад',
+  'Зона ожидания',
+]
 </script>
 
 <script>
@@ -34,11 +43,19 @@ function setRoomCookie(customUserRoomNames) {
 }
 
 function setStaticRoomCookie(valueArr) {
-  let arr = ['Ресепшн', 'Кабинет', 'Кухня', 'Санузел', 'Переговорные', 'Кладовая', 'Склад','Зона ожидания']
+  let arr = [
+    'Ресепшн',
+    'Кабинет',
+    'Кухня',
+    'Санузел',
+    'Переговорные',
+    'Кладовая',
+    'Склад',
+    'Зона ожидания',
+  ]
 
   for (let i = 0; i <= arr.length; i++) {
-    
-    if (valueArr[i]!='0') {
+    if (valueArr[i] != '0') {
       document.cookie = `${arr[i]}=${valueArr[i]}; path=/; max-age=3600`
     }
   }
@@ -53,8 +70,8 @@ function redirect(e) {
   let speakingRoom = e.target[13].value
   let storeRoom = e.target[16].value
   let sclad = e.target[19].value
-  let waitingRoom=e.target[22].value
-  let valueArr = [reception, cabinet, kitchen, tualet, speakingRoom, storeRoom, sclad,waitingRoom]
+  let waitingRoom = e.target[22].value
+  let valueArr = [reception, cabinet, kitchen, tualet, speakingRoom, storeRoom, sclad, waitingRoom]
   let ID = getCookie('userId')
   let customUserRoomNames = new Array(20).fill(0)
 
@@ -88,7 +105,7 @@ function redirect(e) {
         переговорные: speakingRoom,
         кладовая: storeRoom,
         склад: sclad,
-        Зона_ожидания:waitingRoom,
+        Зона_ожидания: waitingRoom,
         ...customUserRoomNames.reduce((acc, name, index) => {
           if (name) {
             acc[name] = count.value[index]
@@ -97,9 +114,9 @@ function redirect(e) {
         }, {}),
       },
       success: function (data) {
-        console.log(data);
-        setStaticRoomCookie(valueArr);
-        setRoomCookie(customUserRoomNames);
+        console.log(data)
+        setStaticRoomCookie(valueArr)
+        setRoomCookie(customUserRoomNames)
 
         router.replace({ path: '/brief_com/wishPage' })
       },
@@ -120,7 +137,7 @@ function showErrorMessage() {
 
 function plus(index) {
   if (index >= 0 && index < 5) {
-    count.value[index] = (count.value[index] || 0) + 1
+    count.value[index] = count.value[index] + 1
   }
   if (count.value[index] > 5) {
     count.value[index] = 5
