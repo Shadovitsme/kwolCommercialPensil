@@ -22,7 +22,10 @@ function changeInputCount(e) {
   e.preventDefault()
   let ID = getCookie('userId')
   let description = textareaValue.value
-  let picArray = refArray.value[0][0]
+  router.replace({ path: '/brief_com/thanksPage' })
+  // TODO фикс бага
+  // let picArray = refArray.value[0][0] ошибка тут, исправь
+
   $.ajax({
     url: 'https://karandash.pro/brief/save_data.php ',
     type: 'POST',

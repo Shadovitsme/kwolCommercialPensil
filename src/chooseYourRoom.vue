@@ -85,13 +85,12 @@ function redirect(e) {
     (speakingRoom && speakingRoom !== '0') ||
     (storeRoom && storeRoom !== '0') ||
     (sclad && sclad !== '0') ||
-    checkContentAdditionalRooms
+    checkContentAdditionalRooms()
   ) {
     for (let i = 0; i < userRoomCount.value; i++) {
       customUserRoomNames[i] = e.target[m].value
       m += 4
     }
-    // console.log(customUserRoomNames)
     $.ajax({
       url: 'https://karandash.pro/brief/save_data.php',
       type: 'POST',
