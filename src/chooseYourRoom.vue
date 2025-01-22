@@ -7,6 +7,7 @@ import errorMessage from './components/errorMessage.vue'
 import { ref } from 'vue'
 import { getCookie } from './utility/getCookie'
 import $ from 'jquery'
+import InputLabel from './components/inputLabel.vue'
 
 let arr = [
   'Ресепшн',
@@ -163,32 +164,7 @@ function minus(index) {
           class="w-full md:mr-16 grid grid-cols-1 md:grid-cols-4 gap-y-5 md:gap-y-5 md:gap-x-[52px]"
         >
           <LabelAdditional :short="true" v-for="item in arr" :text="item"></LabelAdditional>
-          <div
-            v-for="(item, index) in userRoomCount"
-            class="md:flex md:h-[56px] md:static relative h-[143px]"
-          >
-            <input
-              class="md:mr-5 rounded-[5px] text-Text p3 w-full md:w-[199px] absolute md:static top-0 z-20 flex my-auto outline-none placeholder:p3 placeholder:text-QuietText pl-4 py-3 border-[1px] border-Accent bg-DarkAccent"
-              placeholder="Название"
-            />
-            <div
-              class="flex justify-center md:no-flex md:border-0 border-b-[1px] md:static absolute top-10 border-x-[1px] md:p-0 px-4 py-6 border-QuietText rounded-b-[5px]"
-            >
-              <button
-                name="minusButton"
-                @click="minus(index)"
-                type="button"
-                class="disabled:opacity-50 h-[48px] w-[48px] shrink-0 my-auto minusButton"
-              ></button>
-              <input class="input text-center my-auto mx-3" :value="count[index]" />
-              <button
-                type="button"
-                @click="plus(index)"
-                name="plusButton"
-                class="disabled:opacity-50 h-[48px] w-[48px] shrink-0 my-auto plusButton"
-              ></button>
-            </div>
-          </div>
+<InputLabel :count="count" :userRoomCount="userRoomCount"></InputLabel>
           <YellowButton
             v-if="userRoomCount < 20"
             type="button"

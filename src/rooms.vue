@@ -178,7 +178,7 @@ const updateStyles = () => {
   if (roomArray[i.value][1].length < 8) {
     testareaStyle.value = 'md:w-[1004px] w-full mt-5 md:mt-0'
   } else {
-    testareaStyle.value = 'md:w-[916px] w-full mt-5 md:mt-0'
+    testareaStyle.value = 'md:w-[692px] w-full mt-5 md:mt-0'
   }
 }
 // Initial check

@@ -2,6 +2,7 @@
 import { ref, watch } from 'vue'
 import LabelAdditional from './labelAdditional.vue'
 import YellowButton from './yellowButton.vue'
+import InputLabel from './inputLabel.vue'
 
 const props = defineProps({
   textArray: {
@@ -10,10 +11,15 @@ const props = defineProps({
 })
 let gridStyle = ref()
 let short = ref()
+let userAdditional = ref(0)
+let count = ref(new Array(5).fill(0))
+
 const updateStyles = () => {
+  count.value = count.value.map(() => 0)
+  userAdditional.value=0
   if (props.textArray.length > 7) {
     gridStyle.value =
-      'w-full md:w-[964px] md:mr-[64px] grid grid-cols-1 md:grid-cols-2 gap-y-5 md:gap-y-[32px] md:gap-x-[52px] md:h-[598px]'
+      'w-full md:w-[964px] md:mr-[64px] grid grid-cols-1 md:grid-cols-2 gap-y-5 md:gap-y-[32px] md:gap-x-[52px] '
     short.value = true
   } else {
     gridStyle.value = 'md:w-[652px]  md:mr-[64px]'
@@ -31,6 +37,14 @@ watch(() => props.textArray, updateStyles, { deep: true })
 <template>
   <div :class="gridStyle">
     <LabelAdditional :short="short" v-for="item in props.textArray" :text="item"></LabelAdditional>
-    <YellowButton type="button" class="w-full" text="Добавить другое" :arrow="false"></YellowButton>
+    <InputLabel :long="!short" :count="count" :userRoomCount="userAdditional"></InputLabel>
+    <YellowButton
+      v-if="userAdditional < 6"
+      @click="userAdditional++"
+      type="button"
+      class="w-full"
+      text="Добавить другое"
+      :arrow="false"
+    ></YellowButton>
   </div>
 </template>
