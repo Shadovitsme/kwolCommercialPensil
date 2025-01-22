@@ -165,8 +165,10 @@ function minus(index) {
         >
           <LabelAdditional :short="true" v-for="item in arr" :text="item"></LabelAdditional>
           <InputLabel :count="count" :userRoomCount="userRoomCount"></InputLabel>
+          <div v-if="userRoomCount > 18" class="w-full h-full"></div>
+
           <YellowButton
-            v-if="userRoomCount < 20"
+            v-if="userRoomCount < 19"
             type="button"
             @click="addRoom"
             class="w-full"
@@ -178,7 +180,7 @@ function minus(index) {
         <div class="w-full flex md:justify-end mt-9 md:mt-12">
           <YellowButton
             :arrow="true"
-            class="mt-[34px] md:w-[212px] absolute right-0 bottom-0"
+            class="mt-[34px] md:w-[212px] md:absolute w-full right-0 bottom-0"
             text="Далее"
           ></YellowButton>
         </div>

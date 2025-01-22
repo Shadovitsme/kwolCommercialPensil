@@ -237,7 +237,11 @@ watch(() => roomArray[i.value], updateStyles)
           </div>
         </div>
         <div class="w-full flex md:justify-end mt-9 md:mt-12">
-          <YellowButton :arrow="true" class="mt-[34px] md:w-[212px]" text="Далее"></YellowButton>
+          <YellowButton
+            :arrow="true"
+            class="mt-[34px] md:w-[212px] w-full"
+            text="Далее"
+          ></YellowButton>
         </div>
       </form>
     </div>
