@@ -46,13 +46,9 @@ function sendMainUserData(e) {
 
 <template>
   <div class="flex px-[22px] md:px-[100px]">
-    <div class="md:mx-auto max-w-[1920px]">
+    <div class="md:mx-auto w-full max-w-[1920px]">
       <h1 class="H1 Text mb-11 md:mb-9 uppercase">Укажите необходимые данные</h1>
-      <form
-        @submit.prevent="sendMainUserData"
-        class="md:flex justify-between max-w-[1920px]"
-        id="page2"
-      >
+      <form @submit.prevent="sendMainUserData" class="md:flex" id="page2">
         <div class="md:mr-16 md:w-[36vw]">
           <p class="p4 Text mb-2">Сфера деятельности (магазин, офис, кафе, салон красоты и т.д)</p>
           <input class="input mb-4 md:mb-10" type="text" placeholder="Укажите сферу деятельности" />

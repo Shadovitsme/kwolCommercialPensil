@@ -24,13 +24,13 @@ function changeInputCount(e) {
   let description = textareaValue.value
   let picArray = refArray.value[0][0]
   $.ajax({
-    url: 'http://localhost:8000/save_data.php ',
+    url: 'https://karandash.pro/brief/save_data.php ',
     type: 'POST',
     data: {
       funk: 'addRefs',
       userId: ID,
       picArray,
-      description:description
+      description: description,
     },
     success: function (data) {
       console.log(data)
