@@ -8,7 +8,7 @@ import router from './router'
     <div class="md:mx-auto w-full max-w-[1920px]">
       <div class="flex justify-between">
         <div class="my-auto w-[607px]">
-          <h1 class="speciall pb-10 text-[175px]">спасибо!</h1>
+          <h1 class="speciall pb-10 text-[175px]">Спасибо!</h1>
           <p class="p3 Text pb-10">
             Мы обязательно учтём ваши пожелания и постараемся воплотить все ваши идеи в реальность
           </p>
