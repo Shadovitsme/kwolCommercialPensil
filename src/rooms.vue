@@ -169,18 +169,18 @@ function createArrayForAjax(e) {
 function sendRoomDetailData(e) {
   e.preventDefault()
   let arr = createArrayForAjax(e)
-  i.value = findChoosenRoom(i.value + 1)
-
+  if (!defaultRoomEnd.value) {
+    i.value = findChoosenRoom(i.value + 1)
+  }
+  if (customCounterI.value >= customUserArray.length  && defaultRoomEnd.value) {
+    router.replace({ path: '/brief_com/addRefPage' })
+  }
   if (defaultRoomEnd.value) {
     roomName.value = customUserArray[customCounterI.value][0]
     textArray.value = ['Теплый пол', 'Кондиционирование']
     roomCounter.value = customUserArray[customCounterI.value][1]
-    if (customCounterI.value !== customUserArray.length) {
-      customCounterI.value++
-    }
-  } 
-  
-  else {
+    customCounterI.value++
+  } else {
     roomName.value = roomArray[i.value][0]
     textArray.value = roomArray[i.value][1]
     roomCounter.value = Number(getCookie(roomName.value))
@@ -219,16 +219,13 @@ function getAllCookiesExcept(excludeArray) {
 function findChoosenRoom(index) {
   let result
   for (let i = index; i < roomArray.length; i++) {
-    console.log(i)
-    console.log(roomArray.length)
     result = getCookie(roomArray[i][0])
     if (result != '0' && result && result != undefined) {
       return i
     }
   }
   defaultRoomEnd.value = true
-  return roomArray.length-1
-  router.replace({ path: '/brief_com/addRefPage' })
+  return roomArray.length - 1
 }
 
 const updateStyles = () => {
@@ -244,7 +241,6 @@ updateStyles()
 // Watch for changes in short prop
 watch(() => roomArray[i.value], updateStyles)
 watch(() => customUserArray[customCounterI.value], updateStyles)
-
 </script>
 <!-- в общем в рутах передавать сюда параметры и по ним выбирать значения -->
 <template>
