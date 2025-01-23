@@ -6,13 +6,13 @@ import router from './router'
 <template>
   <div class="flex px-[22px] md:pl-[100px]">
     <div class="md:mx-auto w-full max-w-[1920px]">
-      <div class="flex justify-between">
-        <div class="my-auto w-[607px]">
-          <h1 class="speciall pb-10 text-[175px]">Спасибо!</h1>
-          <p class="p3 Text pb-10">
+      <div class=" md:flex md:justify-between">
+        <div class="my-auto md:w-[607px]">
+          <h1 class="speciall mb-4 md:mb-10 text-[64px] md:text-[175px]">Спасибо!</h1>
+          <p class="p4 md:p3 Text md:mb-10 mb-6">
             Мы обязательно учтём ваши пожелания и постараемся воплотить все ваши идеи в реальность
           </p>
-          <a href="/">
+          <a class="" href="/">
             <YellowButton
               :arrow="false"
               class="mt-[34px] md:w-[207px]"
@@ -20,9 +20,9 @@ import router from './router'
             ></YellowButton>
           </a>
         </div>
-        <div class="md:flex md:visible hidden">
-          <img src="./images/thank1.png" alt="" />
-          <img src="./images/thank2.png" class="h-[630px] my-auto ml-5 rounded-[10px]" alt="" />
+        <div class="flex md:visible mt-6">
+          <img src="./images/thank1.png" class="h-[289px]" alt="" />
+          <img src="./images/thank2.png" class="h-[247px] md:h-[630px] my-auto ml-5 rounded-[10px]" alt="" />
         </div>
       </div>
     </div>
