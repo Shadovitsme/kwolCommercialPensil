@@ -7,72 +7,6 @@ import { ref, watch } from 'vue'
 import router from './router'
 import { getCookie } from './utility/getCookie'
 
-function createArrayForAjax(e) {
-  let m = 1
-  let roomArr = []
-  const staticFields = ['пол', 'стены', 'потолки', 'метраж', 'другое']
-
-  for (let i = 0; i <= roomCounter.value; i++) {
-    let roomContentArr = []
-
-    textArray.value.forEach((element) => {
-      roomContentArr.push([element, e.target[m].value])
-      m += 3
-    })
-
-    m--
-
-    for (let i = 0; i < 5; i++) {
-      let k = m + 2
-      if (!e.target[m].value) {
-        break
-      }
-      roomContentArr.push([e.target[m].value, e.target[k].value])
-      m = k + 2
-      k = m + 2
-    }
-    m++
-    for (let i = 0; i < 5; i++) {
-      roomContentArr.push([staticFields[i], e.target[m].value])
-      m++
-    }
-    m++
-
-    roomArr.push([`${roomName.value}${i}`, roomContentArr])
-
-    if (i == roomCounter.value - 1) {
-      break
-    }
-  }
-
-  return roomArr
-}
-
-function sendRoomDetailData(e) {
-  e.preventDefault()
-  let arr = createArrayForAjax(e)
-  i.value = findChoosenRoom(i.value + 1)
-  if (i.value >= roomArray.length) {
-  }
-  roomName.value = roomArray[i.value][0]
-  textArray.value = roomArray[i.value][1]
-  roomCounter.value = Number(getCookie(roomName.value))
-  let ID = getCookie('userId')
-
-  $.ajax({
-    url: 'https://karandash.pro/brief/save_data.php ',
-    type: 'POST',
-    data: {
-      funk: 'addDetailRoom',
-      userId: ID,
-      arr,
-    },
-    success: function (data) {
-      console.log(data)
-    },
-  })
-}
-
 const roomArray = [
   [
     'Ресепшн',
@@ -179,39 +113,121 @@ const roomArrayNames = [
   'Зона ожидания',
   'Переговорная',
   'Кладовая',
-  'Склад'
+  'Склад',
 ]
-
-function getAllCookiesExcept(excludeArray) {
-  const cookies = document.cookie.split(';');
-  const result = [];
-
-  cookies.forEach(cookie => {
-    const [name, value] = cookie.split('=').map(c => c.trim());
-    if (!excludeArray.includes(name) && name !== 'userId' && name!=='undefined') {
-      result.push([name,value]);
-    }
-  });
-
-  return result;
-}
-
-console.log(getAllCookiesExcept(roomArrayNames))
-
+let defaultRoomEnd = ref(false)
+let customCounterI = ref(0)
 let i = ref(findChoosenRoom(0))
 let roomName = ref(roomArray[i.value][0])
 let textArray = ref(roomArray[i.value][1])
 let roomCounter = ref(Number(getCookie(roomName.value)))
 let testareaStyle = ref()
 
+const customUserArray = getAllCookiesExcept(roomArrayNames)
+
+function createArrayForAjax(e) {
+  let m = 1
+  let roomArr = []
+  const staticFields = ['пол', 'стены', 'потолки', 'метраж', 'другое']
+
+  for (let i = 0; i <= roomCounter.value; i++) {
+    let roomContentArr = []
+
+    textArray.value.forEach((element) => {
+      roomContentArr.push([element, e.target[m].value])
+      m += 3
+    })
+
+    m--
+
+    for (let i = 0; i < 5; i++) {
+      let k = m + 2
+      if (!e.target[m].value) {
+        break
+      }
+      roomContentArr.push([e.target[m].value, e.target[k].value])
+      m = k + 2
+      k = m + 2
+    }
+    m++
+    for (let i = 0; i < 5; i++) {
+      roomContentArr.push([staticFields[i], e.target[m].value])
+      m++
+    }
+    m++
+
+    roomArr.push([`${roomName.value}${i}`, roomContentArr])
+
+    if (i == roomCounter.value - 1) {
+      break
+    }
+  }
+
+  return roomArr
+}
+
+function sendRoomDetailData(e) {
+  e.preventDefault()
+  let arr = createArrayForAjax(e)
+  i.value = findChoosenRoom(i.value + 1)
+
+  if (defaultRoomEnd.value) {
+    roomName.value = customUserArray[customCounterI.value][0]
+    textArray.value = ['Теплый пол', 'Кондиционирование']
+    roomCounter.value = customUserArray[customCounterI.value][1]
+    if (customCounterI.value !== customUserArray.length) {
+      customCounterI.value++
+    }
+  } 
+  
+  else {
+    roomName.value = roomArray[i.value][0]
+    textArray.value = roomArray[i.value][1]
+    roomCounter.value = Number(getCookie(roomName.value))
+  }
+
+  let ID = getCookie('userId')
+
+  $.ajax({
+    url: 'https://karandash.pro/brief/save_data.php ',
+    type: 'POST',
+    data: {
+      funk: 'addDetailRoom',
+      userId: ID,
+      arr,
+    },
+    success: function (data) {
+      console.log(data)
+    },
+  })
+}
+
+function getAllCookiesExcept(excludeArray) {
+  const cookies = document.cookie.split(';')
+  const result = []
+
+  cookies.forEach((cookie) => {
+    const [name, value] = cookie.split('=').map((c) => c.trim())
+    if (!excludeArray.includes(name) && name !== 'userId' && name !== 'undefined') {
+      result.push([name, value])
+    }
+  })
+
+  return result
+}
+
 function findChoosenRoom(index) {
   let result
   for (let i = index; i < roomArray.length; i++) {
+    console.log(i)
+    console.log(roomArray.length)
     result = getCookie(roomArray[i][0])
     if (result != '0' && result && result != undefined) {
       return i
     }
   }
+  defaultRoomEnd.value = true
+  return roomArray.length-1
   router.replace({ path: '/brief_com/addRefPage' })
 }
 
@@ -227,6 +243,8 @@ updateStyles()
 
 // Watch for changes in short prop
 watch(() => roomArray[i.value], updateStyles)
+watch(() => customUserArray[customCounterI.value], updateStyles)
+
 </script>
 <!-- в общем в рутах передавать сюда параметры и по ним выбирать значения -->
 <template>
