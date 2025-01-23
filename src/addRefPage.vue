@@ -84,9 +84,12 @@ function removeCard(getItem) {
       @submit.prevent="addRef"
       class="md:h-[60rem] relative z-50 w-full md:w-[47.9375rem] mx-auto pt-7 pb-5 px-5 md:p-[3.75rem] rounded-[0.625rem] border-[0.0625rem] bg-background border-Accent"
     >
-      <div @click="toggleModal" class="cross absolute right-2 top-2 md:right-8 md:top-8 h-7 w-7"></div>
-      <p class="text-Text H5 md:H2 md:text-center">ДОПОЛНИТЕЛЬНЫЕ ПОЖЕЛАНИЯ</p>
-      <p class="text-Text p5 md:p3 md:text-center md:my-8 mt-1.5 mb-6">
+      <div
+        @click="toggleModal"
+        class="cross absolute right-2 top-2 md:right-8 md:top-8 h-7 w-7"
+      ></div>
+      <p class="text-Text H2 md:text-center">ДОПОЛНИТЕЛЬНЫЕ ПОЖЕЛАНИЯ</p>
+      <p class="text-Text p3 md:p3 md:text-center md:my-8 mt-1.5 mb-6">
         Вы можете поделиться примерами интерьеров, которые отражают ваши пожелания и предпочтения
       </p>
       <p class="text-Text mb-2 p4">Добавьте ссылку на изображение, которое вам понравилось</p>
@@ -148,8 +151,9 @@ function removeCard(getItem) {
           Если у вас есть референсы/примеры того, что вы бы хотели видеть, прикрепите их ниже
           ссылками или изображениями.
         </p>
-          <p class="p3 text-Text mt-3 mb-4">Вы можете добавить  
-          <a class="speciall text-[28px] md:text-[28px]"> до 10 референсов.</a></p>
+        <p class="p3 text-Text mt-3 mb-4">
+          Вы можете добавить <a class="speciall text-[28px] md:text-[28px]"> до 10 референсов.</a>
+        </p>
 
         <div class="md:grid md:grid-cols-6 md:gap-x-5 md:gap-y-20">
           <AddCardButton v-if="refArray.length < 10" @click="toggleModal"></AddCardButton>
@@ -163,7 +167,11 @@ function removeCard(getItem) {
           ></ContentRefCard>
         </div>
         <div class="w-full flex md:justify-end mt-6 md:mt-12">
-          <YellowButton :arrow="true" class="mt-[34px] w-full md:w-[212px]" text="Далее"></YellowButton>
+          <YellowButton
+            :arrow="true"
+            class="mt-[34px] w-full md:w-[212px]"
+            text="Далее"
+          ></YellowButton>
         </div>
       </form>
     </div>

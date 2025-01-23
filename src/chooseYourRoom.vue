@@ -87,11 +87,8 @@ function redirect(e) {
     (storeRoom && storeRoom !== '0') ||
     (sclad && sclad !== '0') ||
     (waitingRoom && waitingRoom !== '0') ||
-
     checkContentAdditionalRooms()
-    
   ) {
-
     for (let i = 0; i < userRoomCount.value; i++) {
       customUserRoomNames[i] = e.target[m].value
       m += 4
@@ -126,8 +123,7 @@ function redirect(e) {
         router.replace({ path: '/brief_com/wishPage' })
       },
     })
-  } else { 
-
+  } else {
     showErrorMessage()
   }
 }
@@ -181,7 +177,10 @@ function minus(index) {
             :arrow="false"
           ></YellowButton>
         </div>
-        <errorMessage v-if="error" class="md:absolute static md:right-0 md:bottom-[84px]"></errorMessage>
+        <errorMessage
+          v-if="error"
+          class="md:absolute static md:right-0 md:bottom-[84px]"
+        ></errorMessage>
 
         <div class="w-full flex md:justify-end mt-9 md:mt-12">
           <YellowButton
@@ -191,7 +190,6 @@ function minus(index) {
           ></YellowButton>
         </div>
       </form>
-
     </div>
   </div>
 </template>
