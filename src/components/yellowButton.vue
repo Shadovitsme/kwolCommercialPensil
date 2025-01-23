@@ -7,7 +7,7 @@ const props = defineProps({
 })
 </script>
 <template>
-  <button class="h-[40px] md:h-[60px] flex yellowButton">
+  <button class="h-[44px] md:h-[60px] flex yellowButton">
     <div class="flex mx-auto my-auto">
       <p class="p3">{{ text }}</p>
       <div

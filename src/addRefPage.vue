@@ -82,11 +82,11 @@ function removeCard(getItem) {
 
     <form
       @submit.prevent="addRef"
-      class="h-[60rem] relative z-50 w-[47.9375rem] mx-auto p-[3.75rem] rounded-[0.625rem] border-[0.0625rem] bg-background border-Accent"
+      class="md:h-[60rem] relative z-50 w-full md:w-[47.9375rem] mx-auto pt-7 pb-5 px-5 md:p-[3.75rem] rounded-[0.625rem] border-[0.0625rem] bg-background border-Accent"
     >
-      <div @click="toggleModal" class="cross absolute right-8 top-8 h-7 w-7"></div>
-      <p class="text-Text H2 text-center">ДОПОЛНИТЕЛЬНЫЕ ПОЖЕЛАНИЯ</p>
-      <p class="text-Text p3 text-center my-8">
+      <div @click="toggleModal" class="cross absolute right-2 top-2 md:right-8 md:top-8 h-7 w-7"></div>
+      <p class="text-Text H5 md:H2 md:text-center">ДОПОЛНИТЕЛЬНЫЕ ПОЖЕЛАНИЯ</p>
+      <p class="text-Text p5 md:p3 md:text-center md:my-8 mt-1.5 mb-6">
         Вы можете поделиться примерами интерьеров, которые отражают ваши пожелания и предпочтения
       </p>
       <p class="text-Text mb-2 p4">Добавьте ссылку на изображение, которое вам понравилось</p>
@@ -109,7 +109,7 @@ function removeCard(getItem) {
 
       <label
         v-if="!textInputValue && !fileInputValue"
-        class="bg-DarkAccent hover:bg-background active:bg-DarkAccent w-full flex justify-center cursor-pointer h-[360px] rounded-[10px]"
+        class="bg-DarkAccent hover:bg-background active:bg-DarkAccent w-full flex justify-center cursor-pointer h-[210px] md:h-[360px] rounded-[10px]"
       >
         <input
           accept=".jpg,.jpeg,.png,.webp"
@@ -129,29 +129,29 @@ function removeCard(getItem) {
       <textarea
         v-model="textareaValue"
         placeholder="Опишите, что вам понравилось, а что, наоборот, не хотели бы реализовывать"
-        class="bg-DarkAccent hover:bg-background active:bg-DarkAccent w-full flex justify-center cursor-pointer max-h-[360px] h-[360px] rounded-[10px] text-Text p-5 placeholder:text-QuietText p3 active:border-[1px] active:border-Accent outline-none focus:border-[1px] focus:border-Accent"
+        class="bg-DarkAccent hover:bg-background active:bg-DarkAccent w-full flex justify-center cursor-pointer h-[210px] max-h-[210px] md:max-h-[360px] md:h-[360px] rounded-[10px] text-Text p-5 placeholder:text-QuietText p3 active:border-[1px] active:border-Accent outline-none focus:border-[1px] focus:border-Accent"
         v-if="textInputValue || fileInputValue"
       ></textarea>
 
-      <p class="p5 text-QuietText">Максимальный размер 10 Мб</p>
+      <p class="p5 text-QuietText mt-2">Максимальный размер 10 Мб</p>
       <p class="p5 text-QuietText mb-8">Доступные форматы JPG, PNG, WEBP</p>
 
-      <YellowButton text="Добавить" :arrow="false" class="w-full"></YellowButton>
+      <YellowButton text="Добавить" :arrow="false" class="w-full h-11"></YellowButton>
     </form>
   </div>
   <!-- modal -->
   <div class="flex relative px-[22px] md:px-[100px]">
     <div class="md:mx-auto w-full max-w-[1920px]">
       <form @submit.prevent="changeInputCount" id="page3" class="w-full h-full">
-        <h1 class="H1 Text pb-10 uppercase">ДОПОЛНИТЕЛЬНЫЕ ПОЖЕЛАНИЯ</h1>
+        <h1 class="H1 Text md:mb-10 mb-4 uppercase">ДОПОЛНИТЕЛЬНЫЕ ПОЖЕЛАНИЯ</h1>
         <p class="p3 Text">
           Если у вас есть референсы/примеры того, что вы бы хотели видеть, прикрепите их ниже
           ссылками или изображениями.
         </p>
-        <p class="p3 text-Text pb-10">
-          Вы можете добавить <a class="speciall font-[28px] inline-block">до 10 референсов.</a>
-        </p>
-        <div class="grid grid-cols-6 gap-x-5 gap-y-20">
+          <p class="p3 text-Text mt-3 mb-4">Вы можете добавить  
+          <a class="speciall text-[28px] md:text-[28px]"> до 10 референсов.</a></p>
+
+        <div class="md:grid md:grid-cols-6 md:gap-x-5 md:gap-y-20">
           <AddCardButton v-if="refArray.length < 10" @click="toggleModal"></AddCardButton>
           <ContentRefCard
             v-for="item in refArray"
@@ -162,8 +162,8 @@ function removeCard(getItem) {
             @click="removeCard(item)"
           ></ContentRefCard>
         </div>
-        <div class="w-full flex md:justify-end mt-9 md:mt-12">
-          <YellowButton :arrow="true" class="mt-[34px] md:w-[212px]" text="Далее"></YellowButton>
+        <div class="w-full flex md:justify-end mt-6 md:mt-12">
+          <YellowButton :arrow="true" class="mt-[34px] w-full md:w-[212px]" text="Далее"></YellowButton>
         </div>
       </form>
     </div>
