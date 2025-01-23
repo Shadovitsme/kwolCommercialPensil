@@ -178,7 +178,7 @@ function sendRoomDetailData(e) {
   if (defaultRoomEnd.value) {
     roomName.value = customUserArray[customCounterI.value][0]
     textArray.value = ['Теплый пол', 'Кондиционирование']
-    roomCounter.value = customUserArray[customCounterI.value][1]
+    roomCounter.value = Number(customUserArray[customCounterI.value][1])
     customCounterI.value++
   } else {
     roomName.value = roomArray[i.value][0]
