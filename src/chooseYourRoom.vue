@@ -86,12 +86,17 @@ function redirect(e) {
     (speakingRoom && speakingRoom !== '0') ||
     (storeRoom && storeRoom !== '0') ||
     (sclad && sclad !== '0') ||
+    (waitingRoom && waitingRoom !== '0') ||
+
     checkContentAdditionalRooms()
+    
   ) {
+
     for (let i = 0; i < userRoomCount.value; i++) {
       customUserRoomNames[i] = e.target[m].value
       m += 4
     }
+
     $.ajax({
       url: 'https://karandash.pro/brief/save_data.php',
       type: 'POST',
@@ -121,7 +126,8 @@ function redirect(e) {
         router.replace({ path: '/brief_com/wishPage' })
       },
     })
-  } else {
+  } else { 
+
     showErrorMessage()
   }
 }
@@ -157,7 +163,6 @@ function minus(index) {
 <template>
   <div class="flex px-[22px] md:px-[100px]">
     <div class="md:mx-auto w-full max-w-[1920px] relative h-[776px] max-h-[776px]">
-      <errorMessage v-if="error" class="absolute right-0 bottom-[84px]"></errorMessage>
       <form @submit.prevent="redirect" id="page3" class="w-full h-full">
         <h1 class="H1 Text pb-10 uppercase">Выберите комнаты</h1>
         <div
@@ -176,6 +181,7 @@ function minus(index) {
             :arrow="false"
           ></YellowButton>
         </div>
+        <errorMessage v-if="error" class="md:absolute static md:right-0 md:bottom-[84px]"></errorMessage>
 
         <div class="w-full flex md:justify-end mt-9 md:mt-12">
           <YellowButton
@@ -185,6 +191,7 @@ function minus(index) {
           ></YellowButton>
         </div>
       </form>
+
     </div>
   </div>
 </template>
