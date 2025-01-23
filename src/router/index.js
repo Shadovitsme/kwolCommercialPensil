@@ -9,9 +9,9 @@ import ThanksPage from '@/thanksPage.vue'
 
 const routes = [
   {
-    path: '/referencePage',
+    path: '/brief_com',
     name: 'main',
-    component: addRefPage,
+    component: mainPage,
   },
   {
     path: '/brief_com/mainData',

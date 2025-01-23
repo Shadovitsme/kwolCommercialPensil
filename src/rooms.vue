@@ -171,6 +171,33 @@ const roomArray = [
   ],
 ]
 
+const roomArrayNames = [
+  'Ресепшн',
+  'Кабинет',
+  'Кухня',
+  'Санузел',
+  'Зона ожидания',
+  'Переговорная',
+  'Кладовая',
+  'Склад'
+]
+
+function getAllCookiesExcept(excludeArray) {
+  const cookies = document.cookie.split(';');
+  const result = [];
+
+  cookies.forEach(cookie => {
+    const [name, value] = cookie.split('=').map(c => c.trim());
+    if (!excludeArray.includes(name) && name !== 'userId' && name!=='undefined') {
+      result.push([name,value]);
+    }
+  });
+
+  return result;
+}
+
+console.log(getAllCookiesExcept(roomArrayNames))
+
 let i = ref(findChoosenRoom(0))
 let roomName = ref(roomArray[i.value][0])
 let textArray = ref(roomArray[i.value][1])
