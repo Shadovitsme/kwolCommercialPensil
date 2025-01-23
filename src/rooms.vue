@@ -172,7 +172,7 @@ function sendRoomDetailData(e) {
   if (!defaultRoomEnd.value) {
     i.value = findChoosenRoom(i.value + 1)
   }
-  if (customCounterI.value >= customUserArray.length  && defaultRoomEnd.value) {
+  if (customCounterI.value >= customUserArray.length && defaultRoomEnd.value) {
     router.replace({ path: '/brief_com/addRefPage' })
   }
   if (defaultRoomEnd.value) {

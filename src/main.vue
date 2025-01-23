@@ -3,27 +3,49 @@ import YellowButton from './components/yellowButton.vue'
 import router from './router'
 import $ from 'jquery'
 import { jquery } from 'globals'
+import { ref } from 'vue'
+let userArray = ref([])
+let sawYouBefore = ref(false)
 
 function getMainUserData(e) {
+  e.preventDefault();
   let name = e.target[0].value
   let phone = e.target[1].value
   let town = e.target[2].value
+
   if ((name, phone, town)) {
     $.ajax({
-      url: 'https://karandash.pro/brief/save_data.php ',
-      type: 'POST',
-      data: {
+      url: 'https://karandash.pro/brief/userResult.php',
+      type: 'GET',
+      success: function (data) {
+        userArray.value = Object.values(JSON.parse(data))
+        if (userArray.value.find((element) => element['Phone'] == phone)) {
+          sawYouBefore.value = true
+        }
+      },
+    })
+    setTimeout(() => {
+      console.log(sawYouBefore.value)
+      if (sawYouBefore.value) {
+      alert('kogo i seee')
+      } else {
+      $.ajax({
+        url: 'https://karandash.pro/brief/save_data.php ',
+        type: 'POST',
+        data: {
         funk: 'addNamePhone',
         name: e.target[0].value,
         phone: e.target[1].value,
         town: e.target[2].value,
-      },
-      success: function (data) {
+        },
+        success: function (data) {
         console.log(data)
         document.cookie = `userId=${data}; path=/; max-age=3600`
         router.replace({ path: '/brief_com/mainData' })
-      },
-    })
+        },
+      })
+      }
+    }, 1000)
   } else {
     alert('Не все поля заполнены!!!')
   }
@@ -98,12 +120,12 @@ document.addEventListener('DOMContentLoaded', function () {
           <h1 class="H1 Text uppercase text-justify">Бриф, подготовленный</h1>
           <h1 class="speciall text-justify text-[40px] md:text-[104px] mb-6">специально для вас</h1>
         </div>
-        <p
-          class="p3 mb-[4rem] h-12 Text min-[6.25rem]:mt-4 laptop:mt-5  md:ml-5 tracking-tighter"
-        >
+        <p class="p3 mb-[4rem] h-12 Text min-[6.25rem]:mt-4 laptop:mt-5 md:ml-5 tracking-tighter">
           Заполните бриф, чтобы мы могли сразу сориентировать вас по деталям и стоимости проекта
         </p>
-        <div class="md:p-[3.75rem] md:mt-0 p-5 md:ml-1 border-[1px] border-[#E4A85E] rounded-[0.625rem]">
+        <div
+          class="md:p-[3.75rem] md:mt-0 p-5 md:ml-1 border-[1px] border-[#E4A85E] rounded-[0.625rem]"
+        >
           <h class="H3 Text uppercase"> Основные данные</h>
           <form @submit.prevent="getMainUserData" class="md:mt-8 mt-4" id="page1">
             <input
