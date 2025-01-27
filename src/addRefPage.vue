@@ -163,7 +163,8 @@ function removeCard(getItem) {
             :href="item[2]"
             :file="item[0]"
             :haveLink="item[3]"
-            @click="removeCard(item)"
+            @cross-click="removeCard(item)"
+            @card-click="toggleModal()"
           ></ContentRefCard>
         </div>
         <div class="w-full flex md:justify-end mt-6 md:mt-12">

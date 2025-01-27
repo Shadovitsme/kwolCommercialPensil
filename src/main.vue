@@ -8,7 +8,7 @@ let userArray = ref([])
 let sawYouBefore = ref(false)
 
 function getMainUserData(e) {
-  e.preventDefault();
+  e.preventDefault()
   let name = e.target[0].value
   let phone = e.target[1].value
   let town = e.target[2].value
@@ -17,34 +17,36 @@ function getMainUserData(e) {
     $.ajax({
       url: 'https://karandash.pro/brief/userResult.php',
       type: 'GET',
-    }).done(function (data) {
-      userArray.value = Object.values(JSON.parse(data))
-      if (userArray.value.find((element) => element['Phone'] == phone)) {
-        sawYouBefore.value = true
-      }
-
-      return new Promise((resolve) => resolve(sawYouBefore.value))
-    }).then((sawYouBefore) => {
-      if (sawYouBefore) {
-        alert('kogo i seee')
-      } else {
-        $.ajax({
-          url: 'https://karandash.pro/brief/save_data.php',
-          type: 'POST',
-          data: {
-            funk: 'addNamePhone',
-            name: e.target[0].value,
-            phone: e.target[1].value,
-            town: e.target[2].value,
-          },
-          success: function (data) {
-            console.log(data)
-            document.cookie = `userId=${data}; path=/; max-age=3600`
-            router.replace({ path: '/brief_com/mainData' })
-          },
-        })
-      }
     })
+      .done(function (data) {
+        userArray.value = Object.values(JSON.parse(data))
+        if (userArray.value.find((element) => element['Phone'] == phone)) {
+          sawYouBefore.value = true
+        }
+
+        return new Promise((resolve) => resolve(sawYouBefore.value))
+      })
+      .then((sawYouBefore) => {
+        if (sawYouBefore) {
+          alert('kogo i seee')
+        } else {
+          $.ajax({
+            url: 'https://karandash.pro/brief/save_data.php',
+            type: 'POST',
+            data: {
+              funk: 'addNamePhone',
+              name: e.target[0].value,
+              phone: e.target[1].value,
+              town: e.target[2].value,
+            },
+            success: function (data) {
+              console.log(data)
+              document.cookie = `userId=${data}; path=/; max-age=3600`
+              router.replace({ path: '/brief_com/mainData' })
+            },
+          })
+        }
+      })
   } else {
     alert('Не все поля заполнены!!!')
   }
