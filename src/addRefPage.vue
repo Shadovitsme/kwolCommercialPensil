@@ -14,8 +14,23 @@ let fileInputValue = ref('')
 let textareaValue = ref('')
 
 const modalVisible = ref(false)
-function toggleModal() {
+function toggleModal(data) {
+  if (data) {
+    textInputValue.value = ''
+    fileInputValue.value = ''
+    textareaValue.value = ''
+  }
   modalVisible.value = !modalVisible.value
+}
+
+function openCard(item) {
+  textareaValue.value = item[1]
+  if (item[3]) {
+    textInputValue.value = item[2]
+  } else {
+    fileInputValue.value = item[0]
+  }
+  toggleModal()
 }
 
 function changeInputCount(e) {
@@ -60,7 +75,7 @@ function addRef(e) {
   textInputValue.value = ''
   fileInputValue.value = ''
   textareaValue.value = ''
-  toggleModal()
+  toggleModal(true)
 }
 
 let src = ref('')
@@ -164,7 +179,7 @@ function removeCard(getItem) {
             :file="item[0]"
             :haveLink="item[3]"
             @cross-click="removeCard(item)"
-            @card-click="toggleModal()"
+            @card-click="openCard(item)"
           ></ContentRefCard>
         </div>
         <div class="w-full flex md:justify-end mt-6 md:mt-12">
