@@ -18,16 +18,15 @@ function getMainUserData(e) {
       url: 'https://karandash.pro/brief/userResult.php',
       type: 'GET',
     })
-      .done(function (data) {
+      .then(function (data) {
         userArray.value = Object.values(JSON.parse(data))
         if (userArray.value.find((element) => element['Phone'] == phone)) {
           sawYouBefore.value = true
         }
-
-        return new Promise((resolve) => resolve(sawYouBefore.value))
+        return sawYouBefore.value
       })
-      .then((sawYouBefore) => {
-        if (sawYouBefore) {
+      .done((data) => {
+        if (data) {
           alert('kogo i seee')
         } else {
           $.ajax({

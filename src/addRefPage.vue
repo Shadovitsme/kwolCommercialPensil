@@ -44,18 +44,16 @@ function changeInputCount(e) {
   let picToUrl
 
   refArray.value.forEach((element) => {
-
     if (element[3]) {
       dataArr.push([element[0], element[1]])
     } else {
       picToUrl = URL.createObjectURL(element[0])
       dataArr.push([picToUrl, element[1]])
     }
-    
   })
 
   $.ajax({
-    url: 'http://localhost:8000/save_data.php ',
+    url: 'https://karandash.pro/brief/userResult.php',
     type: 'POST',
     data: {
       funk: 'addRefs',
@@ -64,7 +62,7 @@ function changeInputCount(e) {
     },
     success: function (data) {
       console.log(data)
-      // router.replace({ path: '/brief_com/thanksPage' })
+      router.replace({ path: '/brief_com/thanksPage' })
     },
   })
 }

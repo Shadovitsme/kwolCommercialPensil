@@ -12,7 +12,7 @@ const props = defineProps({
   haveLink: { type: Boolean },
 })
 
-const emits = defineEmits(['card-click','cross-click'])
+const emits = defineEmits(['card-click', 'cross-click'])
 
 let link
 if (!props.haveLink) {
@@ -34,13 +34,14 @@ function handleCardClick() {
     haveLink: props.haveLink,
   })
 }
-function handleCrossClick(){
+function handleCrossClick() {
   emits('cross-click', {
     href: props.href,
     comment: props.comment,
     file: props.file,
     haveLink: props.haveLink,
-  })}
+  })
+}
 </script>
 <template>
   <div
