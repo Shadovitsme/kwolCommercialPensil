@@ -17,35 +17,34 @@ function getMainUserData(e) {
     $.ajax({
       url: 'https://karandash.pro/brief/userResult.php',
       type: 'GET',
-      success: function (data) {
-        userArray.value = Object.values(JSON.parse(data))
-        if (userArray.value.find((element) => element['Phone'] == phone)) {
-          sawYouBefore.value = true
-        }
-      },
-    })
-    setTimeout(() => {
-      console.log(sawYouBefore.value)
-      if (sawYouBefore.value) {
-      alert('kogo i seee')
-      } else {
-      $.ajax({
-        url: 'https://karandash.pro/brief/save_data.php ',
-        type: 'POST',
-        data: {
-        funk: 'addNamePhone',
-        name: e.target[0].value,
-        phone: e.target[1].value,
-        town: e.target[2].value,
-        },
-        success: function (data) {
-        console.log(data)
-        document.cookie = `userId=${data}; path=/; max-age=3600`
-        router.replace({ path: '/brief_com/mainData' })
-        },
-      })
+    }).done(function (data) {
+      userArray.value = Object.values(JSON.parse(data))
+      if (userArray.value.find((element) => element['Phone'] == phone)) {
+        sawYouBefore.value = true
       }
-    }, 1000)
+
+      return new Promise((resolve) => resolve(sawYouBefore.value))
+    }).then((sawYouBefore) => {
+      if (sawYouBefore) {
+        alert('kogo i seee')
+      } else {
+        $.ajax({
+          url: 'https://karandash.pro/brief/save_data.php',
+          type: 'POST',
+          data: {
+            funk: 'addNamePhone',
+            name: e.target[0].value,
+            phone: e.target[1].value,
+            town: e.target[2].value,
+          },
+          success: function (data) {
+            console.log(data)
+            document.cookie = `userId=${data}; path=/; max-age=3600`
+            router.replace({ path: '/brief_com/mainData' })
+          },
+        })
+      }
+    })
   } else {
     alert('Не все поля заполнены!!!')
   }
