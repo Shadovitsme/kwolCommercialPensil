@@ -33,30 +33,38 @@ function openCard(index) {
     fileInputValue.value = refArray.value[index][0]
   }
   alreadyExist.value = true
-  changeIndex.value=index
+  changeIndex.value = index
   toggleModal()
 }
 
 function changeInputCount(e) {
   e.preventDefault()
   let ID = getCookie('userId')
-  let description = textareaValue.value
-  router.replace({ path: '/brief_com/thanksPage' })
-  // TODO фикс бага
-  // let picArray = refArray.value[0][0] ошибка тут, исправь
+  let dataArr = []
+  let picToUrl
+
+  refArray.value.forEach((element) => {
+
+    if (element[3]) {
+      dataArr.push([element[0], element[1]])
+    } else {
+      picToUrl = URL.createObjectURL(element[0])
+      dataArr.push([picToUrl, element[1]])
+    }
+    
+  })
 
   $.ajax({
-    url: 'https://karandash.pro/brief/save_data.php ',
+    url: 'http://localhost:8000/save_data.php ',
     type: 'POST',
     data: {
       funk: 'addRefs',
       userId: ID,
-      picArray,
-      description: description,
+      dataArr,
     },
     success: function (data) {
       console.log(data)
-      router.replace({ path: '/brief_com/thanksPage' })
+      // router.replace({ path: '/brief_com/thanksPage' })
     },
   })
 }
@@ -67,10 +75,16 @@ function addRef(e) {
   let description = textareaValue.value
   let file = ref()
   if (alreadyExist.value) {
-    if (textInputValue.value ) {
+    if (textInputValue.value) {
       file.value = textInputValue.value
       haveLink.value = true
-      refArray.value[changeIndex.value] = [file.value, description, textInputValue.value, haveLink.value]
+
+      refArray.value[changeIndex.value] = [
+        file.value,
+        description,
+        textInputValue.value,
+        haveLink.value,
+      ]
     } else {
       file.value = fileInputValue.value
       haveLink.value = false
