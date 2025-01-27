@@ -12,8 +12,10 @@ let haveLink = ref()
 let textInputValue = ref('')
 let fileInputValue = ref('')
 let textareaValue = ref('')
-
+let alreadyExist = ref(false)
+let changeIndex = ref()
 const modalVisible = ref(false)
+
 function toggleModal(data) {
   if (data) {
     textInputValue.value = ''
@@ -23,13 +25,15 @@ function toggleModal(data) {
   modalVisible.value = !modalVisible.value
 }
 
-function openCard(item) {
-  textareaValue.value = item[1]
-  if (item[3]) {
-    textInputValue.value = item[2]
+function openCard(index) {
+  textareaValue.value = refArray.value[index][1]
+  if (refArray.value[index][3]) {
+    textInputValue.value = refArray.value[index][2]
   } else {
-    fileInputValue.value = item[0]
+    fileInputValue.value = refArray.value[index][0]
   }
+  alreadyExist.value = true
+  changeIndex.value=index
   toggleModal()
 }
 
@@ -62,16 +66,28 @@ function addRef(e) {
   e.preventDefault()
   let description = textareaValue.value
   let file = ref()
-  if (textInputValue.value) {
-    file.value = textInputValue.value
-    haveLink.value = true
-    refArray.value.push([file.value, description, textInputValue.value, haveLink.value])
+  if (alreadyExist.value) {
+    if (textInputValue.value ) {
+      file.value = textInputValue.value
+      haveLink.value = true
+      refArray.value[changeIndex.value] = [file.value, description, textInputValue.value, haveLink.value]
+    } else {
+      file.value = fileInputValue.value
+      haveLink.value = false
+      refArray.value[changeIndex.value] = [file.value, description, file.value.name, haveLink.value]
+    }
   } else {
-    file.value = fileInputValue.value
-    haveLink.value = false
-    refArray.value.push([file.value, description, file.value.name, haveLink.value])
+    if (textInputValue.value) {
+      file.value = textInputValue.value
+      haveLink.value = true
+      refArray.value.push([file.value, description, textInputValue.value, haveLink.value])
+    } else {
+      file.value = fileInputValue.value
+      haveLink.value = false
+      refArray.value.push([file.value, description, file.value.name, haveLink.value])
+    }
   }
-
+  alreadyExist.value = NaN
   textInputValue.value = ''
   fileInputValue.value = ''
   textareaValue.value = ''
@@ -173,13 +189,13 @@ function removeCard(getItem) {
         <div class="md:grid md:grid-cols-6 md:gap-x-5 md:gap-y-20">
           <AddCardButton v-if="refArray.length < 10" @click="toggleModal"></AddCardButton>
           <ContentRefCard
-            v-for="item in refArray"
+            v-for="(item, index) in refArray"
             :comment="item[1]"
             :href="item[2]"
             :file="item[0]"
             :haveLink="item[3]"
             @cross-click="removeCard(item)"
-            @card-click="openCard(item)"
+            @card-click="openCard(index)"
           ></ContentRefCard>
         </div>
         <div class="w-full flex md:justify-end mt-6 md:mt-12">
