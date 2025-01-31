@@ -197,6 +197,7 @@ function sendRoomDetailData(e) {
     },
     success: function (data) {
       console.log(data)
+      scrollToTop()
     },
   })
 }
@@ -205,15 +206,15 @@ function getAllCookiesExcept(excludeArray) {
   const result = []
 
   for (let i = 0; i < localstorage.length; i++) {
-    const key = localstorage.key(i);
-    const value = localstorage.getItem(key);
+    const key = localstorage.key(i)
+    const value = localstorage.getItem(key)
     if (
       !excludeArray.includes(key) &&
       key !== 'userId' &&
       key !== 'undefined' &&
       /^[0-9]+$/.test(value)
     ) {
-      result.push([key, value]);
+      result.push([key, value])
     }
   }
 
@@ -230,6 +231,13 @@ function findChoosenRoom(index) {
   }
   defaultRoomEnd.value = true
   return roomArray.length - 1
+}
+
+function scrollToTop() {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth',
+  })
 }
 
 const updateStyles = () => {
@@ -252,7 +260,7 @@ watch(() => customUserArray[customCounterI.value], updateStyles)
     <div class="md:mx-auto w-full max-w-[1920px]">
       <form @submit.prevent="sendRoomDetailData" id="bedroom" class="w-full">
         <div v-for="(item, index) in roomCounter" :key="index">
-          <h1 class="H1 Text pb-10 uppercase">{{ roomName }}</h1>
+          <h1 :id="roomName" class="H1 Text pb-10 uppercase">{{ roomName }}</h1>
           <div id="bedroom0" class="w-full md:flex">
             <LabelGroup :textArray="textArray"></LabelGroup>
             <div :class="testareaStyle">
@@ -282,7 +290,7 @@ watch(() => customUserArray[customCounterI.value], updateStyles)
           </div>
         </div>
         <div class="w-full flex md:justify-end mt-9 md:mt-12">
-          <YellowButton
+          ><YellowButton
             :arrow="true"
             class="mt-[34px] md:w-[212px] w-full"
             text="Далее"

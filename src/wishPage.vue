@@ -1,5 +1,4 @@
 <script setup>
-
 import YellowButton from './components/yellowButton.vue'
 import router from './router'
 
