@@ -39,7 +39,7 @@ function openCard(index) {
 
 function changeInputCount(e) {
   e.preventDefault()
-  let ID = getCookie('userId')
+  let ID = localStorage.getItem('userId')
   let dataArr = []
   let picToUrl
 
@@ -53,7 +53,7 @@ function changeInputCount(e) {
   })
 
   $.ajax({
-    url: 'https://karandash.pro/brief/userResult.php',
+    url: 'https://karandash.pro/brief/save_data.php',
     type: 'POST',
     data: {
       funk: 'addRefs',

@@ -9,7 +9,8 @@ import router from './router'
 <script>
 function sendMainUserData(e) {
   e.preventDefault() // предотвращаем стандартное поведение формы
-  let ID = getCookie('userId')
+  let ID = localStorage.getItem('userId')
+
   let actvitySphere = e.target[0].value
   let area = e.target[1].value
   let soundless = e.target[2].checked

@@ -120,7 +120,7 @@ let customCounterI = ref(0)
 let i = ref(findChoosenRoom(0))
 let roomName = ref(roomArray[i.value][0])
 let textArray = ref(roomArray[i.value][1])
-let roomCounter = ref(Number(getCookie(roomName.value)))
+let roomCounter = ref(Number(localStorage.getItem(roomName.value)))
 let testareaStyle = ref()
 
 const customUserArray = getAllCookiesExcept(roomArrayNames)
@@ -183,11 +183,10 @@ function sendRoomDetailData(e) {
   } else {
     roomName.value = roomArray[i.value][0]
     textArray.value = roomArray[i.value][1]
-    roomCounter.value = Number(getCookie(roomName.value))
+    roomCounter.value = Number(localStorage.getItem(roomName.value))
   }
 
-  let ID = getCookie('userId')
-
+  let ID = localStorage.getItem('userId')
   $.ajax({
     url: 'https://karandash.pro/brief/save_data.php ',
     type: 'POST',
@@ -201,17 +200,22 @@ function sendRoomDetailData(e) {
     },
   })
 }
-
 function getAllCookiesExcept(excludeArray) {
-  const cookies = document.cookie.split(';')
+  const localstorage = localStorage
   const result = []
 
-  cookies.forEach((cookie) => {
-    const [name, value] = cookie.split('=').map((c) => c.trim())
-    if (!excludeArray.includes(name) && name !== 'userId' && name !== 'undefined') {
-      result.push([name, value])
+  for (let i = 0; i < localstorage.length; i++) {
+    const key = localstorage.key(i);
+    const value = localstorage.getItem(key);
+    if (
+      !excludeArray.includes(key) &&
+      key !== 'userId' &&
+      key !== 'undefined' &&
+      /^[0-9]+$/.test(value)
+    ) {
+      result.push([key, value]);
     }
-  })
+  }
 
   return result
 }
@@ -219,7 +223,7 @@ function getAllCookiesExcept(excludeArray) {
 function findChoosenRoom(index) {
   let result
   for (let i = index; i < roomArray.length; i++) {
-    result = getCookie(roomArray[i][0])
+    result = localStorage.getItem(roomArray[i][0])
     if (result != '0' && result && result != undefined) {
       return i
     }

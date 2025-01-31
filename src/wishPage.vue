@@ -1,10 +1,10 @@
 <script setup>
-import $ from 'jquery'
-import { jquery } from 'globals'
+
 import YellowButton from './components/yellowButton.vue'
 import router from './router'
 
 function replace(e) {
+  // TODO сделать запись пожеланий коммерческого брифа
   router.replace({ path: '/brief_com/rooms' })
 }
 </script>
