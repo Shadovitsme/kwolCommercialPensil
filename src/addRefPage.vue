@@ -37,18 +37,40 @@ function openCard(index) {
   toggleModal()
 }
 
+async function saveFile(photo) {
+  let formData = new FormData()
+  formData.append('photo', photo)
+  formData.append('name', 'test.phg')
+  try {
+    const response = await fetch('https://karandash.pro/brief/uploadImage.php', {
+      method: 'POST',
+      body: formData,
+    })
+    if (response.status === 200) {
+      const data = await response.json()
+      console.log('Success', data)
+    } else {
+      console.log('Server error', data.error.message)
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 function changeInputCount(e) {
   e.preventDefault()
   let ID = localStorage.getItem('userId')
   let dataArr = []
-  let picToUrl
 
   refArray.value.forEach((element) => {
     if (element[3]) {
       dataArr.push([element[0], element[1]])
     } else {
-      picToUrl = URL.createObjectURL(element[0])
-      dataArr.push([picToUrl, element[1]])
+      setTimeout(() => {
+        saveFile(element[0])
+      })
+      let elemName = '../kwolkarandash/clientsRefs/' + element[0]['name']
+      dataArr.push([elemName, element[1]])
     }
   })
 
@@ -61,8 +83,7 @@ function changeInputCount(e) {
       dataArr,
     },
     success: function (data) {
-      console.log(data)
-      router.replace({ path: '/brief_com/thanksPage' })
+      // router.replace({ path: '/brief_com/thanksPage' })
     },
   })
 }
