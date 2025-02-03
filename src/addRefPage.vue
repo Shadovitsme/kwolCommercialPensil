@@ -42,7 +42,7 @@ async function saveFile(photo) {
   formData.append('photo', photo)
   formData.append('name', 'test.phg')
   try {
-    const response = await fetch('https://karandash.pro/brief/uploadImage.php', {
+    const response = await fetch('http://localhost:8000/uploadImage.php', {
       method: 'POST',
       body: formData,
     })
@@ -69,21 +69,21 @@ function changeInputCount(e) {
       setTimeout(() => {
         saveFile(element[0])
       })
-      let elemName = '../kwolkarandash/clientsRefs/' + element[0]['name']
+      let elemName = '../brief/clientsRefs/' + element[0]['name']
       dataArr.push([elemName, element[1]])
     }
   })
 
   $.ajax({
-    url: 'https://karandash.pro/brief/save_data.php',
+    url: 'http://localhost:8000/save_data.php',
     type: 'POST',
     data: {
       funk: 'addRefs',
-      userId: ID,
+      userId: 1,
       dataArr,
     },
     success: function (data) {
-      // router.replace({ path: '/brief_com/thanksPage' })
+      router.replace({ path: '/brief_com/thanksPage' })
     },
   })
 }
