@@ -182,7 +182,7 @@ function minus(index) {
         </div>
         <errorMessage
           v-if="error"
-          class="md:absolute static md:right-0 md:bottom-[84px]"
+          class="md:absolute static md:right-0 z-20 md:bottom-[84px]"
         ></errorMessage>
 
         <div class="w-full flex md:justify-end mt-9 md:mt-12">

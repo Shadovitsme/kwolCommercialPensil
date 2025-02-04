@@ -62,7 +62,7 @@ function getMainUserData(e) {
               console.log(data)
               document.cookie = `userId=${data}; path=/; max-age=3600`
               localStorage.setItem('userId', data)
-              // router.replace({ path: '/brief_com/mainData' })
+              router.replace({ path: '/brief_com/mainData' })
             },
           })
         }
