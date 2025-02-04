@@ -285,7 +285,7 @@ watch(() => customUserArray[customCounterI.value], updateStyles)
                 placeholder="Опишите предпочтения по отделке потолков (натяжной, подвесной, многоуровневый, или просто окрашенный.) Укажите предпочтения по материалам и цвету. Если нужен декоративный элемент (карнизы, лепнина, балки), уточните."
               ></textarea>
               <p class="p4 Text mb-2">Метраж помещения</p>
-              <input id="small" class="input mb-3" type="number" placeholder="Укажите число" />
+              <input id="small" class="input mb-3"  type="number" oninput="this.value = this.value.slice(0, 50)" placeholder="Укажите число" />
               <p class="p4 Text mb-2">Другое</p>
               <textarea
                 class="textarea h-[140px]"

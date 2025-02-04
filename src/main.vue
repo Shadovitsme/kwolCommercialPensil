@@ -128,31 +128,25 @@ document.addEventListener('DOMContentLoaded', function () {
           class="md:p-[3.75rem] md:mt-0 p-5 md:ml-1 border-[1px] border-[#E4A85E] rounded-[0.625rem]"
         >
           <h class="H3 Text uppercase"> Основные данные</h>
-          <form @submit.prevent="getMainUserData" class="md:mt-8 mt-4" id="page1">
-            <input
-              maxlength="30"
-              type="text"
-              class="input mb-6"
-              name="name"
-              placeholder="Введите имя"
-            />
+          <form @submit.prevent="getMainUserData" class="md:mt-8 mt-4 gap-y-6" id="page1">
+            <input maxlength="30" class="mb-6" type="text" name="name" placeholder="Введите имя" />
             <input
               id="phone"
               maxlength="30"
-              class="input mb-6"
+              class="mb-6"
               name="phone"
               placeholder="Введите телефон"
             />
             <input
               maxlength="30"
-              class="input"
+              class="mb-6"
               type="text"
               name="city"
               placeholder="Ваш город, улица, дом"
             />
             <YellowButton
               :arrow="true"
-              class="mt-[2.125rem] md:w-[19.875rem] w-full"
+              class="md:w-[19.875rem] w-full"
               text="Перейти к брифу"
             ></YellowButton>
           </form>
@@ -171,3 +165,9 @@ document.addEventListener('DOMContentLoaded', function () {
     </div>
   </div>
 </template>
+
+<style>
+.errorInput{
+
+}
+</style>

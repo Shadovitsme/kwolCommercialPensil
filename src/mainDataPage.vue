@@ -54,7 +54,7 @@ function sendMainUserData(e) {
           <p class="p4 Text mb-2">Сфера деятельности (магазин, офис, кафе, салон красоты и т.д)</p>
           <input class="input mb-4 md:mb-10" type="text" placeholder="Укажите сферу деятельности" />
           <p class="p4 Text mb-2">Площадь помещения в м²</p>
-          <input class="input mb-5 md:mb-10" type="number" placeholder="Укажите число" />
+          <input class="input mb-5 md:mb-10"  type="number" oninput="this.value = this.value.slice(0, 50)" placeholder="Укажите число" />
           <p class="H6 Accent">Есть необходимость звукоизоляции?</p>
           <div class="md:flex mt-5 md:mt-1 mb-5 md:mb-8">
             <div class="mr-5 ms:mb-1">
@@ -100,7 +100,7 @@ function sendMainUserData(e) {
             </div>
           </div>
           <p class="H6 Accent mb-[14px]">Количество рабочих мест</p>
-          <input class="input mb-4 md:mb-10" type="number" placeholder="Укажите число" />
+          <input class="input mb-4 md:mb-10"  type="number" oninput="this.value = this.value.slice(0, 50)" placeholder="Укажите число" />
           <div class="w-full md:mt-10 mt-5 flex md:justify-end">
             <YellowButton :arrow="true" class="md:w-[212px]" text="Далее"></YellowButton>
           </div>

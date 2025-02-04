@@ -6,6 +6,9 @@ import WishPage from '@/wishPage.vue'
 import Rooms from '@/rooms.vue'
 import addRefPage from '@/addRefPage.vue'
 import ThanksPage from '@/thanksPage.vue'
+import $ from 'jquery'
+$('input').attr('maxlength', '50')
+$('textarea').attr('maxlength', '800')
 
 const routes = [
   {
