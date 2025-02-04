@@ -4,6 +4,7 @@ import router from './router'
 import $ from 'jquery'
 import { jquery } from 'globals'
 import { ref } from 'vue'
+import { contains } from 'jquery'
 let userArray = ref([])
 let sawYouBefore = ref(false)
 
@@ -12,8 +13,27 @@ function getMainUserData(e) {
   let name = e.target[0].value
   let phone = e.target[1].value
   let town = e.target[2].value
+  if (!(name, phone, town) || phone.length < 11) {
+    if (!name) {
+      nameStyle.value = errorStyle
+    } else {
+      nameStyle.value = defaultStyle
+    }
+    if (!town) {
+      townStyle.value = errorStyle
+    } else {
+      townStyle.value = defaultStyle
+    }
+    if (phone.length < 11) {
+      PhoneStyle.value = errorStyle
+    } else {
+      PhoneStyle.value = defaultStyle
+    }
+  } else {
+    nameStyle.value = defaultStyle
+    PhoneStyle.value = defaultStyle
+    townStyle.value = defaultStyle
 
-  if ((name, phone, town)) {
     $.ajax({
       url: 'https://karandash.pro/brief/userResult.php',
       type: 'GET',
@@ -42,13 +62,11 @@ function getMainUserData(e) {
               console.log(data)
               document.cookie = `userId=${data}; path=/; max-age=3600`
               localStorage.setItem('userId', data)
-              router.replace({ path: '/brief_com/mainData' })
+              // router.replace({ path: '/brief_com/mainData' })
             },
           })
         }
       })
-  } else {
-    alert('Не все поля заполнены!!!')
   }
 }
 
@@ -111,6 +129,13 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 })
+
+const defaultStyle = 'mb-6 input'
+const errorStyle = 'mb-6 inputError'
+
+let nameStyle = ref(defaultStyle)
+let PhoneStyle = ref(defaultStyle)
+let townStyle = ref(defaultStyle)
 </script>
 
 <template>
@@ -129,17 +154,23 @@ document.addEventListener('DOMContentLoaded', function () {
         >
           <h class="H3 Text uppercase"> Основные данные</h>
           <form @submit.prevent="getMainUserData" class="md:mt-8 mt-4 gap-y-6" id="page1">
-            <input maxlength="30" class="mb-6" type="text" name="name" placeholder="Введите имя" />
+            <input
+              maxlength="30"
+              :class="nameStyle"
+              type="text"
+              name="name"
+              placeholder="Введите имя"
+            />
             <input
               id="phone"
               maxlength="30"
-              class="mb-6"
+              :class="PhoneStyle"
               name="phone"
               placeholder="Введите телефон"
             />
             <input
               maxlength="30"
-              class="mb-6"
+              :class="townStyle"
               type="text"
               name="city"
               placeholder="Ваш город, улица, дом"
@@ -167,7 +198,55 @@ document.addEventListener('DOMContentLoaded', function () {
 </template>
 
 <style>
-.errorInput{
+.inputError {
+  background-color: var(--DarkAccent);
+  padding: 20px;
+  width: 100%;
+  height: 68px;
+  color: var(--Text);
+  border-radius: 5px;
+  vertical-align: top;
+  border-color: #c63f3f;
+  border-width: 1px;
+}
 
+.inputError::placeholder {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--QuietText);
+}
+
+.inputError:focus,
+.inputError:active {
+  border-color: #c63f3f;
+  outline: none;
+  border-width: 1px;
+  border-width: 1px;
+}
+
+.inputError:focus::placeholder {
+  transform: translateY(-20px);
+  font-size: 12px;
+  line-height: 12px;
+}
+
+@media screen and (max-width: 1024px) {
+  .inputError {
+    border-color: #c63f3f;
+    border-width: 1px;
+    height: 58px;
+    background-color: var(--DarkAccent);
+    padding: 20px;
+    width: 100%;
+    color: var(--Text);
+    border-radius: 5px;
+  }
+  .inputError::placeholder {
+    font-family: 'Corsa Grotesk Regular';
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+  }
 }
 </style>
