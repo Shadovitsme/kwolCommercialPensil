@@ -42,7 +42,7 @@ async function saveFile(photo) {
   formData.append('photo', photo)
   formData.append('name', 'test.phg')
   try {
-    const response = await fetch('http://localhost:8000/uploadImage.php', {
+    const response = await fetch('https://karandash.pro/brief/uploadImage.php', {
       method: 'POST',
       body: formData,
     })
@@ -75,11 +75,11 @@ function changeInputCount(e) {
   })
 
   $.ajax({
-    url: 'http://localhost:8000/save_data.php',
+    url: 'https://karandash.pro/brief/save_data.php',
     type: 'POST',
     data: {
       funk: 'addRefs',
-      userId: 1,
+      userId: ID,
       dataArr,
     },
     success: function (data) {

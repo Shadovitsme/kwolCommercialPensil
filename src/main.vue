@@ -143,7 +143,13 @@ document.addEventListener('DOMContentLoaded', function () {
               name="phone"
               placeholder="Введите телефон"
             />
-            <input maxlength="30" class="input" type="text" name="city" placeholder="Ваш город" />
+            <input
+              maxlength="30"
+              class="input"
+              type="text"
+              name="city"
+              placeholder="Ваш город, улица, дом"
+            />
             <YellowButton
               :arrow="true"
               class="mt-[2.125rem] md:w-[19.875rem] w-full"
@@ -152,7 +158,7 @@ document.addEventListener('DOMContentLoaded', function () {
           </form>
         </div>
       </div>
-      <div class="md:ml-16 mb-[10.59375rem] flex-none overflow-hidden hidden md:block md:visible">
+      <div class="md:ml-16 mb-[10.59375rem] flex-none overflow-hidden hidden md:block">
         <img
           class="h-[45.75rem] inline-block w-[30.8125rem] max-[62.5rem]:hidden my-auto"
           src="./images/pic.png"

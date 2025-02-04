@@ -1,9 +1,13 @@
 <script setup>
-import YellowButton from './components/yellowButton.vue'
-import MainPage from './main.vue'
+import $ from 'jquery'
 </script>
 
 <script>
+$(document).ready(function () {
+  // ajax page 1
+  $('input').attr('maxlength', 50)
+  $('textarea').attr('maxlength', 800)
+})
 function redirect() {
   alert('hi')
 }
