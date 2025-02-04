@@ -115,6 +115,7 @@ const roomArrayNames = [
   'Кладовая',
   'Склад',
 ]
+
 let defaultRoomEnd = ref(false)
 let customCounterI = ref(0)
 let i = ref(findChoosenRoom(0))
@@ -187,6 +188,7 @@ function sendRoomDetailData(e) {
   }
 
   let ID = localStorage.getItem('userId')
+
   $.ajax({
     url: 'https://karandash.pro/brief/save_data.php ',
     type: 'POST',
@@ -197,6 +199,9 @@ function sendRoomDetailData(e) {
     },
     success: function (data) {
       console.log(data)
+      $('input').val(0)
+      $('#small').val(undefined)
+      $('textarea').val(undefined)
       scrollToTop()
     },
   })
@@ -280,7 +285,7 @@ watch(() => customUserArray[customCounterI.value], updateStyles)
                 placeholder="Опишите предпочтения по отделке потолков (натяжной, подвесной, многоуровневый, или просто окрашенный.) Укажите предпочтения по материалам и цвету. Если нужен декоративный элемент (карнизы, лепнина, балки), уточните."
               ></textarea>
               <p class="p4 Text mb-2">Метраж помещения</p>
-              <input class="input mb-3" type="number" placeholder="Укажите число" />
+              <input id="small" class="input mb-3" type="number" placeholder="Укажите число" />
               <p class="p4 Text mb-2">Другое</p>
               <textarea
                 class="textarea h-[140px]"
