@@ -101,7 +101,7 @@ function sendMainUserData(e) {
           </div>
           <p class="H6 Accent mb-[14px]">Количество рабочих мест</p>
           <input class="input mb-4 md:mb-10" type="number" placeholder="Укажите число" />
-          <div class="w-full md:mt-[75px] flex md:justify-end">
+          <div class="w-full md:mt-10 mt-5 flex md:justify-end">
             <YellowButton :arrow="true" class="md:w-[212px]" text="Далее"></YellowButton>
           </div>
         </div>

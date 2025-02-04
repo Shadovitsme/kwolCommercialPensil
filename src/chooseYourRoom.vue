@@ -169,10 +169,10 @@ function minus(index) {
         >
           <LabelAdditional :short="true" v-for="item in arr" :text="item"></LabelAdditional>
           <InputLabel :count="count" :userRoomCount="userRoomCount"></InputLabel>
-          <div v-if="userRoomCount > 18" class="w-full h-full"></div>
+          <div v-if="userRoomCount > 19" class="w-full h-full"></div>
 
           <YellowButton
-            v-if="userRoomCount < 19"
+            v-if="userRoomCount < 20"
             type="button"
             @click="addRoom"
             class="w-full"

@@ -19,10 +19,11 @@ const updateStyles = () => {
   userAdditional.value = 0
   if (props.textArray.length > 7) {
     gridStyle.value =
-      'w-full md:w-[964px] md:mr-[64px] grid grid-cols-1 md:grid-cols-2 gap-y-5 md:gap-y-[32px] md:gap-x-[52px] '
+      'w-full md:w-[964px] h-fit md:mr-[64px] h-fit grid grid-cols-1 md:grid-cols-2 gap-y-5 md:gap-y-[32px] md:gap-x-[52px] '
     short.value = true
   } else {
-    gridStyle.value = 'md:w-[652px]  md:mr-[64px]'
+    gridStyle.value =
+      'md:w-[652px] md:mr-[64px] h-fit w-full grid grid-cols-1 gap-y-5 md:gap-y-[32px] md:gap-x-[52px] '
     short.value = false
   }
 }
@@ -37,7 +38,12 @@ watch(() => props.textArray, updateStyles, { deep: true })
 <template>
   <div :class="gridStyle">
     <LabelAdditional :short="short" v-for="item in props.textArray" :text="item"></LabelAdditional>
-    <InputLabel :long="!short" :count="count" :userRoomCount="userAdditional"></InputLabel>
+    <InputLabel
+      class="mb-5"
+      :long="!short"
+      :count="count"
+      :userRoomCount="userAdditional"
+    ></InputLabel>
     <YellowButton
       v-if="userAdditional < 5"
       @click="userAdditional++"

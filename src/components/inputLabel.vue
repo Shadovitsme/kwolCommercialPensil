@@ -37,7 +37,7 @@ const updateStyles = () => {
     padd.value = 'input text-center my-auto mx-3 md:w-[52px]'
   } else {
     labelStyle.value =
-      'md:mr-5 rounded-[5px] text-Text p3 w-full md:w-[199px] absolute md:static top-0 z-20 flex my-auto outline-none placeholder:p3 placeholder:text-QuietText pl-4 py-3 border-[1px] border-Accent bg-DarkAccent'
+      'md:mr-5 rounded-[5px] text-Text p3 w-full absolute md:static top-0 z-20 flex my-auto outline-none placeholder:p3 placeholder:text-QuietText pl-4 py-3 border-[1px] border-Accent bg-DarkAccent'
     padd.value = 'input text-center my-auto mx-3'
   }
 }
@@ -50,7 +50,7 @@ watch(() => props.long, updateStyles)
 <template>
   <div
     v-for="(item, index) in props.userRoomCount"
-    class="md:flex md:h-[56px] md:static relative h-[143px] mb-[37px]"
+    class="md:flex md:h-[56px] md:static relative h-[143px]"
   >
     <input :class="labelStyle" placeholder="Название" />
     <div
@@ -72,3 +72,21 @@ watch(() => props.long, updateStyles)
     </div>
   </div>
 </template>
+
+<style scoped>
+.input {
+  background-color: var(--DarkAccent);
+  padding: 20px;
+  width: 52px;
+  height: 58px;
+  color: var(--Text);
+  border-radius: 5px;
+  vertical-align: top;
+}
+
+@media (max-width: 1024px) {
+  .input {
+    width: 100%;
+  }
+}
+</style>

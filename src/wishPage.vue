@@ -63,7 +63,7 @@ function replace(e) {
 
             <p class="p4 Text mb-2">Дополнительный комментарий</p>
             <textarea
-              class="textarea mb-14"
+              class="textarea"
               type="text"
               placeholder="Если есть какая‑либо информация, которую вы считаете важной, укажите её здесь"
             ></textarea>

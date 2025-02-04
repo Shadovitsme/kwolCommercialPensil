@@ -34,7 +34,7 @@ const updateStyles = () => {
   } else {
     labelStyle.value =
       'labelWrapper md:mr-5 w-full md:w-[460px] absolute md:static top-0 z-20 flex my-auto'
-    padd.value = 'md:flex md:h-[58px] mb-[32px] md:static relative h-[143px]'
+    padd.value = 'md:flex md:h-[58px] md:static relative h-[143px]'
   }
 }
 

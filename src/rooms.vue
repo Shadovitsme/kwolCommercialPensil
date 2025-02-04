@@ -294,12 +294,8 @@ watch(() => customUserArray[customCounterI.value], updateStyles)
             </div>
           </div>
         </div>
-        <div class="w-full flex md:justify-end mt-9 md:mt-12">
-          ><YellowButton
-            :arrow="true"
-            class="mt-[34px] md:w-[212px] w-full"
-            text="Далее"
-          ></YellowButton>
+        <div class="w-full md:flex md:justify-end mt-5 md:mt-12">
+          ><YellowButton :arrow="true" class="md:w-[212px] w-full" text="Далее"></YellowButton>
         </div>
       </form>
     </div>
