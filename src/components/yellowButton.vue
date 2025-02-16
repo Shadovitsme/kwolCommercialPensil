@@ -7,15 +7,8 @@ const props = defineProps({
 })
 </script>
 <template>
-  <button class="h-[44px] md:h-[60px] flex yellowButton">
-    <div class="flex mx-auto my-auto">
-      <p class="p3">{{ text }}</p>
-      <div
-        v-if="props.arrow"
-        class="rightArrow h-5 w-5 ml-[18px] mt-[7px] md:visible hidden md:block"
-      ></div>
-    </div>
+  <button class="h-[44px] md:h-[60px] flex justify-center content-center items-center yellowButton">
+    <p class="p3">{{ text }}</p>
+    <img src="../images/Vector.svg" v-if="props.arrow" class="ml-4 my-auto hidden md:block" />
   </button>
 </template>
-
-<style></style>

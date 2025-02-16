@@ -6,6 +6,8 @@ import { jquery } from 'globals'
 import { ref, watch } from 'vue'
 import router from './router'
 import { getCookie } from './utility/getCookie'
+import BackButton from './components/backButton.vue'
+import BackLink from './components/backLink.vue'
 
 const roomArray = [
   [
@@ -198,7 +200,7 @@ function sendRoomDetailData(e) {
       arr,
     },
     success: function (data) {
-      console.log(data)
+      // console.log(data)
       $('input').val(0)
       $('#small').val(undefined)
       $('textarea').val(undefined)
@@ -255,6 +257,16 @@ const updateStyles = () => {
 // Initial check
 updateStyles()
 
+function backFunction() {
+  let result
+  console.log('aaaa')
+  for (let m = i.value - 1; m < roomArray.length; m++) {
+    result = localStorage.getItem(roomArray[m][0])
+    if (result != '0' && result && result != undefined) {
+      i.value = m
+    }
+  }
+}
 // Watch for changes in short prop
 watch(() => roomArray[i.value], updateStyles)
 watch(() => customUserArray[customCounterI.value], updateStyles)
@@ -300,8 +312,10 @@ watch(() => customUserArray[customCounterI.value], updateStyles)
             </div>
           </div>
         </div>
-        <div class="w-full md:flex md:justify-end mt-5 md:mt-12">
-          ><YellowButton :arrow="true" class="md:w-[212px] w-full" text="Далее"></YellowButton>
+        <div class="w-full md:flex md:justify-between mt-5 md:mt-12">
+          <BackButton @click="backFunction"></BackButton>
+          <YellowButton :arrow="true" class="md:w-[212px] w-full" text="Далее"></YellowButton>
+          <BackLink @click="backFunction"></BackLink>
         </div>
       </form>
     </div>

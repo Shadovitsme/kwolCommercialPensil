@@ -8,6 +8,8 @@ import { ref } from 'vue'
 import { getCookie } from './utility/getCookie'
 import $ from 'jquery'
 import InputLabel from './components/inputLabel.vue'
+import BackButton from './components/backButton.vue'
+import BackLink from './components/backLink.vue'
 
 let arr = [
   'Ресепшн',
@@ -161,7 +163,7 @@ function minus(index) {
 
 <template>
   <div class="flex px-[22px] md:px-[100px]">
-    <div class="md:mx-auto w-full max-w-[1920px] relative h-[776px] max-h-[776px]">
+    <div class="md:mx-auto w-full max-w-[1920px] relative md:h-[776px] md:max-h-[776px]">
       <form @submit.prevent="redirect" id="page3" class="w-full h-full">
         <h1 class="H1 Text pb-10 uppercase">Выберите комнаты</h1>
         <div
@@ -185,12 +187,12 @@ function minus(index) {
           class="md:absolute static md:right-0 z-20 md:bottom-[84px]"
         ></errorMessage>
 
-        <div class="w-full flex md:justify-end mt-9 md:mt-12">
-          <YellowButton
-            :arrow="true"
-            class="mt-[34px] md:w-[212px] md:absolute w-full right-0 bottom-0"
-            text="Далее"
-          ></YellowButton>
+        <div
+          class="w-full md:flex md:absolute md:bottom-0 items-end md:justify-between mt-9 md:mt-12 "
+        >
+          <a href="/brief_com/mainData"> <BackButton></BackButton> </a>
+          <YellowButton :arrow="true" class="md:w-[212px] w-full" text="Далее"></YellowButton>
+          <BackLink href="/brief_com/mainData"></BackLink>
         </div>
       </form>
     </div>

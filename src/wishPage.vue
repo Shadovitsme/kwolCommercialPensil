@@ -1,4 +1,6 @@
 <script setup>
+import BackButton from './components/backButton.vue'
+import BackLink from './components/backLink.vue';
 import YellowButton from './components/yellowButton.vue'
 import router from './router'
 
@@ -67,10 +69,12 @@ function replace(e) {
               type="text"
               placeholder="Если есть какая‑либо информация, которую вы считаете важной, укажите её здесь"
             ></textarea>
-            <div class="w-full flex md:justify-end mt-9 md:mt-12">
-              <YellowButton :arrow="true" class="md:w-[212px]" text="Далее"></YellowButton>
-            </div>
           </div>
+        </div>
+        <div class="w-full md:flex md:justify-between mt-9 md:mt-12">
+          <a href="/brief_com/chooseRoom"> <BackButton></BackButton> </a>
+          <YellowButton :arrow="true" class="md:w-[212px]" text="Далее"></YellowButton>
+          <BackLink href="/brief_com/chooseRoom"></BackLink>
         </div>
       </form>
     </div>
