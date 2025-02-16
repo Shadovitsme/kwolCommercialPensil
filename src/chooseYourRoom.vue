@@ -27,6 +27,10 @@ let arr = [
 let userRoomCount = ref(0)
 let count = ref(new Array(20).fill(0))
 
+$(document).ready(function () {
+
+})
+
 function checkContentAdditionalRooms() {
   return count.value.find((value) => value !== 0)
 }
@@ -46,9 +50,7 @@ function setRoomCookie(customUserRoomNames) {
     }
   }
 }
-
-function setStaticRoomCookie(valueArr) {
-  let arr = [
+let arr = [
     'Ресепшн',
     'Кабинет',
     'Кухня',
@@ -58,6 +60,8 @@ function setStaticRoomCookie(valueArr) {
     'Склад',
     'Зона ожидания',
   ]
+function setStaticRoomCookie(valueArr) {
+
 
   for (let i = 0; i <= arr.length; i++) {
     if (valueArr[i] != '0') {
@@ -66,6 +70,26 @@ function setStaticRoomCookie(valueArr) {
     }
   }
 }
+
+
+function checkLocalStorage(num){
+  if( localStorage.getItem(arr[num])==undefined  ){
+    return 0
+  }
+  return localStorage.getItem(arr[num])
+}
+
+$(document).ready(function () {
+  document.getElementById('page3').elements[1].value = checkLocalStorage(0)
+  document.getElementById('page3').elements[4].value = checkLocalStorage(1)
+  document.getElementById('page3').elements[7].value = checkLocalStorage(2)
+  document.getElementById('page3').elements[10].value = checkLocalStorage(3)
+  document.getElementById('page3').elements[13].value = checkLocalStorage(4)
+  document.getElementById('page3').elements[16].value = checkLocalStorage(5)
+  document.getElementById('page3').elements[19].value = checkLocalStorage(6)
+  document.getElementById('page3').elements[22].value = checkLocalStorage(7)
+
+})
 
 function redirect(e) {
   e.preventDefault() // предотвращаем стандартное поведение формы
@@ -78,6 +102,9 @@ function redirect(e) {
   let sclad = e.target[19].value
   let waitingRoom = e.target[22].value
   let valueArr = [reception, cabinet, kitchen, tualet, speakingRoom, storeRoom, sclad, waitingRoom]
+  arr.forEach((element,key) => {
+    localStorage.setItem(element,valueArr[key])
+  });
   let ID = localStorage.getItem('userId')
   let customUserRoomNames = new Array(20).fill(0)
 

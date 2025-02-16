@@ -17,8 +17,6 @@ let contentArr = [
   'workPlaces',
 ]
 
-function chooseDataFill() {}
-
 $(document).ready(function () {
     document.getElementById('page2').elements[0].value = localStorage.getItem(contentArr[0])
     document.getElementById('page2').elements[1].value = localStorage.getItem(contentArr[1])
