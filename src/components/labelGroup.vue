@@ -19,11 +19,11 @@ const updateStyles = () => {
   userAdditional.value = 0
   if (props.textArray.length > 7) {
     gridStyle.value =
-      'w-full md:w-[964px] h-fit md:mr-[64px] h-fit grid grid-cols-1 md:grid-cols-2 gap-y-5 md:gap-y-[32px] md:gap-x-[52px] '
+      'w-full lg:w-[964px] h-fit lg:mr-[64px] h-fit grid grid-cols-1 md:grid-cols-2 gap-y-5 md:gap-y-[32px] md:gap-x-[52px] '
     short.value = true
   } else {
     gridStyle.value =
-      'md:w-[652px] md:mr-[64px] h-fit w-full grid grid-cols-1 gap-y-5 md:gap-y-[32px] md:gap-x-[52px] '
+      'lg:w-[652px] lg:mr-[64px] h-fit w-full grid grid-cols-1 gap-y-5 md:gap-y-[32px] md:gap-x-[52px] '
     short.value = false
   }
 }

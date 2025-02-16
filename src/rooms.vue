@@ -208,6 +208,7 @@ function sendRoomDetailData(e) {
     },
   })
 }
+
 function getAllCookiesExcept(excludeArray) {
   const localstorage = localStorage
   const result = []
@@ -238,6 +239,10 @@ function findChoosenRoom(index) {
     }
   }
   defaultRoomEnd.value = true
+  if(customUserArray.length<=0){
+    router.replace({ path: '/brief_com/addRefPage' })
+
+  }
   return index
 }
 
@@ -284,17 +289,17 @@ function backFunction() {
 }
 
 function scrollToTop() {
-  // window.scrollTo({
-  //   top: 0,
-  //   behavior: 'smooth',
-  // })
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth',
+  })
 }
 
 const updateStyles = () => {
   if (roomArray[i.value][1].length < 8) {
-    testareaStyle.value = 'md:w-[1004px] w-full mt-5 md:mt-0'
+    testareaStyle.value = 'lg:w-[1004px] w-full mt-5 md:mt-0'
   } else {
-    testareaStyle.value = 'md:w-[692px] w-full mt-5 md:mt-0'
+    testareaStyle.value = 'lg:w-[692px] w-full mt-5 md:mt-0'
   }
 }
 // Initial check
@@ -311,7 +316,7 @@ watch(() => customUserArray[customCounterI.value], updateStyles)
       <form @submit.prevent="sendRoomDetailData" id="bedroom" class="w-full">
         <div v-for="(item, index) in roomCounter" :key="index">
           <h1 :id="roomName" class="H1 Text pb-10 uppercase">{{ roomName }}</h1>
-          <div id="bedroom0" class="w-full md:flex">
+          <div id="bedroom0" class="w-full lg:flex">
             <LabelGroup :textArray="textArray"></LabelGroup>
             <div :class="testareaStyle">
               <p class="p4 Text mb-2">Пожелания по напольному покрытию</p>

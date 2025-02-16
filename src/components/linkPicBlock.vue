@@ -17,7 +17,6 @@ watch([textInputValue, fileInputValue], ([newTextValue, newFileValue]) => {
   showTextarea.value = newTextValue.length > 0 || newFileValue !== null
 })
 </script>
-<!-- TODO ограничеть допустимые форматы файлов -->
 <template>
   <div v-for="{ item } in inputs">
     <p class="p4 mb-2 text-Text">Ссылка на референс</p>

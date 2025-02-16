@@ -54,7 +54,7 @@ watch(() => props.long, updateStyles)
   >
     <input :class="labelStyle" placeholder="Название" />
     <div
-      class="flex justify-center md:no-flex md:border-0 border-b-[1px] md:static absolute top-10 border-x-[1px] md:p-0 px-4 py-6 border-QuietText rounded-b-[5px]"
+      class="flex justify-center md:no-flex md:border-0 border-b-[1px] md:static absolute w-full top-10 border-x-[1px] md:p-0 px-4 py-6 border-QuietText rounded-b-[5px]"
     >
       <button
         name="minusButton"

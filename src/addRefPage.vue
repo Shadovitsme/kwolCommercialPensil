@@ -244,7 +244,7 @@ function checkBackLink() {
           <BackButton @click="checkBackLink()"></BackButton>
           <YellowButton
             :arrow="true"
-            class="mt-[34px] w-full md:w-[212px]"
+            class=" w-full md:w-[212px]"
             text="Далее"
           ></YellowButton>
           <BackLink @click="checkBackLink()"></BackLink>
