@@ -8,6 +8,7 @@ import router from './router'
 import { getCookie } from './utility/getCookie'
 import BackButton from './components/backButton.vue'
 import BackLink from './components/backLink.vue'
+import { contains } from 'jquery'
 
 const roomArray = [
   [
@@ -190,7 +191,6 @@ function sendRoomDetailData(e) {
   }
 
   let ID = localStorage.getItem('userId')
-
   $.ajax({
     url: 'https://karandash.pro/brief/save_data.php ',
     type: 'POST',
@@ -230,21 +230,64 @@ function getAllCookiesExcept(excludeArray) {
 
 function findChoosenRoom(index) {
   let result
-  for (let i = index; i < roomArray.length; i++) {
-    result = localStorage.getItem(roomArray[i][0])
+
+  for (let j = index; j < roomArray.length; j++) {
+    result = localStorage.getItem(roomArray[j][0])
     if (result != '0' && result && result != undefined) {
-      return i
+      return j
     }
   }
   defaultRoomEnd.value = true
-  return roomArray.length - 1
+  return index
+}
+
+function findBackRoom(index) {
+  let result
+  for (let m = index; m >= 0; m--) {
+    result = localStorage.getItem(roomArray[m][0])
+    if (result != '0' && result != undefined) {
+      return m
+    }
+  }
+  router.replace({ path: '/brief_com/wishPage' })
+}
+
+function findBackCustomRoom() {
+  customCounterI.value = customCounterI.value - 1
+
+  if (customCounterI.value == 0) {
+    i.value = findBackRoom(i.value)
+    roomName.value = roomArray[i.value][0]
+    textArray.value = roomArray[i.value][1]
+    roomCounter.value = Number(localStorage.getItem(roomName.value))
+    defaultRoomEnd.value = false
+  } else {
+    customCounterI.value = customCounterI.value - 1
+    roomName.value = customUserArray[customCounterI.value][0]
+    textArray.value = ['Теплый пол', 'Кондиционирование']
+    roomCounter.value = Number(customUserArray[customCounterI.value][1])
+    customCounterI.value==0?customCounterI.value=1:customCounterI.value
+
+  }
+}
+
+function backFunction() {
+  if (defaultRoomEnd.value) {
+    findBackCustomRoom()
+  } else {
+    defaultRoomEnd.value = false
+    i.value = findBackRoom(i.value - 1)
+    roomName.value = roomArray[i.value][0]
+    textArray.value = roomArray[i.value][1]
+    roomCounter.value = Number(localStorage.getItem(roomName.value))
+  }
 }
 
 function scrollToTop() {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth',
-  })
+  // window.scrollTo({
+  //   top: 0,
+  //   behavior: 'smooth',
+  // })
 }
 
 const updateStyles = () => {
@@ -257,16 +300,6 @@ const updateStyles = () => {
 // Initial check
 updateStyles()
 
-function backFunction() {
-  let result
-  console.log('aaaa')
-  for (let m = i.value - 1; m < roomArray.length; m++) {
-    result = localStorage.getItem(roomArray[m][0])
-    if (result != '0' && result && result != undefined) {
-      i.value = m
-    }
-  }
-}
 // Watch for changes in short prop
 watch(() => roomArray[i.value], updateStyles)
 watch(() => customUserArray[customCounterI.value], updateStyles)

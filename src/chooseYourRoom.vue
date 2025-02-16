@@ -188,7 +188,7 @@ function minus(index) {
         ></errorMessage>
 
         <div
-          class="w-full md:flex md:absolute md:bottom-0 items-end md:justify-between mt-9 md:mt-12 "
+          class="w-full md:flex md:absolute md:bottom-0 items-end md:justify-between mt-9 md:mt-12"
         >
           <a href="/brief_com/mainData"> <BackButton></BackButton> </a>
           <YellowButton :arrow="true" class="md:w-[212px] w-full" text="Далее"></YellowButton>
