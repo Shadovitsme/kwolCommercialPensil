@@ -6,7 +6,8 @@ import AddCardButton from './components/addCardButton.vue'
 import ContentRefCard from './components/contentRefCard.vue'
 import $ from 'jquery'
 import { getCookie } from './utility/getCookie'
-// TODO сделать добавление файлов в бд
+import BackButton from './components/backButton.vue'
+import BackLink from './components/backLink.vue'
 let refArray = ref([])
 let haveLink = ref()
 let textInputValue = ref('')
@@ -89,7 +90,6 @@ function changeInputCount(e) {
 }
 
 function addRef(e) {
-  // TODO добавить маску чтобы проверять на что ссылка
   e.preventDefault()
   let description = textareaValue.value
   let file = ref()
@@ -134,6 +134,15 @@ function changeSrc() {
 
 function removeCard(getItem) {
   refArray.value = refArray.value.filter((item) => item !== getItem)
+}
+
+function checkBackLink() {
+  if (localStorage.getItem('commercial') == 'true') {
+    router.replace('/brief_com/rooms')
+  }
+  else{
+    history.back()
+  }
 }
 </script>
 <template>
@@ -231,12 +240,14 @@ function removeCard(getItem) {
             @card-click="openCard(index)"
           ></ContentRefCard>
         </div>
-        <div class="w-full flex md:justify-end mt-6 md:mt-12">
+        <div class="w-full md:flex md:justify-between mt-6 md:mt-12">
+          <BackButton @click="checkBackLink()"></BackButton>
           <YellowButton
             :arrow="true"
             class="mt-[34px] w-full md:w-[212px]"
             text="Далее"
           ></YellowButton>
+          <BackLink @click="checkBackLink()"></BackLink>
         </div>
       </form>
     </div>
