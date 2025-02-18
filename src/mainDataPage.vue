@@ -18,13 +18,13 @@ let contentArr = [
 ]
 
 $(document).ready(function () {
-    document.getElementById('page2').elements[0].value = localStorage.getItem(contentArr[0])
-    document.getElementById('page2').elements[1].value = localStorage.getItem(contentArr[1])
-    document.getElementById('page2').elements[2].value = localStorage.getItem(contentArr[2])
-    document.getElementById('page2').elements[4].value = localStorage.getItem(contentArr[3])
-    document.getElementById('page2').elements[6].value = localStorage.getItem(contentArr[4])
-    document.getElementById('page2').elements[7].value = localStorage.getItem(contentArr[5])
-    document.getElementById('page2').elements[9].value = localStorage.getItem(contentArr[6])
+  document.getElementById('page2').elements[0].value = localStorage.getItem(contentArr[0])
+  document.getElementById('page2').elements[1].value = localStorage.getItem(contentArr[1])
+  document.getElementById('page2').elements[2].value = localStorage.getItem(contentArr[2])
+  document.getElementById('page2').elements[4].value = localStorage.getItem(contentArr[3])
+  document.getElementById('page2').elements[6].value = localStorage.getItem(contentArr[4])
+  document.getElementById('page2').elements[7].value = localStorage.getItem(contentArr[5])
+  document.getElementById('page2').elements[9].value = localStorage.getItem(contentArr[6])
 })
 
 function sendMainUserData(e) {

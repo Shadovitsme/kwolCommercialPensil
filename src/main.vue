@@ -2,9 +2,7 @@
 import YellowButton from './components/yellowButton.vue'
 import router from './router'
 import $ from 'jquery'
-import { jquery } from 'globals'
 import { ref } from 'vue'
-import { contains } from 'jquery'
 let userArray = ref([])
 let sawYouBefore = ref(false)
 
@@ -33,7 +31,7 @@ function getMainUserData(e) {
     nameStyle.value = defaultStyle
     PhoneStyle.value = defaultStyle
     townStyle.value = defaultStyle
-
+    localStorage.setItem('commercial', 'true')
     $.ajax({
       url: 'https://karandash.pro/brief/userResult.php',
       type: 'GET',
@@ -141,12 +139,12 @@ let townStyle = ref(defaultStyle)
 <template>
   <div class="flex px-[1.375rem] md:px-0">
     <div class="flex md:justify-between md:mx-auto max-w-[1920px] z-20">
-      <div class="md:ml-[6.25rem] md:w-full">
-        <div class="mt-10 md:w-[51.75rem] md:ml-5">
+      <div class="md:mx-6 lg:mx-[6.25rem] md:w-full">
+        <div class="mt-10 lg:w-[51.75rem] md:ml-5">
           <h1 class="H1 Text uppercase text-justify">Бриф, подготовленный</h1>
-          <h1 class="speciall text-justify text-[40px] md:text-[104px] mb-6">специально для вас</h1>
+          <h1 class="speciall text-justify text-[40px] lg:text-[104px] mb-6">специально для вас</h1>
         </div>
-        <p class="p3 mb-[4rem] h-12 Text min-[6.25rem]:mt-4 laptop:mt-5 md:ml-5 tracking-tighter">
+        <p class="p3 mb-[4rem] h-12 Text  laptop:mt-5 md:ml-5 tracking-tighter">
           Заполните бриф, чтобы мы могли сразу сориентировать вас по деталям и стоимости проекта
         </p>
         <div
@@ -183,7 +181,7 @@ let townStyle = ref(defaultStyle)
           </form>
         </div>
       </div>
-      <div class="md:ml-16 mb-[10.59375rem] flex-none overflow-hidden hidden md:block">
+      <div class="md:ml-16 mb-[10.59375rem] flex-none overflow-hidden hidden lg:block">
         <img
           class="h-[45.75rem] inline-block w-[30.8125rem] max-[62.5rem]:hidden my-auto"
           src="./images/pic.png"

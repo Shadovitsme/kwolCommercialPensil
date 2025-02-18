@@ -16,41 +16,39 @@ $(document).ready(function () {
   document.getElementById('wishPage').elements[7].value = localStorage.getItem('wannaSee')
   document.getElementById('wishPage').elements[8].value = localStorage.getItem('dontWannaSee')
   document.getElementById('wishPage').elements[9].value = localStorage.getItem('additional')
-
 })
 
 function replace(e) {
   let ID = localStorage.getItem('userId')
   let light = e.target[0].value
-  localStorage.setItem('light',light)
+  localStorage.setItem('light', light)
 
   let warmFloor = e.target[1].value
-  localStorage.setItem('warmFloor',warmFloor)
+  localStorage.setItem('warmFloor', warmFloor)
 
   let ceiling = e.target[2].value
-  localStorage.setItem('ceiling',ceiling)
+  localStorage.setItem('ceiling', ceiling)
 
   let floor = e.target[3].value
-  localStorage.setItem('floor',floor)
+  localStorage.setItem('floor', floor)
 
   let deadline = e.target[4].value
-  localStorage.setItem('deadline',deadline)
+  localStorage.setItem('deadline', deadline)
 
   let condicioner = e.target[5].value
-  localStorage.setItem('condicioner',condicioner)
+  localStorage.setItem('condicioner', condicioner)
 
   let style = e.target[6].value
-  localStorage.setItem('style',style)
+  localStorage.setItem('style', style)
 
   let wannaSee = e.target[7].value
-  localStorage.setItem('wannaSee',wannaSee)
+  localStorage.setItem('wannaSee', wannaSee)
 
   let dontWannaSee = e.target[8].value
-  localStorage.setItem('dontWannaSee',dontWannaSee)
+  localStorage.setItem('dontWannaSee', dontWannaSee)
 
   let additional = e.target[9].value
-  localStorage.setItem('additional',additional)
-
+  localStorage.setItem('additional', additional)
 
   $.ajax({
     url: 'https://karandash.pro/brief/save_data.php',
@@ -83,7 +81,7 @@ function replace(e) {
       <h1 class="H1 Text mb-10 uppercase">Пожелания ко всем комнатам</h1>
       <form @submit.prevent="replace" id="wishPage">
         <div class="md:flex md:h-full">
-          <div class="md:w-[828px] md:mr-16">
+          <div class="w-full md:w-1/2 md:mr-16">
             <p class="p4 Text mb-2">Пожелания по освещению</p>
             <textarea
               class="textarea w-full mb-5"
@@ -109,7 +107,7 @@ function replace(e) {
             <p class="p4 Text mb-2">Ограничения по срокам</p>
             <input class="input mb-5" type="text" placeholder="Укажите в днях" />
           </div>
-          <div class="md:w-[828px]">
+          <div class="w-full md:w-1/2 ">
             <p class="p4 mb-2 Text">Кондиционирование</p>
             <input
               class="input mb-5"

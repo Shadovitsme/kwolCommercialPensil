@@ -239,9 +239,8 @@ function findChoosenRoom(index) {
     }
   }
   defaultRoomEnd.value = true
-  if(customUserArray.length<=0){
+  if (customUserArray.length <= 0) {
     router.replace({ path: '/brief_com/addRefPage' })
-
   }
   return index
 }
@@ -271,8 +270,7 @@ function findBackCustomRoom() {
     roomName.value = customUserArray[customCounterI.value][0]
     textArray.value = ['Теплый пол', 'Кондиционирование']
     roomCounter.value = Number(customUserArray[customCounterI.value][1])
-    customCounterI.value==0?customCounterI.value=1:customCounterI.value
-
+    customCounterI.value == 0 ? (customCounterI.value = 1) : customCounterI.value
   }
 }
 

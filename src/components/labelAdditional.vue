@@ -29,11 +29,11 @@ let labelStyle = ref()
 const updateStyles = () => {
   if (props.short) {
     labelStyle.value =
-      'labelWrapper md:mr-5 w-full h-fit md:w-[264px] absolute md:static top-0 z-20 flex my-auto'
-    padd.value = 'md:flex md:h-fit md:static relative h-[143px]'
+      'labelWrapper md:mr-5 w-full overflow-hidden h-fit md:w-[264px] absolute md:static top-0 z-20 flex my-auto'
+    padd.value = 'md:flex md:h-fit md:static  relative h-[143px]'
   } else {
     labelStyle.value =
-      'labelWrapper md:mr-5 w-full md:w-[460px] absolute md:static top-0 z-20 flex my-auto'
+      'labelWrapper md:mr-5 w-full overflow-hidden md:w-[460px] absolute md:static top-0 z-20 flex my-auto '
     padd.value = 'md:flex md:h-fit md:static relative h-[143px]'
   }
 }
@@ -48,7 +48,7 @@ watch(() => props.short, updateStyles)
 <template>
   <div :class="padd">
     <div :class="labelStyle">
-      <p class="p3 Text my-auto">{{ text }}</p>
+      <p class="p3 Text my-auto break-keep">{{ text }}</p>
     </div>
     <div
       class="flex justify-center md:no-flex md:border-0 border-b-[1px] md:static absolute w-full md:w-fit top-10 border-x-[1px] md:p-0 px-4 py-6 border-QuietText rounded-b-[5px]"
@@ -78,7 +78,7 @@ watch(() => props.short, updateStyles)
   border-radius: 5px;
   padding-block: 12px;
   padding-left: 16px;
-  height: fit-content
+  height: fit-content;
 }
 
 .input {

@@ -139,8 +139,7 @@ function removeCard(getItem) {
 function checkBackLink() {
   if (localStorage.getItem('commercial') == 'true') {
     router.replace('/brief_com/rooms')
-  }
-  else{
+  } else {
     history.back()
   }
 }
@@ -242,11 +241,7 @@ function checkBackLink() {
         </div>
         <div class="w-full md:flex md:justify-between mt-6 md:mt-12">
           <BackButton @click="checkBackLink()"></BackButton>
-          <YellowButton
-            :arrow="true"
-            class=" w-full md:w-[212px]"
-            text="Далее"
-          ></YellowButton>
+          <YellowButton :arrow="true" class="w-full md:w-[212px]" text="Далее"></YellowButton>
           <BackLink @click="checkBackLink()"></BackLink>
         </div>
       </form>

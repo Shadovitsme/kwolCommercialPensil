@@ -27,9 +27,7 @@ let arr = [
 let userRoomCount = ref(0)
 let count = ref(new Array(20).fill(0))
 
-$(document).ready(function () {
-
-})
+$(document).ready(function () {})
 
 function checkContentAdditionalRooms() {
   return count.value.find((value) => value !== 0)
@@ -51,18 +49,16 @@ function setRoomCookie(customUserRoomNames) {
   }
 }
 let arr = [
-    'Ресепшн',
-    'Кабинет',
-    'Кухня',
-    'Санузел',
-    'Переговорные',
-    'Кладовая',
-    'Склад',
-    'Зона ожидания',
-  ]
+  'Ресепшн',
+  'Кабинет',
+  'Кухня',
+  'Санузел',
+  'Переговорные',
+  'Кладовая',
+  'Склад',
+  'Зона ожидания',
+]
 function setStaticRoomCookie(valueArr) {
-
-
   for (let i = 0; i <= arr.length; i++) {
     if (valueArr[i] != '0') {
       localStorage.setItem(arr[i], valueArr[i])
@@ -71,9 +67,8 @@ function setStaticRoomCookie(valueArr) {
   }
 }
 
-
-function checkLocalStorage(num){
-  if( localStorage.getItem(arr[num])==undefined  ){
+function checkLocalStorage(num) {
+  if (localStorage.getItem(arr[num]) == undefined) {
     return 0
   }
   return localStorage.getItem(arr[num])
@@ -88,7 +83,6 @@ $(document).ready(function () {
   document.getElementById('page3').elements[16].value = checkLocalStorage(5)
   document.getElementById('page3').elements[19].value = checkLocalStorage(6)
   document.getElementById('page3').elements[22].value = checkLocalStorage(7)
-
 })
 
 function redirect(e) {
@@ -102,9 +96,9 @@ function redirect(e) {
   let sclad = e.target[19].value
   let waitingRoom = e.target[22].value
   let valueArr = [reception, cabinet, kitchen, tualet, speakingRoom, storeRoom, sclad, waitingRoom]
-  arr.forEach((element,key) => {
-    localStorage.setItem(element,valueArr[key])
-  });
+  arr.forEach((element, key) => {
+    localStorage.setItem(element, valueArr[key])
+  })
   let ID = localStorage.getItem('userId')
   let customUserRoomNames = new Array(20).fill(0)
 
@@ -194,7 +188,7 @@ function minus(index) {
       <form @submit.prevent="redirect" id="page3" class="w-full h-full">
         <h1 class="H1 Text pb-10 uppercase">Выберите комнаты</h1>
         <div
-          class="w-full md:mr-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-5 md:gap-y-5 md:gap-x-[52px]"
+          class="w-full md:mr-16 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-y-5 md:gap-y-5 md:gap-x-[52px]"
         >
           <LabelAdditional :short="true" v-for="item in arr" :text="item"></LabelAdditional>
           <InputLabel :count="count" :userRoomCount="userRoomCount"></InputLabel>
@@ -215,7 +209,7 @@ function minus(index) {
         ></errorMessage>
 
         <div
-          class="w-full md:flex md:absolute md:bottom-0 items-end md:justify-between mt-9 md:mt-12"
+          class="w-full md:flex 2xl:absolute md:bottom-0 items-end md:justify-between mt-9 md:mt-12"
         >
           <a href="/brief_com/mainData"> <BackButton></BackButton> </a>
           <YellowButton :arrow="true" class="md:w-[212px] w-full" text="Далее"></YellowButton>

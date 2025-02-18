@@ -33,11 +33,11 @@ function minus(index) {
 const updateStyles = () => {
   if (props.long) {
     labelStyle.value =
-      'md:mr-5 rounded-[5px] text-Text p3 w-full md:w-[480px] absolute md:static top-0 z-20 flex my-auto outline-none placeholder:p3 placeholder:text-QuietText pl-4 py-3 border-[1px] border-Accent bg-DarkAccent'
+      'md:mr-5 rounded-[5px] text-Text p3 w-full absolute md:static top-0 z-20 flex my-auto outline-none placeholder:p3 placeholder:text-QuietText pl-4 py-3 border-[1px] border-Accent bg-DarkAccent overflow-hidden'
     padd.value = 'input text-center my-auto mx-3 md:w-[52px]'
   } else {
     labelStyle.value =
-      'md:mr-5 rounded-[5px] text-Text p3 w-full absolute md:static top-0 z-20 flex my-auto outline-none placeholder:p3 placeholder:text-QuietText pl-4 py-3 border-[1px] border-Accent bg-DarkAccent'
+      'md:mr-5 rounded-[5px] overflow-hidden text-Text p3 w-full absolute md:static top-0 z-20 flex my-auto outline-none placeholder:p3 placeholder:text-QuietText pl-4 py-3 border-[1px] border-Accent bg-DarkAccent '
     padd.value = 'input text-center my-auto mx-3'
   }
 }
@@ -50,11 +50,11 @@ watch(() => props.long, updateStyles)
 <template>
   <div
     v-for="(item, index) in props.userRoomCount"
-    class="md:flex md:h-[56px] md:static relative h-[143px]"
+    class="md:flex md:h-[56px] md:static relative  h-[143px]"
   >
     <input :class="labelStyle" placeholder="Название" />
     <div
-      class="flex justify-center md:no-flex md:border-0 border-b-[1px] md:static absolute w-full top-10 border-x-[1px] md:p-0 px-4 py-6 border-QuietText rounded-b-[5px]"
+      class="flex justify-center md:no-flex md:border-0 border-b-[1px] md:static absolute w-full md:w-fit top-10 border-x-[1px] md:p-0 px-4 py-6 border-QuietText rounded-b-[5px]"
     >
       <button
         name="minusButton"
