@@ -227,7 +227,7 @@ function checkBackLink() {
           Вы можете добавить <a class="speciall text-[28px] md:text-[28px]"> до 10 референсов.</a>
         </p>
 
-        <div class="md:grid md:grid-cols-6 md:gap-x-5 md:gap-y-20">
+        <div class="md:grid w-full xl:grid-cols-4 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-6 gap-x-5 md:gap-y-20">
           <AddCardButton v-if="refArray.length < 10" @click="toggleModal"></AddCardButton>
           <ContentRefCard
             v-for="(item, index) in refArray"
