@@ -34,11 +34,11 @@ const updateStyles = () => {
   if (props.long) {
     labelStyle.value =
       'md:mr-5 rounded-[5px] text-Text p3 w-full absolute md:static top-0 z-20 flex my-auto outline-none placeholder:p3 placeholder:text-QuietText pl-4 py-3 border-[1px] border-Accent bg-DarkAccent overflow-hidden'
-    padd.value = 'input text-center my-auto mx-3 md:w-[52px]'
+    padd.value = 'input text-center my-auto mx-3 w-full'
   } else {
     labelStyle.value =
       'md:mr-5 rounded-[5px] overflow-hidden text-Text p3 w-full absolute md:static top-0 z-20 flex my-auto outline-none placeholder:p3 placeholder:text-QuietText pl-4 py-3 border-[1px] border-Accent bg-DarkAccent '
-    padd.value = 'input text-center my-auto mx-3'
+    padd.value = 'input text-center my-auto mx-3 w-full'
   }
 }
 
