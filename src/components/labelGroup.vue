@@ -5,7 +5,7 @@ import YellowButton from './yellowButton.vue'
 import InputLabel from './inputLabel.vue'
 
 const props = defineProps({
-  textArray: { 
+  textArray: {
     type: Array,
   },
 })
@@ -40,7 +40,6 @@ watch(() => props.textArray, updateStyles, { deep: true })
     <LabelAdditional :short="short" v-for="item in props.textArray" :text="item"></LabelAdditional>
     <InputLabel
       class="mb-5"
-      :long="!short"
       :count="count"
       :userRoomCount="userAdditional"
     ></InputLabel>

@@ -121,24 +121,21 @@ const roomArrayNames = [
 
 let defaultRoomEnd = ref(false)
 let customCounterI = ref(0)
+const customUserArray = getAllCookiesExcept(roomArrayNames)
+
 let i = ref(findChoosenRoom(0))
 let roomName = ref(roomArray[i.value][0])
 let textArray = ref(roomArray[i.value][1])
-let roomCounter = ref(Number(localStorage.getItem(roomName.value)))
+let roomCounter = ref(Number(localStorage.getItem('room|' + roomName.value)))
 let testareaStyle = ref()
-
-// const customUserArray = getAllCookiesExcept(roomArrayNames)
-
-const customUserArray = []
 
 function createArrayForAjax(e) {
   let m = 1
   let roomArr = []
   const staticFields = ['пол', 'стены', 'потолки', 'метраж', 'другое']
 
-  for (let i = 0; i <= roomCounter.value; i++) {
+  for (let i = 0; i < roomCounter.value; i++) {
     let roomContentArr = []
-
     textArray.value.forEach((element) => {
       roomContentArr.push([element, e.target[m].value])
       m += 3
@@ -188,8 +185,9 @@ function sendRoomDetailData(e) {
     customCounterI.value++
   } else {
     roomName.value = roomArray[i.value][0]
-    textArray.value = roomArray[i.value][1]
-    roomCounter.value = Number(localStorage.getItem(roomName.value))
+    console.log(roomName)
+
+    roomCounter.value = Number(localStorage.getItem('room|'+roomName.value))
   }
 
   let ID = localStorage.getItem('userId')
@@ -218,13 +216,14 @@ function getAllCookiesExcept(excludeArray) {
   for (let i = 0; i < localstorage.length; i++) {
     const key = localstorage.key(i)
     const value = localstorage.getItem(key)
+    const regex = /^room\|[\w\d]+$/
     if (
       !excludeArray.includes(key) &&
-      key !== 'userId' &&
-      key !== 'undefined' &&
-      /^[0-9]+$/.test(value)
+      regex.test(key) &&
+      localstorage.getItem(key) != 'undefined'
     ) {
-      result.push([key, value])
+      const newKey = key.replace(/^room\|/, '')
+      result.push([newKey, value])
     }
   }
 
@@ -235,9 +234,11 @@ function findChoosenRoom(index) {
   let result
 
   for (let j = index; j < roomArray.length; j++) {
-    result = localStorage.getItem(roomArray[j][0])
-    if (result != '0' && result && result != undefined) {
+    result = localStorage.getItem('room|' + roomArray[j][0])
+    if (result != '0' && result && result != 'undefined') {
+
       return j
+
     }
   }
   defaultRoomEnd.value = true
@@ -248,7 +249,7 @@ function findChoosenRoom(index) {
 function findBackRoom(index) {
   let result
   for (let m = index; m >= 0; m--) {
-    result = localStorage.getItem(roomArray[m][0])
+    result = localStorage.getItem('room|' + roomArray[m][0])
     if (result != '0' && result != undefined) {
       return m
     }
@@ -263,7 +264,7 @@ function findBackCustomRoom() {
     i.value = findBackRoom(i.value)
     roomName.value = roomArray[i.value][0]
     textArray.value = roomArray[i.value][1]
-    roomCounter.value = Number(localStorage.getItem(roomName.value))
+    roomCounter.value = Number(localStorage.getItem('room|' + roomName.value))
     defaultRoomEnd.value = false
   } else {
     customCounterI.value = customCounterI.value - 1
@@ -282,7 +283,7 @@ function backFunction() {
     i.value = findBackRoom(i.value - 1)
     roomName.value = roomArray[i.value][0]
     textArray.value = roomArray[i.value][1]
-    roomCounter.value = Number(localStorage.getItem(roomName.value))
+    roomCounter.value = Number(localStorage.getItem('room|'+roomName.value))
   }
 }
 
@@ -350,7 +351,7 @@ watch(() => customUserArray[customCounterI.value], updateStyles)
         </div>
         <div class="w-full md:flex md:justify-between mt-5 md:mt-12">
           <BackButton @click="backFunction"></BackButton>
-          <YellowButton :arrow="true" class="md:w-[212px] w-full" text="Далее"></YellowButton>
+          <YellowButton type="sumbit" :arrow="true" class="md:w-[212px] w-full" text="Далее"></YellowButton>
           <BackLink @click="backFunction"></BackLink>
         </div>
       </form>

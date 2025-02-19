@@ -42,9 +42,7 @@ let error = ref(false)
 function setRoomCookie(customUserRoomNames) {
   for (let i = 0; i < userRoomCount.value; i++) {
     if (count.value[i]) {
-      localStorage.setItem(customUserRoomNames[i], count.value[i])
-
-      document.cookie = `${customUserRoomNames[i]}=${count.value[i]}; path=/; max-age=3600`
+      localStorage.setItem('room|'+customUserRoomNames[i], count.value[i])
     }
   }
 }
@@ -61,8 +59,7 @@ let arr = [
 function setStaticRoomCookie(valueArr) {
   for (let i = 0; i <= arr.length; i++) {
     if (valueArr[i] != '0') {
-      localStorage.setItem(arr[i], valueArr[i])
-      document.cookie = `${arr[i]}=${valueArr[i]}; path=/; max-age=3600`
+      localStorage.setItem('room|' + arr[i], valueArr[i])
     }
   }
 }
@@ -96,9 +93,7 @@ function redirect(e) {
   let sclad = e.target[19].value
   let waitingRoom = e.target[22].value
   let valueArr = [reception, cabinet, kitchen, tualet, speakingRoom, storeRoom, sclad, waitingRoom]
-  arr.forEach((element, key) => {
-    localStorage.setItem(element, valueArr[key])
-  })
+
   let ID = localStorage.getItem('userId')
   let customUserRoomNames = new Array(20).fill(0)
 
