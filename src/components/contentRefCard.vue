@@ -14,6 +14,14 @@ const props = defineProps({
 
 const emits = defineEmits(['card-click', 'cross-click'])
 
+import { watch } from 'vue'
+
+watch(() => props.file, (newFile) => {
+  if (!props.haveLink) {
+    link = URL.createObjectURL(newFile)
+  }
+})
+
 let link
 if (!props.haveLink) {
   link = URL.createObjectURL(props.file)

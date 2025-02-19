@@ -30,9 +30,12 @@ function openCard(index) {
   textareaValue.value = refArray.value[index][1]
   if (refArray.value[index][3]) {
     textInputValue.value = refArray.value[index][2]
+    src.value=refArray.value[index][2]
   } else {
     fileInputValue.value = refArray.value[index][0]
+    src.value=URL.createObjectURL(fileInputValue.value)
   }
+
   alreadyExist.value = true
   changeIndex.value = index
   toggleModal()
@@ -84,20 +87,21 @@ function changeInputCount(e) {
       dataArr,
     },
     success: function (data) {
+      localStorage.clear()
       router.replace({ path: '/brief_com/thanksPage' })
     },
   })
 }
+let file = ref()
 
 function addRef(e) {
   e.preventDefault()
   let description = textareaValue.value
-  let file = ref()
   if (alreadyExist.value) {
     if (textInputValue.value) {
+
       file.value = textInputValue.value
       haveLink.value = true
-
       refArray.value[changeIndex.value] = [
         file.value,
         description,
@@ -131,6 +135,7 @@ let src = ref('')
 function changeSrc() {
   src.value = URL.createObjectURL(fileInputValue.value)
 }
+
 
 function removeCard(getItem) {
   refArray.value = refArray.value.filter((item) => item !== getItem)
