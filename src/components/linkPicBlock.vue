@@ -9,9 +9,6 @@ let fileInputValue = ref(null)
 
 let inputs = ref(1)
 
-function test(e) {
-  console.log(e.target.value)
-}
 
 watch([textInputValue, fileInputValue], ([newTextValue, newFileValue]) => {
   showTextarea.value = newTextValue.length > 0 || newFileValue !== null

@@ -9,6 +9,16 @@ const props = defineProps({
   long: { type: Boolean },
 })
 
+function checkInputValue(e) {
+  if (e.target.value > 5) {
+    e.target.value = 5
+  } else if (e.target.value < 0) {
+    e.target.value = 0
+  } else if (e.target.value == "" || e.target.value == undefined) {
+    e.target.value=0
+  }
+}
+
 let padd = ref()
 let labelStyle = ref()
 
@@ -50,7 +60,7 @@ watch(() => props.long, updateStyles)
 <template>
   <div
     v-for="(item, index) in props.userRoomCount"
-    class="md:flex md:h-[56px] md:static relative  h-[143px]"
+    class="md:flex md:h-[56px] md:static relative h-[143px]"
   >
     <input :class="labelStyle" placeholder="Название" />
     <div
@@ -62,7 +72,16 @@ watch(() => props.long, updateStyles)
         type="button"
         class="disabled:opacity-50 h-[48px] w-[48px] shrink-0 my-auto minusButton"
       ></button>
-      <input :class="padd" :value="props.count[index]" />
+      <input
+        @change="
+          (e) => {
+            checkInputValue(e)
+          }
+        "
+        type="number"
+        :class="padd"
+        :value="props.count[index]"
+      />
       <button
         type="button"
         @click="plus(index)"

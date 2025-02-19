@@ -127,7 +127,9 @@ let textArray = ref(roomArray[i.value][1])
 let roomCounter = ref(Number(localStorage.getItem(roomName.value)))
 let testareaStyle = ref()
 
-const customUserArray = getAllCookiesExcept(roomArrayNames)
+// const customUserArray = getAllCookiesExcept(roomArrayNames)
+
+const customUserArray = []
 
 function createArrayForAjax(e) {
   let m = 1
@@ -239,9 +241,7 @@ function findChoosenRoom(index) {
     }
   }
   defaultRoomEnd.value = true
-  if (customUserArray.length <= 0) {
-    router.replace({ path: '/brief_com/addRefPage' })
-  }
+
   return index
 }
 

@@ -74,6 +74,10 @@ function replace(e) {
     },
   })
 }
+
+function backButton() {
+  router.replace({ path: '/brief_com/chooseRoom' })
+}
 </script>
 <template>
   <div class="flex px-[22px] md:px-[100px]">
@@ -107,7 +111,7 @@ function replace(e) {
             <p class="p4 Text mb-2">Ограничения по срокам</p>
             <input class="input mb-5" type="text" placeholder="Укажите в днях" />
           </div>
-          <div class="w-full md:w-1/2 ">
+          <div class="w-full md:w-1/2">
             <p class="p4 mb-2 Text">Кондиционирование</p>
             <input
               class="input mb-5"
@@ -138,9 +142,9 @@ function replace(e) {
           </div>
         </div>
         <div class="w-full md:flex md:justify-between mt-9 md:mt-12">
-          <a href="/brief_com/chooseRoom"> <BackButton></BackButton> </a>
+          <BackButton @click="backButton()"></BackButton>
           <YellowButton :arrow="true" class="md:w-[212px]" text="Далее"></YellowButton>
-          <BackLink href="/brief_com/chooseRoom"></BackLink>
+          <BackLink @click="backButton()"></BackLink>
         </div>
       </form>
     </div>

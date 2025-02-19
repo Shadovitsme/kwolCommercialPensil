@@ -44,26 +44,26 @@ function getMainUserData(e) {
         return sawYouBefore.value
       })
       .done((data) => {
-        if (data) {
-          alert('kogo i seee')
-        } else {
-          $.ajax({
-            url: 'https://karandash.pro/brief/save_data.php',
-            type: 'POST',
-            data: {
-              funk: 'addNamePhone',
-              name: e.target[0].value,
-              phone: e.target[1].value,
-              town: e.target[2].value,
-            },
-            success: function (data) {
-              console.log(data)
-              document.cookie = `userId=${data}; path=/; max-age=3600`
-              localStorage.setItem('userId', data)
-              router.replace({ path: '/brief_com/mainData' })
-            },
-          })
-        }
+        // if (data) {
+        //   alert('kogo i seee')
+        // } else {
+        $.ajax({
+          url: 'https://karandash.pro/brief/save_data.php',
+          type: 'POST',
+          data: {
+            funk: 'addNamePhone',
+            name: e.target[0].value,
+            phone: e.target[1].value,
+            town: e.target[2].value,
+          },
+          success: function (data) {
+            console.log(data)
+            document.cookie = `userId=${data}; path=/; max-age=3600`
+            localStorage.setItem('userId', data)
+            router.replace({ path: '/brief_com/mainData' })
+          },
+        })
+        // }
       })
   }
 }
@@ -144,7 +144,7 @@ let townStyle = ref(defaultStyle)
           <h1 class="H1 Text uppercase text-justify">Бриф, подготовленный</h1>
           <h1 class="speciall text-justify text-[40px] lg:text-[104px] mb-6">специально для вас</h1>
         </div>
-        <p class="p3 mb-[4rem] h-12 Text  laptop:mt-5 md:ml-5 tracking-tighter">
+        <p class="p3 mb-[4rem] h-12 Text laptop:mt-5 md:ml-5 tracking-tighter">
           Заполните бриф, чтобы мы могли сразу сориентировать вас по деталям и стоимости проекта
         </p>
         <div

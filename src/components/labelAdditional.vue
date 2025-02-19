@@ -22,8 +22,18 @@ function minus() {
   count.value = count.value - 1
   count.value = count.value <= 0 ? 0 : count.value
   return false
-  return false
 }
+
+function checkInputValue(e) {
+  if (e.target.value > 5) {
+    e.target.value = 5
+  } else if (e.target.value < 0) {
+    e.target.value = 0
+  } else if (e.target.value == "" || e.target.value == undefined) {
+    e.target.value=0
+  }
+}
+
 let padd = ref()
 let labelStyle = ref()
 const updateStyles = () => {
@@ -59,7 +69,16 @@ watch(() => props.short, updateStyles)
         type="button"
         class="disabled:opacity-50 h-[48px] w-[48px] shrink-0 my-auto minusButton"
       ></button>
-      <input class="input text-center my-auto mx-3" :value="count" />
+      <input
+        @change="
+          (e) => {
+            checkInputValue(e)
+          }
+        "
+        type="number"
+        class="input text-center my-auto mx-3"
+        :value="count"
+      />
       <button
         type="button"
         :onclick="plus"

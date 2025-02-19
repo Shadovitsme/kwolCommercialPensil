@@ -180,6 +180,10 @@ function minus(index) {
     }
   }
 }
+
+function backButton() {
+  router.replace({ path: '/brief_com/mainData' })
+}
 </script>
 
 <template>
@@ -211,9 +215,9 @@ function minus(index) {
         <div
           class="w-full md:flex 2xl:absolute md:bottom-0 items-end md:justify-between mt-9 md:mt-12"
         >
-          <a href="/brief_com/mainData"> <BackButton></BackButton> </a>
+          <BackButton @click="backButton"></BackButton>
           <YellowButton :arrow="true" class="md:w-[212px] w-full" text="Далее"></YellowButton>
-          <BackLink href="/brief_com/mainData"></BackLink>
+          <BackLink @click="backButton"></BackLink>
         </div>
       </form>
     </div>

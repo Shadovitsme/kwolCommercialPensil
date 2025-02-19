@@ -32,25 +32,25 @@ function sendMainUserData(e) {
   let ID = localStorage.getItem('userId')
 
   let actvitySphere = e.target[0].value
-  localStorage.setItem('actvitySphere', actvitySphere)
+  // localStorage.setItem('actvitySphere', actvitySphere)
 
   let area = e.target[1].value
-  localStorage.setItem('area', area)
+  // localStorage.setItem('area', area)
 
   let soundless = e.target[2].checked
-  localStorage.setItem('soundless', soundless)
+  // localStorage.setItem('soundless', soundless)
 
   let furniture = e.target[4].checked
-  localStorage.setItem('furniture', furniture)
+  // localStorage.setItem('furniture', furniture)
 
   let zones = e.target[6].value
-  localStorage.setItem('zones', zones)
+  // localStorage.setItem('zones', zones)
 
   let replane = e.target[7].checked
-  localStorage.setItem('replane', replane)
+  // localStorage.setItem('replane', replane)
 
   let workPlaces = e.target[9].value
-  localStorage.setItem('workPlaces', workPlaces)
+  // localStorage.setItem('workPlaces', workPlaces)
 
   $.ajax({
     url: 'https://karandash.pro/brief/save_data.php ',
