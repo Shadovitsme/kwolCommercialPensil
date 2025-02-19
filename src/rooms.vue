@@ -314,7 +314,7 @@ watch(() => customUserArray[customCounterI.value], updateStyles)
     <div class="md:mx-auto w-full max-w-[1920px]">
       <form @submit.prevent="sendRoomDetailData" id="bedroom" class="w-full">
         <div v-for="(item, index) in roomCounter" :key="index">
-          <h1 :id="roomName" class="H1 Text pb-10 uppercase">{{ roomName }}</h1>
+          <h1 :id="roomName" class="H1 Text pb-10 uppercase">{{ roomName+' ' +(index+1) }}</h1>
           <div id="bedroom0" class="w-full justify-between lg:flex">
             <LabelGroup :textArray="textArray"></LabelGroup>
             <div :class="testareaStyle">

@@ -145,7 +145,12 @@ function checkBackLink() {
   if (localStorage.getItem('commercial') == 'true') {
     router.replace('/brief_com/rooms')
   } else {
-    history.back()
+    const previousPage = document.referrer;
+    if (previousPage) {
+      window.location.href = previousPage;
+    } else {
+      router.back();
+    }
   }
 }
 </script>
