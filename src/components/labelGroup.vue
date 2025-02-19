@@ -5,7 +5,7 @@ import YellowButton from './yellowButton.vue'
 import InputLabel from './inputLabel.vue'
 
 const props = defineProps({
-  textArray: {
+  textArray: { 
     type: Array,
   },
 })

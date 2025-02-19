@@ -39,7 +39,7 @@ let labelStyle = ref()
 const updateStyles = () => {
   if (props.short) {
     labelStyle.value =
-      'labelWrapper md:mr-5 w-full overflow-hidden h-fit md:w-[264px] absolute md:static top-0 z-20 flex my-auto'
+      'labelWrapper md:mr-5 w-full overflow-hidden h-fit  absolute md:static top-0 z-20 flex my-auto'
     padd.value = 'md:flex md:h-fit md:static  relative h-[143px]'
   } else {
     labelStyle.value =
