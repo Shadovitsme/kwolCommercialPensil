@@ -5,7 +5,6 @@ import router from './router'
 import AddCardButton from './components/addCardButton.vue'
 import ContentRefCard from './components/contentRefCard.vue'
 import $ from 'jquery'
-import { getCookie } from './utility/getCookie'
 import BackButton from './components/backButton.vue'
 import BackLink from './components/backLink.vue'
 let refArray = ref([])
@@ -30,10 +29,10 @@ function openCard(index) {
   textareaValue.value = refArray.value[index][1]
   if (refArray.value[index][3]) {
     textInputValue.value = refArray.value[index][2]
-    src.value=refArray.value[index][2]
+    src.value = refArray.value[index][2]
   } else {
     fileInputValue.value = refArray.value[index][0]
-    src.value=URL.createObjectURL(fileInputValue.value)
+    src.value = URL.createObjectURL(fileInputValue.value)
   }
 
   alreadyExist.value = true
@@ -99,7 +98,6 @@ function addRef(e) {
   let description = textareaValue.value
   if (alreadyExist.value) {
     if (textInputValue.value) {
-
       file.value = textInputValue.value
       haveLink.value = true
       refArray.value[changeIndex.value] = [
@@ -136,7 +134,6 @@ function changeSrc() {
   src.value = URL.createObjectURL(fileInputValue.value)
 }
 
-
 function removeCard(getItem) {
   refArray.value = refArray.value.filter((item) => item !== getItem)
 }
@@ -145,12 +142,7 @@ function checkBackLink() {
   if (localStorage.getItem('commercial') == 'true') {
     router.replace('/brief_com/rooms')
   } else {
-    const previousPage = document.referrer;
-    if (previousPage) {
-      window.location.href = previousPage;
-    } else {
-      router.back();
-    }
+    window.location.replace(localStorage.getItem('backLink'))
   }
 }
 </script>
@@ -212,6 +204,7 @@ function checkBackLink() {
       <!-- fileInput -->
 
       <textarea
+        maxlength="800"
         v-model="textareaValue"
         placeholder="Опишите, что вам понравилось, а что, наоборот, не хотели бы реализовывать"
         class="bg-DarkAccent hover:bg-background active:bg-DarkAccent w-full flex justify-center cursor-pointer h-[210px] max-h-[210px] md:max-h-[360px] md:h-[360px] rounded-[10px] text-Text p-5 placeholder:text-QuietText p3 active:border-[1px] active:border-Accent outline-none focus:border-[1px] focus:border-Accent"

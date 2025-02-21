@@ -38,11 +38,7 @@ watch(() => props.textArray, updateStyles, { deep: true })
 <template>
   <div :class="gridStyle">
     <LabelAdditional :short="short" v-for="item in props.textArray" :text="item"></LabelAdditional>
-    <InputLabel
-      class="mb-5"
-      :count="count"
-      :userRoomCount="userAdditional"
-    ></InputLabel>
+    <InputLabel class="mb-5" :count="count" :userRoomCount="userAdditional"></InputLabel>
     <YellowButton
       v-if="userAdditional < 5"
       @click="userAdditional++"

@@ -88,32 +88,37 @@ function backButton() {
           <div class="w-full md:w-1/2 md:mr-16">
             <p class="p4 Text mb-2">Пожелания по освещению</p>
             <textarea
+              maxlength="800"
               class="textarea w-full mb-5"
               placeholder="Опишите предпочтения по освещению (центральное, подсветка)"
             ></textarea>
             <p class="p4 Text mb-2">Зона теплого пола</p>
             <textarea
+              maxlength="800"
               class="textarea w-full mb-5"
               placeholder="Опишите зоны, в которых нужна установка тёплого пола"
             ></textarea>
             <p class="p4 Text mb-2">Пожелания по отделке потолков</p>
             <textarea
+              maxlength="800"
               class="textarea w-full mb-5"
               placeholder="Опишите предпочтения по отделке потолков (натяжной, подвесной, многоуровневый, или просто окрашенный.) Укажите предпочтения по материалам и цвету. Если нужен декоративный элемент (карнизы, лепнина, балки), уточните."
             ></textarea>
 
             <p class="p4 Text mb-2">Пожелания по напольному покрытию</p>
             <textarea
+              maxlength="800"
               class="textarea w-full mb-5"
               placeholder="Укажите тип покрытия для пола (плитка, ламинат и т. д.) "
             ></textarea>
 
             <p class="p4 Text mb-2">Ограничения по срокам</p>
-            <input class="input mb-5" type="text" placeholder="Укажите в днях" />
+            <input maxlength="50" class="input mb-5" type="text" placeholder="Укажите в днях" />
           </div>
           <div class="w-full md:w-1/2">
             <p class="p4 mb-2 Text">Кондиционирование</p>
             <input
+              maxlength="50"
               class="input mb-5"
               type="text"
               placeholder="Опишите зоны, в которых нужно кондиционирование"
@@ -122,19 +127,29 @@ function backButton() {
               Какой стиль вы хотите видеть? Какие цвета должны преобладать в интерьере?
             </p>
             <textarea
+              maxlength="800"
               class="textarea mb-5"
               type="text"
               placeholder="Опишите как можно подробнее"
             ></textarea>
 
             <p class="p4 Text mb-2">Хочу видеть в будущем интерьере:</p>
-            <textarea class="textarea mb-5" placeholder="Опишите как можно подробнее"></textarea>
+            <textarea
+              maxlength="800"
+              class="textarea mb-5"
+              placeholder="Опишите как можно подробнее"
+            ></textarea>
 
             <p class="p4 Text mb-2">Категорически не хочу видеть в будущем интерьере:</p>
-            <textarea class="textarea mb-5" placeholder="Опишите как можно подробнее"></textarea>
+            <textarea
+              maxlength="800"
+              class="textarea mb-5"
+              placeholder="Опишите как можно подробнее"
+            ></textarea>
 
             <p class="p4 Text mb-2">Дополнительный комментарий</p>
             <textarea
+              maxlength="800"
               class="textarea"
               type="text"
               placeholder="Если есть какая‑либо информация, которую вы считаете важной, укажите её здесь"

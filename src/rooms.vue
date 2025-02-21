@@ -5,7 +5,6 @@ import $ from 'jquery'
 import { jquery } from 'globals'
 import { ref, watch } from 'vue'
 import router from './router'
-import { getCookie } from './utility/getCookie'
 import BackButton from './components/backButton.vue'
 import BackLink from './components/backLink.vue'
 import { contains } from 'jquery'
@@ -187,7 +186,7 @@ function sendRoomDetailData(e) {
     roomName.value = roomArray[i.value][0]
     console.log(roomName)
 
-    roomCounter.value = Number(localStorage.getItem('room|'+roomName.value))
+    roomCounter.value = Number(localStorage.getItem('room|' + roomName.value))
   }
 
   let ID = localStorage.getItem('userId')
@@ -236,9 +235,7 @@ function findChoosenRoom(index) {
   for (let j = index; j < roomArray.length; j++) {
     result = localStorage.getItem('room|' + roomArray[j][0])
     if (result != '0' && result && result != 'undefined') {
-
       return j
-
     }
   }
   defaultRoomEnd.value = true
@@ -283,7 +280,7 @@ function backFunction() {
     i.value = findBackRoom(i.value - 1)
     roomName.value = roomArray[i.value][0]
     textArray.value = roomArray[i.value][1]
-    roomCounter.value = Number(localStorage.getItem('room|'+roomName.value))
+    roomCounter.value = Number(localStorage.getItem('room|' + roomName.value))
   }
 }
 
@@ -314,22 +311,25 @@ watch(() => customUserArray[customCounterI.value], updateStyles)
     <div class="md:mx-auto w-full max-w-[1920px]">
       <form @submit.prevent="sendRoomDetailData" id="bedroom" class="w-full">
         <div v-for="(item, index) in roomCounter" :key="index">
-          <h1 :id="roomName" class="H1 Text pb-10 uppercase">{{ roomName+' ' +(index+1) }}</h1>
+          <h1 :id="roomName" class="H1 Text pb-10 uppercase">{{ roomName + ' ' + (index + 1) }}</h1>
           <div id="bedroom0" class="w-full justify-between lg:flex">
             <LabelGroup :textArray="textArray"></LabelGroup>
             <div :class="testareaStyle">
               <p class="p4 Text mb-2">Пожелания по напольному покрытию</p>
               <textarea
+                maxlength="800"
                 class="textarea w-full mb-3 h-[140px]"
                 placeholder="Укажите тип покрытия для пола (плитка, ламинат и т. д.) "
               ></textarea>
               <p class="p4 Text mb-2">Пожелания по отделке стен</p>
               <textarea
+                maxlength="800"
                 class="textarea mb-3 h-[140px]"
                 placeholder="Укажите предпочтения по материалам и цвету. Если нужен декоративный элемент, уточните."
               ></textarea>
               <p class="p4 Text mb-2">Пожелания по отделке потолков</p>
               <textarea
+                maxlength="800"
                 class="textarea mb-3 h-[140px]"
                 placeholder="Опишите предпочтения по отделке потолков (натяжной, подвесной, многоуровневый, или просто окрашенный.) Укажите предпочтения по материалам и цвету. Если нужен декоративный элемент (карнизы, лепнина, балки), уточните."
               ></textarea>
@@ -343,6 +343,7 @@ watch(() => customUserArray[customCounterI.value], updateStyles)
               />
               <p class="p4 Text mb-2">Другое</p>
               <textarea
+                maxlength="800"
                 class="textarea h-[140px]"
                 placeholder="Если есть другие пожелания, опишите их здесь"
               ></textarea>
@@ -351,7 +352,12 @@ watch(() => customUserArray[customCounterI.value], updateStyles)
         </div>
         <div class="w-full md:flex md:justify-between mt-5 md:mt-12">
           <BackButton @click="backFunction"></BackButton>
-          <YellowButton type="sumbit" :arrow="true" class="md:w-[212px] w-full" text="Далее"></YellowButton>
+          <YellowButton
+            type="sumbit"
+            :arrow="true"
+            class="md:w-[212px] w-full"
+            text="Далее"
+          ></YellowButton>
           <BackLink @click="backFunction"></BackLink>
         </div>
       </form>

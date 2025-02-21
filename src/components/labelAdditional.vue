@@ -1,6 +1,6 @@
 <script setup>
-import $ from 'jquery'
 import { ref, watch } from 'vue'
+
 const props = defineProps({
   text: {
     type: String,
@@ -29,8 +29,8 @@ function checkInputValue(e) {
     e.target.value = 5
   } else if (e.target.value < 0) {
     e.target.value = 0
-  } else if (e.target.value == "" || e.target.value == undefined) {
-    e.target.value=0
+  } else if (e.target.value == '' || e.target.value == undefined) {
+    e.target.value = 0
   }
 }
 

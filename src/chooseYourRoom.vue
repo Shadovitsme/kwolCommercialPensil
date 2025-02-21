@@ -5,29 +5,15 @@ import YellowButton from './components/yellowButton.vue'
 import router from './router'
 import errorMessage from './components/errorMessage.vue'
 import { ref } from 'vue'
-import { getCookie } from './utility/getCookie'
 import $ from 'jquery'
 import InputLabel from './components/inputLabel.vue'
 import BackButton from './components/backButton.vue'
 import BackLink from './components/backLink.vue'
-
-let arr = [
-  'Ресепшн',
-  'Кабинет',
-  'Кухня',
-  'Санузел',
-  'Переговорные',
-  'Кладовая',
-  'Склад',
-  'Зона ожидания',
-]
 </script>
 
 <script>
 let userRoomCount = ref(0)
 let count = ref(new Array(20).fill(0))
-
-$(document).ready(function () {})
 
 function checkContentAdditionalRooms() {
   return count.value.find((value) => value !== 0)
@@ -42,7 +28,7 @@ let error = ref(false)
 function setRoomCookie(customUserRoomNames) {
   for (let i = 0; i < userRoomCount.value; i++) {
     if (count.value[i]) {
-      localStorage.setItem('room|'+customUserRoomNames[i], count.value[i])
+      localStorage.setItem('room|' + customUserRoomNames[i], count.value[i])
     }
   }
 }
@@ -63,24 +49,6 @@ function setStaticRoomCookie(valueArr) {
     }
   }
 }
-
-function checkLocalStorage(num) {
-  if (localStorage.getItem(arr[num]) == undefined) {
-    return 0
-  }
-  return localStorage.getItem(arr[num])
-}
-
-$(document).ready(function () {
-  document.getElementById('page3').elements[1].value = checkLocalStorage(0)
-  document.getElementById('page3').elements[4].value = checkLocalStorage(1)
-  document.getElementById('page3').elements[7].value = checkLocalStorage(2)
-  document.getElementById('page3').elements[10].value = checkLocalStorage(3)
-  document.getElementById('page3').elements[13].value = checkLocalStorage(4)
-  document.getElementById('page3').elements[16].value = checkLocalStorage(5)
-  document.getElementById('page3').elements[19].value = checkLocalStorage(6)
-  document.getElementById('page3').elements[22].value = checkLocalStorage(7)
-})
 
 function redirect(e) {
   e.preventDefault() // предотвращаем стандартное поведение формы
@@ -158,27 +126,44 @@ function showErrorMessage() {
   }, 3000)
 }
 
-function plus(index) {
-  if (index >= 0 && index < 5) {
-    count.value[index] = count.value[index] + 1
-  }
-  if (count.value[index] > 5) {
-    count.value[index] = 5
-  }
-}
-
-function minus(index) {
-  if (index >= 0 && index < 5) {
-    count.value[index] = (count.value[index] || 0) - 1
-    if (count.value[index] < 0) {
-      count.value[index] = 0
-    }
-  }
-}
-
 function backButton() {
   router.replace({ path: '/brief_com/mainData' })
 }
+function checkLocalStorage(num) {
+  console.log(arr[num])
+  if (localStorage.getItem('room|' + arr[num]) == undefined) {
+    return 0
+  }
+  return localStorage.getItem('room|' + arr[num])
+}
+
+function addCustomRoomToDefaultArray() {
+  let storage = localStorage
+  const regex = /^room\|[\w\d]+$/
+
+  for (let i = 0; i < storage.length; i++) {
+    const key = storage.key(i)
+    let result = key.replace(/^room\|/, '')
+    if (
+      !arr.find((element) => element == result) &&
+      regex.test(key) &&
+      storage.getItem(key) != 'undefined' &&
+      storage.getItem(key) != '0'
+    ) {
+      arr.push(result)
+    }
+  }
+}
+// TODO сделать заполнение названий кастомных комнат
+addCustomRoomToDefaultArray()
+$(document).ready(function () {
+  let l = 1
+  for (let i = 0; i < arr.length; i++) {
+    document.getElementById('page3').elements[l].value = checkLocalStorage(i)
+    console.log(document.getElementById('page3').elements[l].value)
+    l += 3
+  }
+})
 </script>
 
 <template>
