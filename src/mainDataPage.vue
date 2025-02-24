@@ -5,18 +5,7 @@ import router from './router'
 </script>
 
 <script>
-let contentArr = [
-  'actvitySphere',
-  'area',
-  'soundless',
-  'furniture',
-  'zones',
-  'replane',
-  'workPlaces',
-]
-
 function chooseWhatChecked(itemOne, itemTwo, localstorageData) {
-  console.log(localstorageData)
   if (localstorageData) {
     document.getElementById(itemOne).checked = true
   } else {
@@ -24,14 +13,18 @@ function chooseWhatChecked(itemOne, itemTwo, localstorageData) {
   }
 }
 
+function setDataInFields(field, data) {
+  document.getElementById(field).value = localStorage.getItem(data)
+}
+
 $(document).ready(function () {
-  document.getElementById('page2').elements[0].value = localStorage.getItem(contentArr[0])
-  document.getElementById('page2').elements[1].value = localStorage.getItem(contentArr[1])
-  chooseWhatChecked('soundlessYes', 'soundlessNo', localStorage.getItem(contentArr[2]) == 'true')
-  chooseWhatChecked('furnitureYes', 'furnitureNo', localStorage.getItem(contentArr[3]) == 'true')
-  document.getElementById('page2').elements[6].value = localStorage.getItem(contentArr[4])
-  chooseWhatChecked('replanYes', 'replanNo', localStorage.getItem(contentArr[5]) == 'true')
-  document.getElementById('page2').elements[9].value = localStorage.getItem(contentArr[6])
+  setDataInFields('activitySphere', 'actvitySphere')
+  setDataInFields('area', 'area')
+  chooseWhatChecked('soundlessYes', 'soundlessNo', localStorage.getItem('soundless') == 'true')
+  chooseWhatChecked('furnitureYes', 'furnitureNo', localStorage.getItem('furniture') == 'true')
+  setDataInFields('zones', 'zones')
+  chooseWhatChecked('replanYes', 'replanNo', localStorage.getItem('replane') == 'true')
+  setDataInFields('workPlaces', 'workPlaces')
 })
 
 function sendMainUserData(e) {
@@ -39,24 +32,19 @@ function sendMainUserData(e) {
   let ID = localStorage.getItem('userId')
 
   let actvitySphere = e.target[0].value
-  localStorage.setItem('actvitySphere', actvitySphere)
-
   let area = e.target[1].value
-  localStorage.setItem('area', area)
-
   let soundless = e.target[2].checked
-  localStorage.setItem('soundless', soundless)
-
   let furniture = e.target[4].checked
-  localStorage.setItem('furniture', furniture)
-
   let zones = e.target[6].value
-  localStorage.setItem('zones', zones)
-
   let replane = e.target[7].checked
-  localStorage.setItem('replane', replane)
-
   let workPlaces = e.target[9].value
+
+  localStorage.setItem('actvitySphere', actvitySphere)
+  localStorage.setItem('area', area)
+  localStorage.setItem('soundless', soundless)
+  localStorage.setItem('furniture', furniture)
+  localStorage.setItem('zones', zones)
+  localStorage.setItem('replane', replane)
   localStorage.setItem('workPlaces', workPlaces)
 
   $.ajax({
@@ -80,7 +68,6 @@ function sendMainUserData(e) {
 
     success: function (data) {
       console.log(data)
-
       router.replace({ path: '/brief_com/chooseRoom' })
     },
   })
@@ -96,13 +83,14 @@ function sendMainUserData(e) {
           <p class="p4 Text mb-2">Сфера деятельности (магазин, офис, кафе, салон красоты и т.д)</p>
           <input
             maxlength="50"
-            name="test"
+            id="activitySphere"
             class="input mb-4 md:mb-10"
             type="text"
             placeholder="Укажите сферу деятельности"
           />
           <p class="p4 Text mb-2">Площадь помещения в м²</p>
           <input
+            id="area"
             maxlength="50"
             class="input mb-5 md:mb-10"
             type="number"
@@ -168,6 +156,7 @@ function sendMainUserData(e) {
             Особенности зонирования (например, отдельные кабинеты, открытая планировка, зоны отдыха)
           </p>
           <textarea
+            id="zones"
             maxlength="800"
             type="text"
             class="textarea mb-10"
@@ -201,6 +190,7 @@ function sendMainUserData(e) {
           </div>
           <p class="H6 Accent mb-[14px]">Количество рабочих мест</p>
           <input
+            id="workPlaces"
             maxlength="50"
             class="input mb-4 md:mb-10"
             type="number"
