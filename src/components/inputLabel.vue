@@ -6,6 +6,8 @@ const props = defineProps({
     type: Number,
   },
   count: { type: Array },
+  customArr: { type: Array },
+
   long: { type: Boolean },
 })
 
@@ -20,7 +22,7 @@ function checkInputValue(e) {
 }
 
 function plus(index) {
-  if (index >= 0 && index < 5) {
+  if (props.count[index] >= 0 && props.count[index] < 5) {
     props.count[index] = props.count[index] + 1
   }
   if (props.count[index] > 5) {
@@ -29,7 +31,7 @@ function plus(index) {
 }
 
 function minus(index) {
-  if (index >= 0 && index < 5) {
+  if (props.count[index] >= 0 && props.count[index] < 5) {
     props.count[index] = (props.count[index] || 0) - 1
     if (props.count[index] < 0) {
       props.count[index] = 0
@@ -43,6 +45,7 @@ function minus(index) {
     class="md:flex md:h-[56px] md:static relative h-[143px]"
   >
     <input
+      v-model="props.customArr[index]"
       maxlength="50"
       class="md:mr-5 rounded-[5px] text-Text p3 w-full md:w-8/12 lg:w-full absolute md:static top-0 z-20 flex my-auto outline-none placeholder:p3 placeholder:text-QuietText pl-4 py-3 border-[1px] border-Accent bg-DarkAccent labelWrapper overflow-hidden h-fit"
       placeholder="Название"

@@ -4,6 +4,7 @@ import BackLink from './components/backLink.vue'
 import YellowButton from './components/yellowButton.vue'
 import router from './router'
 import $ from 'jquery'
+import backButtonFunction from './customjs/backButtonFunction'
 
 $(document).ready(function () {
   document.getElementById('wishPage').elements[0].value = localStorage.getItem('light')
@@ -157,9 +158,9 @@ function backButton() {
           </div>
         </div>
         <div class="w-full md:flex md:justify-between mt-9 md:mt-12">
-          <BackButton @click="backButton()"></BackButton>
+          <BackButton @click="backButtonFunction('/brief_com/chooseRoom')"></BackButton>
           <YellowButton :arrow="true" class="md:w-[212px]" text="Далее"></YellowButton>
-          <BackLink @click="backButton()"></BackLink>
+          <BackLink @click="backButtonFunction('/brief_com/chooseRoom')"></BackLink>
         </div>
       </form>
     </div>

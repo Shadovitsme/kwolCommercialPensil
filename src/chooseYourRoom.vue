@@ -1,5 +1,4 @@
 <script setup>
-import { errorMessages } from 'vue/compiler-sfc'
 import LabelAdditional from './components/labelAdditional.vue'
 import YellowButton from './components/yellowButton.vue'
 import router from './router'
@@ -9,6 +8,7 @@ import $ from 'jquery'
 import InputLabel from './components/inputLabel.vue'
 import BackButton from './components/backButton.vue'
 import BackLink from './components/backLink.vue'
+import backButtonFunction from './customjs/backButtonFunction'
 </script>
 
 <script>
@@ -21,7 +21,6 @@ function checkContentAdditionalRooms() {
 
 function addRoom() {
   userRoomCount.value++
-  count.value.push(0)
 }
 let error = ref(false)
 
@@ -52,6 +51,7 @@ function setStaticRoomCookie(valueArr) {
 
 function redirect(e) {
   e.preventDefault() // предотвращаем стандартное поведение формы
+  // заполняем массив с данными
   let reception = e.target[1].value
   let cabinet = e.target[4].value
   let kitchen = e.target[7].value
@@ -105,7 +105,6 @@ function redirect(e) {
         }, {}),
       },
       success: function (data) {
-        console.log(data)
         setStaticRoomCookie(valueArr)
         setRoomCookie(customUserRoomNames)
 
@@ -126,13 +125,7 @@ function showErrorMessage() {
   }, 3000)
 }
 
-function backButton() {
-  router.replace({ path: '/brief_com/mainData' }).then(() => {
-    window.location.href = '/brief_com/mainData'
-  })
-}
 function checkLocalStorage(num) {
-  console.log(arr[num])
   if (localStorage.getItem('room|' + arr[num]) == undefined) {
     return 0
   }
@@ -142,7 +135,8 @@ function checkLocalStorage(num) {
 function addCustomRoomToDefaultArray() {
   let storage = localStorage
   const regex = /^room\|[\w\d]+$/
-
+  let customArr = []
+let m=0
   for (let i = 0; i < storage.length; i++) {
     const key = storage.key(i)
     let result = key.replace(/^room\|/, '')
@@ -152,17 +146,20 @@ function addCustomRoomToDefaultArray() {
       storage.getItem(key) != 'undefined' &&
       storage.getItem(key) != '0'
     ) {
-      arr.push(result)
-    }
+      customArr.push(result)
+      userRoomCount.value = userRoomCount.value + 1
+      count.value[m]=(storage.getItem(key))
+      m++
+console.log( count.value)    }
   }
+  return customArr
 }
-// TODO сделать заполнение названий кастомных комнат
-addCustomRoomToDefaultArray()
+let publicCustomArr = ref()
 $(document).ready(function () {
+  publicCustomArr.value = addCustomRoomToDefaultArray()
   let l = 1
   for (let i = 0; i < arr.length; i++) {
     document.getElementById('page3').elements[l].value = checkLocalStorage(i)
-    console.log(document.getElementById('page3').elements[l].value)
     l += 3
   }
 })
@@ -177,7 +174,11 @@ $(document).ready(function () {
           class="w-full md:mr-16 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-y-5 md:gap-y-5 md:gap-x-[52px]"
         >
           <LabelAdditional :short="true" v-for="item in arr" :text="item"></LabelAdditional>
-          <InputLabel :count="count" :userRoomCount="userRoomCount"></InputLabel>
+          <InputLabel
+            :customArr="publicCustomArr"
+            :count="count"
+            :userRoomCount="userRoomCount"
+          ></InputLabel>
           <div v-if="userRoomCount > 19" class="w-full h-full"></div>
 
           <YellowButton
@@ -197,9 +198,9 @@ $(document).ready(function () {
         <div
           class="w-full md:flex 2xl:absolute md:bottom-0 items-end md:justify-between mt-9 md:mt-12"
         >
-          <BackButton @click="backButton"></BackButton>
+          <BackButton @click="backButtonFunction('/brief_com/mainData')"></BackButton>
           <YellowButton :arrow="true" class="md:w-[212px] w-full" text="Далее"></YellowButton>
-          <BackLink @click="backButton"></BackLink>
+          <BackLink @click="backButtonFunction('/brief_com/mainData')"></BackLink>
         </div>
       </form>
     </div>
