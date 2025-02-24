@@ -15,13 +15,22 @@ let contentArr = [
   'workPlaces',
 ]
 
+function chooseWhatChecked(itemOne, itemTwo, localstorageData) {
+  console.log(localstorageData)
+  if (localstorageData) {
+    document.getElementById(itemOne).checked = true
+  } else {
+    document.getElementById(itemTwo).checked = true
+  }
+}
+
 $(document).ready(function () {
   document.getElementById('page2').elements[0].value = localStorage.getItem(contentArr[0])
   document.getElementById('page2').elements[1].value = localStorage.getItem(contentArr[1])
-  document.getElementById('page2').elements[2].value = localStorage.getItem(contentArr[2])
-  document.getElementById('page2').elements[4].value = localStorage.getItem(contentArr[3])
+  chooseWhatChecked('soundlessYes', 'soundlessNo', localStorage.getItem(contentArr[2]) == 'true')
+  chooseWhatChecked('furnitureYes', 'furnitureNo', localStorage.getItem(contentArr[3]) == 'true')
   document.getElementById('page2').elements[6].value = localStorage.getItem(contentArr[4])
-  document.getElementById('page2').elements[7].value = localStorage.getItem(contentArr[5])
+  chooseWhatChecked('replanYes', 'replanNo', localStorage.getItem(contentArr[5]) == 'true')
   document.getElementById('page2').elements[9].value = localStorage.getItem(contentArr[6])
 })
 
