@@ -2,12 +2,11 @@
 import LabelGroup from './components/labelGroup.vue'
 import YellowButton from './components/yellowButton.vue'
 import $ from 'jquery'
-import { jquery } from 'globals'
 import { ref, watch } from 'vue'
 import router from './router'
 import BackButton from './components/backButton.vue'
 import BackLink from './components/backLink.vue'
-import { contains } from 'jquery'
+import backButtonFunction from './customjs/backButtonFunction'
 
 const roomArray = [
   [
@@ -121,12 +120,26 @@ const roomArrayNames = [
 let defaultRoomEnd = ref(false)
 let customCounterI = ref(0)
 const customUserArray = getAllCookiesExcept(roomArrayNames)
-
 let i = ref(findChoosenRoom(0))
-let roomName = ref(roomArray[i.value][0])
-let textArray = ref(roomArray[i.value][1])
-let roomCounter = ref(Number(localStorage.getItem('room|' + roomName.value)))
+let roomName = ref()
+let textArray = ref()
+let roomCounter = ref()
 let testareaStyle = ref()
+
+selectArray()
+
+function selectArray() {
+  if (defaultRoomEnd.value) {
+    roomName.value = customUserArray[customCounterI.value][0]
+    textArray.value = ['Теплый пол', 'Кондиционирование']
+    roomCounter.value = Number(customUserArray[customCounterI.value][1])
+    customCounterI.value++
+  } else {
+    roomName = ref(roomArray[i.value][0])
+    textArray = ref(roomArray[i.value][1])
+    roomCounter = ref(Number(localStorage.getItem('room|' + roomName.value)))
+  }
+}
 
 function createArrayForAjax(e) {
   let m = 1
@@ -164,13 +177,36 @@ function createArrayForAjax(e) {
       break
     }
   }
-
   return roomArr
 }
+
+function setUserData(roomArr) {
+  for (let i = 0; i < roomArr.length; i++) {
+    for (let j = 0; j < roomArr[i][1].length; j++) {
+      localStorage.setItem(
+        'detailRoomData|' + roomArr[i][0] + '|' + roomArr[i][1][j][0],
+        roomArr[i][1][j][1]
+      )
+    }
+  }
+}
+
+function getUserData() {
+
+  for (let i = 0; i < roomCounter.value; i ++) {
+    for (let j = 0; j < textArray.value.length; j++) {
+      document.getElementById(roomName.value +i).children[0].children[j].children[1].children[1].value=localStorage.getItem('detailRoomData|'+roomName.value +i+'|'+textArray.value[j])
+    }
+  }
+}
+$(document).ready(function () {
+  getUserData()
+})
 
 function sendRoomDetailData(e) {
   e.preventDefault()
   let arr = createArrayForAjax(e)
+  setUserData(arr)
   if (!defaultRoomEnd.value) {
     i.value = findChoosenRoom(i.value + 1)
   }
@@ -184,8 +220,6 @@ function sendRoomDetailData(e) {
     customCounterI.value++
   } else {
     roomName.value = roomArray[i.value][0]
-    console.log(roomName)
-
     roomCounter.value = Number(localStorage.getItem('room|' + roomName.value))
   }
 
@@ -239,7 +273,6 @@ function findChoosenRoom(index) {
     }
   }
   defaultRoomEnd.value = true
-
   return index
 }
 
@@ -251,7 +284,7 @@ function findBackRoom(index) {
       return m
     }
   }
-  router.replace({ path: '/brief_com/wishPage' })
+  backButtonFunction('/brief_com/wishPage')
 }
 
 function findBackCustomRoom() {
@@ -305,14 +338,13 @@ updateStyles()
 watch(() => roomArray[i.value], updateStyles)
 watch(() => customUserArray[customCounterI.value], updateStyles)
 </script>
-<!-- в общем в рутах передавать сюда параметры и по ним выбирать значения -->
 <template>
   <div class="flex px-[22px] md:px-[100px]">
     <div class="md:mx-auto w-full max-w-[1920px]">
       <form @submit.prevent="sendRoomDetailData" id="bedroom" class="w-full">
         <div v-for="(item, index) in roomCounter" :key="index">
-          <h1 :id="roomName" class="H1 Text pb-10 uppercase">{{ roomName + ' ' + (index + 1) }}</h1>
-          <div id="bedroom0" class="w-full justify-between lg:flex">
+          <h1 class="H1 Text pb-10 uppercase">{{ roomName + ' ' + (index + 1) }}</h1>
+          <div :id="roomName + index" class="w-full justify-between lg:flex">
             <LabelGroup :textArray="textArray"></LabelGroup>
             <div :class="testareaStyle">
               <p class="p4 Text mb-2">Пожелания по напольному покрытию</p>

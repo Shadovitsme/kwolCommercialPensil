@@ -150,7 +150,6 @@ function fillCustomRoomsFromLocalStorage() {
       userRoomCount.value = userRoomCount.value + 1
       count.value[m] = storage.getItem(key)
       m++
-      console.log(count.value)
     }
   }
   return customArr

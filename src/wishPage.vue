@@ -16,6 +16,7 @@ $(document).ready(function () {
   setDataInFields('ceiling')
   setDataInFields('deadline')
   setDataInFields('condicioner')
+  setDataInFields('floor')
   setDataInFields('style')
   setDataInFields('wannaSee')
   setDataInFields('dontWannaSee')
