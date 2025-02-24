@@ -6,17 +6,20 @@ import router from './router'
 import $ from 'jquery'
 import backButtonFunction from './customjs/backButtonFunction'
 
+function setDataInFields(field) {
+  document.getElementById(field).value = localStorage.getItem(field)
+}
+
 $(document).ready(function () {
-  document.getElementById('wishPage').elements[0].value = localStorage.getItem('light')
-  document.getElementById('wishPage').elements[1].value = localStorage.getItem('warmFloor')
-  document.getElementById('wishPage').elements[2].value = localStorage.getItem('ceiling')
-  document.getElementById('wishPage').elements[3].value = localStorage.getItem('floor')
-  document.getElementById('wishPage').elements[4].value = localStorage.getItem('deadline')
-  document.getElementById('wishPage').elements[5].value = localStorage.getItem('condicioner')
-  document.getElementById('wishPage').elements[6].value = localStorage.getItem('style')
-  document.getElementById('wishPage').elements[7].value = localStorage.getItem('wannaSee')
-  document.getElementById('wishPage').elements[8].value = localStorage.getItem('dontWannaSee')
-  document.getElementById('wishPage').elements[9].value = localStorage.getItem('additional')
+  setDataInFields('light')
+  setDataInFields('warmFloor')
+  setDataInFields('ceiling')
+  setDataInFields('deadline')
+  setDataInFields('condicioner')
+  setDataInFields('style')
+  setDataInFields('wannaSee')
+  setDataInFields('dontWannaSee')
+  setDataInFields('additional')
 })
 
 function replace(e) {
@@ -89,18 +92,21 @@ function backButton() {
           <div class="w-full md:w-1/2 md:mr-16">
             <p class="p4 Text mb-2">Пожелания по освещению</p>
             <textarea
+              id="light"
               maxlength="800"
               class="textarea w-full mb-5"
               placeholder="Опишите предпочтения по освещению (центральное, подсветка)"
             ></textarea>
             <p class="p4 Text mb-2">Зона теплого пола</p>
             <textarea
+              id="warmFloor"
               maxlength="800"
               class="textarea w-full mb-5"
               placeholder="Опишите зоны, в которых нужна установка тёплого пола"
             ></textarea>
             <p class="p4 Text mb-2">Пожелания по отделке потолков</p>
             <textarea
+              id="ceiling"
               maxlength="800"
               class="textarea w-full mb-5"
               placeholder="Опишите предпочтения по отделке потолков (натяжной, подвесной, многоуровневый, или просто окрашенный.) Укажите предпочтения по материалам и цвету. Если нужен декоративный элемент (карнизы, лепнина, балки), уточните."
@@ -108,17 +114,25 @@ function backButton() {
 
             <p class="p4 Text mb-2">Пожелания по напольному покрытию</p>
             <textarea
+              id="floor"
               maxlength="800"
               class="textarea w-full mb-5"
               placeholder="Укажите тип покрытия для пола (плитка, ламинат и т. д.) "
             ></textarea>
 
             <p class="p4 Text mb-2">Ограничения по срокам</p>
-            <input maxlength="50" class="input mb-5" type="text" placeholder="Укажите в днях" />
+            <input
+              id="deadline"
+              maxlength="50"
+              class="input mb-5"
+              type="text"
+              placeholder="Укажите в днях"
+            />
           </div>
           <div class="w-full md:w-1/2">
             <p class="p4 mb-2 Text">Кондиционирование</p>
             <input
+              id="condicioner"
               maxlength="50"
               class="input mb-5"
               type="text"
@@ -128,6 +142,7 @@ function backButton() {
               Какой стиль вы хотите видеть? Какие цвета должны преобладать в интерьере?
             </p>
             <textarea
+              id="style"
               maxlength="800"
               class="textarea mb-5"
               type="text"
@@ -136,6 +151,7 @@ function backButton() {
 
             <p class="p4 Text mb-2">Хочу видеть в будущем интерьере:</p>
             <textarea
+              id="wannaSee"
               maxlength="800"
               class="textarea mb-5"
               placeholder="Опишите как можно подробнее"
@@ -143,6 +159,7 @@ function backButton() {
 
             <p class="p4 Text mb-2">Категорически не хочу видеть в будущем интерьере:</p>
             <textarea
+              id="dontWannaSee"
               maxlength="800"
               class="textarea mb-5"
               placeholder="Опишите как можно подробнее"
@@ -150,6 +167,7 @@ function backButton() {
 
             <p class="p4 Text mb-2">Дополнительный комментарий</p>
             <textarea
+              id="additional"
               maxlength="800"
               class="textarea"
               type="text"

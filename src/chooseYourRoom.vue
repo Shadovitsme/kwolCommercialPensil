@@ -14,23 +14,9 @@ import backButtonFunction from './customjs/backButtonFunction'
 <script>
 let userRoomCount = ref(0)
 let count = ref(new Array(20).fill(0))
-
-function checkContentAdditionalRooms() {
-  return count.value.find((value) => value !== 0)
-}
-
-function addRoom() {
-  userRoomCount.value++
-}
 let error = ref(false)
+let publicCustomArr = ref()
 
-function setRoomCookie(customUserRoomNames) {
-  for (let i = 0; i < userRoomCount.value; i++) {
-    if (count.value[i]) {
-      localStorage.setItem('room|' + customUserRoomNames[i], count.value[i])
-    }
-  }
-}
 let arr = [
   'Ресепшн',
   'Кабинет',
@@ -41,7 +27,20 @@ let arr = [
   'Склад',
   'Зона ожидания',
 ]
-function setStaticRoomCookie(valueArr) {
+
+function checkContentAdditionalRooms() {
+  return count.value.find((value) => value !== 0)
+}
+
+function setCustomUserRoomLocalStorage(customUserRoomNames) {
+  for (let i = 0; i < userRoomCount.value; i++) {
+    if (count.value[i]) {
+      localStorage.setItem('room|' + customUserRoomNames[i], count.value[i])
+    }
+  }
+}
+
+function setDefaultRoomLocalStorage(valueArr) {
   for (let i = 0; i <= arr.length; i++) {
     if (valueArr[i] != '0') {
       localStorage.setItem('room|' + arr[i], valueArr[i])
@@ -67,6 +66,7 @@ function redirect(e) {
 
   let m = 24
 
+  // TODO уменьшить вложенность
   if (
     (reception && reception !== '0') ||
     (cabinet && cabinet !== '0') ||
@@ -105,8 +105,8 @@ function redirect(e) {
         }, {}),
       },
       success: function (data) {
-        setStaticRoomCookie(valueArr)
-        setRoomCookie(customUserRoomNames)
+        setDefaultRoomLocalStorage(valueArr)
+        setCustomUserRoomLocalStorage(customUserRoomNames)
 
         router.replace({ path: '/brief_com/wishPage' })
       },
@@ -132,11 +132,11 @@ function checkLocalStorage(num) {
   return localStorage.getItem('room|' + arr[num])
 }
 
-function addCustomRoomToDefaultArray() {
+function fillCustomRoomsFromLocalStorage() {
   let storage = localStorage
   const regex = /^room\|[\w\d]+$/
   let customArr = []
-let m=0
+  let m = 0
   for (let i = 0; i < storage.length; i++) {
     const key = storage.key(i)
     let result = key.replace(/^room\|/, '')
@@ -148,15 +148,16 @@ let m=0
     ) {
       customArr.push(result)
       userRoomCount.value = userRoomCount.value + 1
-      count.value[m]=(storage.getItem(key))
+      count.value[m] = storage.getItem(key)
       m++
-console.log( count.value)    }
+      console.log(count.value)
+    }
   }
   return customArr
 }
-let publicCustomArr = ref()
+
 $(document).ready(function () {
-  publicCustomArr.value = addCustomRoomToDefaultArray()
+  publicCustomArr.value = fillCustomRoomsFromLocalStorage()
   let l = 1
   for (let i = 0; i < arr.length; i++) {
     document.getElementById('page3').elements[l].value = checkLocalStorage(i)
@@ -184,7 +185,7 @@ $(document).ready(function () {
           <YellowButton
             v-if="userRoomCount < 20"
             type="button"
-            @click="addRoom"
+            @click="userRoomCount++"
             class="w-full"
             text="Добавить помещение"
             :arrow="false"
