@@ -8,15 +8,24 @@ const props = defineProps({
   textArray: {
     type: Array,
   },
+  customArr: { type: Array, required: false },
 })
 let gridStyle = ref()
 let short = ref()
-let userAdditional = ref(0)
+let userAdditional = ref(props.customArr.length)
 let count = ref(new Array(5).fill(0))
+
+props.customArr.forEach((element,index) => {
+  Object.keys(localStorage).forEach((key) => {
+    if (key.includes(element)) {
+      count.value[index] = localStorage.getItem(key);
+      console.log(localStorage.getItem(key))
+    }
+  });
+});
 
 const updateStyles = () => {
   count.value = count.value.map(() => 0)
-  userAdditional.value = 0
   if (props.textArray.length > 7) {
     gridStyle.value =
       'w-full lg:w-[964px] h-fit lg:mr-[64px] h-fit grid grid-cols-1 md:grid-cols-2 gap-y-5 md:gap-y-[32px] md:gap-x-[52px] '
@@ -39,7 +48,7 @@ watch(() => props.textArray, updateStyles, { deep: true })
   <div :class="gridStyle">
     <LabelAdditional :short="short" v-for="item in props.textArray" :text="item"></LabelAdditional>
     <InputLabel
-      :customArr="[]"
+      :customArr="props.customArr"
       class="mb-5"
       :count="count"
       :userRoomCount="userAdditional"

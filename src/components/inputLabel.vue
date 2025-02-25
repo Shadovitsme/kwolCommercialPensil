@@ -38,6 +38,8 @@ function minus(index) {
     }
   }
 }
+
+
 </script>
 <template>
   <div

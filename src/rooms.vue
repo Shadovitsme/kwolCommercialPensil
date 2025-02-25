@@ -347,6 +347,27 @@ updateStyles()
 // Watch for changes in short prop
 watch(() => i.value, updateStyles)
 watch(() => customCounterI.value, updateStyles)
+let customArr = []
+let defaultTextareaArr=['метраж',"другое","пол","стены","потолки"]
+function fillCustomArr() {
+  for (let j = 0; j < localStorage.getItem('room|'+roomName.value); j++) {
+    let prefix = 'detailRoomData|' + roomName.value + j + '|'
+    let besideArr=[]
+    for (let i = 0; i < localStorage.length; i++) {
+      let key = localStorage.key(i)
+      if (key.startsWith(prefix)) {
+        const item = key.replace(prefix, '')
+
+        if (!textArray.value.includes(item) && !defaultTextareaArr.includes(item)) {
+          besideArr.push(item)
+        }
+      }
+    }
+    customArr.push(besideArr)
+    console.log(customArr)
+  }
+}
+fillCustomArr()
 </script>
 <template>
   <div class="flex px-[22px] md:px-[100px]">
@@ -355,7 +376,7 @@ watch(() => customCounterI.value, updateStyles)
         <div v-for="(item, index) in roomCounter" :key="index">
           <h1 class="H1 Text pb-10 uppercase">{{ roomName + ' ' + (index + 1) }}</h1>
           <div :id="roomName + index" class="w-full justify-between lg:flex">
-            <LabelGroup :textArray="textArray"></LabelGroup>
+            <LabelGroup :customArr="customArr[index]" :textArray="textArray"></LabelGroup>
             <div :class="testareaStyle">
               <p class="p4 Text mb-2">Пожелания по напольному покрытию</p>
               <textarea
