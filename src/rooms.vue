@@ -185,20 +185,30 @@ function setUserData(roomArr) {
     for (let j = 0; j < roomArr[i][1].length; j++) {
       localStorage.setItem(
         'detailRoomData|' + roomArr[i][0] + '|' + roomArr[i][1][j][0],
-        roomArr[i][1][j][1]
+        roomArr[i][1][j][1],
       )
     }
   }
 }
 
 function getUserData() {
-
-  for (let i = 0; i < roomCounter.value; i ++) {
+  for (let i = 0; i < roomCounter.value; i++) {
     for (let j = 0; j < textArray.value.length; j++) {
-      document.getElementById(roomName.value +i).children[0].children[j].children[1].children[1].value=localStorage.getItem('detailRoomData|'+roomName.value +i+'|'+textArray.value[j])
+      document.getElementById(roomName.value + i).children[0].children[
+        j
+      ].children[1].children[1].value = getValueForFiller(roomName.value + i, textArray.value[j])
     }
   }
 }
+
+function getValueForFiller(roomName, textArray) {
+  let result = localStorage.getItem('detailRoomData|' + roomName + '|' + textArray)
+  if (result == undefined) {
+    return 0
+  }
+  return result
+}
+
 $(document).ready(function () {
   getUserData()
 })
@@ -233,10 +243,7 @@ function sendRoomDetailData(e) {
       arr,
     },
     success: function (data) {
-      // console.log(data)
-      $('input').val(0)
-      $('#small').val(undefined)
-      $('textarea').val(undefined)
+      getUserData()
       scrollToTop()
     },
   })
@@ -315,6 +322,9 @@ function backFunction() {
     textArray.value = roomArray[i.value][1]
     roomCounter.value = Number(localStorage.getItem('room|' + roomName.value))
   }
+  $(document).ready(function () {
+    getUserData()
+  })
 }
 
 function scrollToTop() {
@@ -335,8 +345,8 @@ const updateStyles = () => {
 updateStyles()
 
 // Watch for changes in short prop
-watch(() => roomArray[i.value], updateStyles)
-watch(() => customUserArray[customCounterI.value], updateStyles)
+watch(() => i.value, updateStyles)
+watch(() => customCounterI.value, updateStyles)
 </script>
 <template>
   <div class="flex px-[22px] md:px-[100px]">

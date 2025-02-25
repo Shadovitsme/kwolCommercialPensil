@@ -129,7 +129,7 @@ function sendMainUserData(e) {
             <div class="mr-5">
               <input
                 maxlength="50"
-                id="futnitureYes"
+                id="furnitureYes"
                 class="radio"
                 type="radio"
                 name="furniture"
