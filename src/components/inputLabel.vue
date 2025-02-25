@@ -11,6 +11,20 @@ const props = defineProps({
   long: { type: Boolean },
 })
 
+props.customArr.forEach((element, index) => {
+  for (let i = 0; i < localStorage.length; i++) {
+    let key = localStorage.key(i)
+    if (key.includes(element)) {
+      let result = localStorage.getItem(key)
+      if (result == undefined || result == '') {
+        props.count[index] = 0
+      } else {
+        props.count[index] = result
+      }
+    }
+  }
+})
+
 function checkInputValue(e) {
   if (e.target.value > 5) {
     e.target.value = 5
@@ -38,8 +52,6 @@ function minus(index) {
     }
   }
 }
-
-
 </script>
 <template>
   <div

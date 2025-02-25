@@ -15,14 +15,7 @@ let short = ref()
 let userAdditional = ref(props.customArr.length)
 let count = ref(new Array(5).fill(0))
 
-props.customArr.forEach((element,index) => {
-  Object.keys(localStorage).forEach((key) => {
-    if (key.includes(element)) {
-      count.value[index] = localStorage.getItem(key);
-      console.log(localStorage.getItem(key))
-    }
-  });
-});
+
 
 const updateStyles = () => {
   count.value = count.value.map(() => 0)
@@ -49,7 +42,6 @@ watch(() => props.textArray, updateStyles, { deep: true })
     <LabelAdditional :short="short" v-for="item in props.textArray" :text="item"></LabelAdditional>
     <InputLabel
       :customArr="props.customArr"
-      class="mb-5"
       :count="count"
       :userRoomCount="userAdditional"
     ></InputLabel>

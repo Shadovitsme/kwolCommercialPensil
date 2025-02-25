@@ -364,7 +364,6 @@ function fillCustomArr() {
       }
     }
     customArr.push(besideArr)
-    console.log(customArr)
   }
 }
 fillCustomArr()
@@ -375,7 +374,7 @@ fillCustomArr()
       <form @submit.prevent="sendRoomDetailData" id="bedroom" class="w-full">
         <div v-for="(item, index) in roomCounter" :key="index">
           <h1 class="H1 Text pb-10 uppercase">{{ roomName + ' ' + (index + 1) }}</h1>
-          <div :id="roomName + index" class="w-full justify-between lg:flex">
+          <div :id="roomName + index" class="w-full justify-between mb-10 lg:flex">
             <LabelGroup :customArr="customArr[index]" :textArray="textArray"></LabelGroup>
             <div :class="testareaStyle">
               <p class="p4 Text mb-2">Пожелания по напольному покрытию</p>
