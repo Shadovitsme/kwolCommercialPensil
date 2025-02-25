@@ -11,19 +11,23 @@ const props = defineProps({
   long: { type: Boolean },
 })
 
-props.customArr.forEach((element, index) => {
-  for (let i = 0; i < localStorage.length; i++) {
-    let key = localStorage.key(i)
-    if (key.includes(element)) {
-      let result = localStorage.getItem(key)
-      if (result == undefined || result == '') {
-        props.count[index] = 0
-      } else {
-        props.count[index] = result
+function filler() {
+  props.customArr.forEach((element, index) => {
+    for (let i = 0; i < localStorage.length; i++) {
+      let key = localStorage.key(i)
+      if (key.includes(element)) {
+        let result = localStorage.getItem(key)
+        if (result == undefined || result == '') {
+          props.count[index] = 0
+        } else {
+          props.count[index] = result
+        }
       }
     }
-  }
-})
+  })
+}
+
+watch(() => props.customArr, filler, { immediate: true })
 
 function checkInputValue(e) {
   if (e.target.value > 5) {
@@ -74,6 +78,7 @@ function minus(index) {
         class="disabled:opacity-50 h-[48px] w-[48px] shrink-0 my-auto minusButton"
       ></button>
       <input
+        name="counter"
         @change="
           (e) => {
             checkInputValue(e)
@@ -81,7 +86,7 @@ function minus(index) {
         "
         type="number"
         class="input text-center my-auto mx-3"
-        :value="props.count[index]"
+        v-model="props.count[index]"
       />
       <button
         type="button"

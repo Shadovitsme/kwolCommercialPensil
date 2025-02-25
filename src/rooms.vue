@@ -116,6 +116,8 @@ const roomArrayNames = [
   'Кладовая',
   'Склад',
 ]
+let customArr = ref([])
+let defaultTextareaArr = ['метраж', 'другое', 'пол', 'стены', 'потолки']
 
 let defaultRoomEnd = ref(false)
 let customCounterI = ref(0)
@@ -194,16 +196,18 @@ function setUserData(roomArr) {
 function getUserData() {
   for (let i = 0; i < roomCounter.value; i++) {
     for (let j = 0; j < textArray.value.length; j++) {
+
       document.getElementById(roomName.value + i).children[0].children[
         j
       ].children[1].children[1].value = getValueForFiller(roomName.value + i, textArray.value[j])
+
     }
   }
 }
 
 function getValueForFiller(roomName, textArray) {
   let result = localStorage.getItem('detailRoomData|' + roomName + '|' + textArray)
-  if (result == undefined) {
+  if (result == undefined || result=='') {
     return 0
   }
   return result
@@ -232,7 +236,7 @@ function sendRoomDetailData(e) {
     roomName.value = roomArray[i.value][0]
     roomCounter.value = Number(localStorage.getItem('room|' + roomName.value))
   }
-
+  fillCustomArr()
   let ID = localStorage.getItem('userId')
   $.ajax({
     url: 'https://karandash.pro/brief/save_data.php ',
@@ -324,6 +328,7 @@ function backFunction() {
   }
   $(document).ready(function () {
     getUserData()
+    fillCustomArr()
   })
 }
 
@@ -343,30 +348,34 @@ const updateStyles = () => {
 }
 // Initial check
 updateStyles()
+fillCustomArr()
 
-// Watch for changes in short prop
-watch(() => i.value, updateStyles)
-watch(() => customCounterI.value, updateStyles)
-let customArr = []
-let defaultTextareaArr=['метраж',"другое","пол","стены","потолки"]
+
+
 function fillCustomArr() {
-  for (let j = 0; j < localStorage.getItem('room|'+roomName.value); j++) {
+  customArr.value=[]
+  for (let j = 0; j < localStorage.getItem('room|' + roomName.value); j++) {
+
     let prefix = 'detailRoomData|' + roomName.value + j + '|'
-    let besideArr=[]
+    let besideArr = []
+
     for (let i = 0; i < localStorage.length; i++) {
       let key = localStorage.key(i)
       if (key.startsWith(prefix)) {
         const item = key.replace(prefix, '')
-
         if (!textArray.value.includes(item) && !defaultTextareaArr.includes(item)) {
           besideArr.push(item)
         }
       }
     }
-    customArr.push(besideArr)
+    customArr.value.push(besideArr)
   }
 }
-fillCustomArr()
+
+// Watch for changes in short prop
+watch(() => i.value, updateStyles)
+watch(() => customCounterI.value, updateStyles)
+
 </script>
 <template>
   <div class="flex px-[22px] md:px-[100px]">
