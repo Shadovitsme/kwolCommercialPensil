@@ -1,6 +1,6 @@
 <script setup>
 import { ref, watch } from 'vue'
-
+import $ from 'jquery'
 const props = defineProps({
   userRoomCount: {
     type: Number,
@@ -12,18 +12,20 @@ const props = defineProps({
 })
 
 function filler() {
-  props.customArr.forEach((element, index) => {
-    for (let i = 0; i < localStorage.length; i++) {
-      let key = localStorage.key(i)
-      if (key.includes(element)) {
-        let result = localStorage.getItem(key)
-        if (result == undefined || result == '') {
-          props.count[index] = 0
-        } else {
-          props.count[index] = result
+  $(document).ready(function () {
+    props.customArr.forEach((element, index) => {
+      for (let i = 0; i < localStorage.length; i++) {
+        let key = localStorage.key(i)
+        if (key.includes(element)) {
+          let result = localStorage.getItem(key)
+          if (result == undefined || result == '') {
+            props.count[index] = 0
+          } else {
+            props.count[index] = result
+          }
         }
       }
-    }
+    })
   })
 }
 

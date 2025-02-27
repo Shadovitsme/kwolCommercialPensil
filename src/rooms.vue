@@ -194,13 +194,13 @@ function setUserData(roomArr) {
 }
 
 function getUserData() {
+  let l = 0
   for (let i = 0; i < roomCounter.value; i++) {
     for (let j = 0; j < textArray.value.length; j++) {
       document.getElementById(roomName.value + i).children[0].children[
         j
       ].children[1].children[1].value = getValueForFiller(roomName.value + i, textArray.value[j])
     }
-    let l = 0
     for (let m = 1; m < 10; m += 2) {
       document.getElementById(roomName.value + i).children[1].children[m].value = getValueForFiller(
         roomName.value + i,
@@ -225,10 +225,6 @@ function getValueForFiller(roomName, textArray, textarea) {
   return result
 }
 
-$(document).ready(function () {
-  getUserData()
-})
-
 function sendRoomDetailData(e) {
   e.preventDefault()
   let arr = createArrayForAjax(e)
@@ -247,6 +243,7 @@ function sendRoomDetailData(e) {
   } else {
     roomName.value = roomArray[i.value][0]
     roomCounter.value = Number(localStorage.getItem('room|' + roomName.value))
+    textArray.value = roomArray[i.value][1]
   }
   fillCustomArr()
   let ID = localStorage.getItem('userId')
@@ -331,12 +328,14 @@ function findBackCustomRoom() {
 function backFunction() {
   if (defaultRoomEnd.value) {
     findBackCustomRoom()
+    fillCustomArr()
   } else {
     defaultRoomEnd.value = false
     i.value = findBackRoom(i.value - 1)
     roomName.value = roomArray[i.value][0]
     textArray.value = roomArray[i.value][1]
     roomCounter.value = Number(localStorage.getItem('room|' + roomName.value))
+    fillCustomArr()
   }
   $(document).ready(function () {
     getUserData()
