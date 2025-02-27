@@ -137,12 +137,18 @@ function changeSrc() {
 function removeCard(getItem) {
   refArray.value = refArray.value.filter((item) => item !== getItem)
 }
-
+const currentUrl = new URL(window.location.href)
+    const params = currentUrl.searchParams.toString().replace(/=$/, '')
+    console.log(params)
 function checkBackLink() {
   if (localStorage.getItem('commercial') == 'true') {
     router.replace('/brief_com/rooms')
   } else {
-    window.location.replace(localStorage.getItem('backLink'))
+    const currentUrl = new URL(window.location.href)
+    const params = currentUrl.searchParams.toString().replace(/=$/, '')
+    console.log(params)
+    window.location.replace(`https://karandash.pro/brief/rooms/${params}`)
+
   }
 }
 </script>
