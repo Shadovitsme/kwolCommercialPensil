@@ -10,7 +10,7 @@ const props = defineProps({
   },
 })
 
-let count = ref(Number(localStorage.getItem('room|'+props.text)))
+let count = ref(Number(localStorage.getItem('room|' + props.text)))
 
 function plus() {
   count.value = count.value + 1

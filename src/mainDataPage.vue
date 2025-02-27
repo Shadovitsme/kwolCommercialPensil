@@ -2,7 +2,6 @@
 import YellowButton from './components/yellowButton.vue'
 import $ from 'jquery'
 import router from './router'
-import { onBeforeMount, onMounted } from 'vue'
 </script>
 
 <script>
@@ -28,7 +27,6 @@ let replane =
 function sendMainUserData(e) {
   e.preventDefault() // предотвращаем стандартное поведение формы
   let ID = localStorage.getItem('userId')
-
   let actvitySphere = e.target[0].value
   let area = e.target[1].value
   let soundless = e.target[2].checked
