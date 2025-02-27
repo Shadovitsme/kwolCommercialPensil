@@ -117,7 +117,7 @@ const roomArrayNames = [
   'Склад',
 ]
 let customArr = ref([])
-let defaultTextareaArr = ['метраж', 'другое', 'пол', 'стены', 'потолки']
+let defaultTextareaArr = ['пол', 'стены', 'потолки', 'метраж', 'другое']
 
 let defaultRoomEnd = ref(false)
 let customCounterI = ref(0)
@@ -196,20 +196,32 @@ function setUserData(roomArr) {
 function getUserData() {
   for (let i = 0; i < roomCounter.value; i++) {
     for (let j = 0; j < textArray.value.length; j++) {
-
       document.getElementById(roomName.value + i).children[0].children[
         j
       ].children[1].children[1].value = getValueForFiller(roomName.value + i, textArray.value[j])
-
     }
+    let l = 0
+    for (let m = 1; m < 10; m += 2) {
+      document.getElementById(roomName.value + i).children[1].children[m].value = getValueForFiller(
+        roomName.value + i,
+        defaultTextareaArr[l],
+        true,
+      )
+      l++
+    }
+    l = 0
   }
 }
 
-function getValueForFiller(roomName, textArray) {
+function getValueForFiller(roomName, textArray, textarea) {
   let result = localStorage.getItem('detailRoomData|' + roomName + '|' + textArray)
-  if (result == undefined || result=='') {
+  if (result == undefined || result == '' || result == null) {
+    if (textarea) {
+      return ''
+    }
     return 0
   }
+
   return result
 }
 
@@ -329,6 +341,7 @@ function backFunction() {
   $(document).ready(function () {
     getUserData()
     fillCustomArr()
+    scrollToTop()
   })
 }
 
@@ -350,12 +363,9 @@ const updateStyles = () => {
 updateStyles()
 fillCustomArr()
 
-
-
 function fillCustomArr() {
-  customArr.value=[]
+  customArr.value = []
   for (let j = 0; j < localStorage.getItem('room|' + roomName.value); j++) {
-
     let prefix = 'detailRoomData|' + roomName.value + j + '|'
     let besideArr = []
 
@@ -375,7 +385,6 @@ function fillCustomArr() {
 // Watch for changes in short prop
 watch(() => i.value, updateStyles)
 watch(() => customCounterI.value, updateStyles)
-
 </script>
 <template>
   <div class="flex px-[22px] md:px-[100px]">

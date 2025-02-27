@@ -15,9 +15,12 @@ let short = ref()
 let userAdditional = ref(props.customArr.length)
 let count = ref(new Array(5).fill(0))
 
-watch(() => props.customArr.length, (newLength) => {
-  userAdditional.value = newLength
-})
+watch(
+  () => props.customArr.length,
+  (newLength) => {
+    userAdditional.value = newLength
+  },
+)
 
 const updateStyles = () => {
   count.value = count.value.map(() => 0)
