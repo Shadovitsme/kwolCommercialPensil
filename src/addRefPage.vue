@@ -162,7 +162,7 @@ function checkBackLink() {
 
     <form
       @submit.prevent="addRef"
-      class="md:h-[60rem] relative z-50 w-full md:w-[47.9375rem] mx-auto pt-7 pb-5 px-5 md:p-[3.75rem] rounded-[0.625rem] border-[0.0625rem] bg-background border-Accent"
+      class="md:h-[820px] relative z-50 w-full md:w-[47.9375rem] mx-auto pt-7 pb-5 px-5 md:p-[3.75rem] rounded-[0.625rem] border-[0.0625rem] bg-background border-Accent"
     >
       <div
         @click="toggleModal"
@@ -192,7 +192,7 @@ function checkBackLink() {
 
       <label
         v-if="!textInputValue && !fileInputValue"
-        class="bg-DarkAccent hover:bg-background active:bg-DarkAccent w-full flex justify-center cursor-pointer h-[210px] md:h-[360px] rounded-[10px]"
+        class="bg-DarkAccent hover:bg-background active:bg-DarkAccent w-full flex justify-center cursor-pointer h-[210px] md:h-[220px] rounded-[10px]"
       >
         <input
           accept=".jpg,.jpeg,.png,.webp"
@@ -213,7 +213,7 @@ function checkBackLink() {
         maxlength="800"
         v-model="textareaValue"
         placeholder="Опишите, что вам понравилось, а что, наоборот, не хотели бы реализовывать"
-        class="bg-DarkAccent hover:bg-background active:bg-DarkAccent w-full flex justify-center cursor-pointer h-[210px] max-h-[210px] md:max-h-[360px] md:h-[360px] rounded-[10px] text-Text p-5 placeholder:text-QuietText p3 active:border-[1px] active:border-Accent outline-none focus:border-[1px] focus:border-Accent"
+        class="bg-DarkAccent hover:bg-background active:bg-DarkAccent w-full flex justify-center cursor-pointer h-[210px] max-h-[210px] md:max-h-[260px] md:h-full rounded-[10px] text-Text p-5 placeholder:text-QuietText p3 active:border-[1px] active:border-Accent outline-none focus:border-[1px] focus:border-Accent"
         v-if="textInputValue || fileInputValue"
       ></textarea>
 

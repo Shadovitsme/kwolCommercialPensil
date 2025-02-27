@@ -12,9 +12,9 @@ $('textarea').attr('maxlength', '800')
 
 const routes = [
   {
-    path: '/referencePage',
+    path: '/brief_com',
     name: 'main',
-    component: addRefPage,
+    component: mainPage,
   },
   {
     path: '/brief_com/mainData',

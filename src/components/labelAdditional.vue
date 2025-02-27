@@ -27,7 +27,11 @@ function minus() {
 function checkInputValue(e) {
   if (e.target.value > 5) {
     e.target.value = 5
-  } else if (e.target.value < 0) {
+  }
+  else if (e.target.value.startsWith('0') && e.target.value.length > 1) {
+    e.target.value = e.target.value.slice(1)
+  }
+  else if (e.target.value < 0) {
     e.target.value = 0
   } else if (e.target.value == '' || e.target.value == undefined) {
     e.target.value = 0
