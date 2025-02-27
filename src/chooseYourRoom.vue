@@ -176,7 +176,7 @@ $(document).ready(function () {
           <LabelAdditional :short="true" v-for="item in arr" :text="item"></LabelAdditional>
           <InputLabel
             :customArr="publicCustomArr"
-            :count="count"
+            v-model:count="count"
             :userRoomCount="userRoomCount"
           ></InputLabel>
           <div v-if="userRoomCount > 19" class="w-full h-full"></div>
