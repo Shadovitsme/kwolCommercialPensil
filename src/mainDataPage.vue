@@ -2,30 +2,28 @@
 import YellowButton from './components/yellowButton.vue'
 import $ from 'jquery'
 import router from './router'
+import { onBeforeMount, onMounted } from 'vue'
 </script>
 
 <script>
-function chooseWhatChecked(itemOne, itemTwo, localstorageData) {
-  if (localstorageData) {
-    document.getElementById(itemOne).checked = true
-  } else {
-    document.getElementById(itemTwo).checked = true
+function setDataInFields(field) {
+  let value = localStorage.getItem(field)
+  if (value != 0 && value != '0' && value != undefined) {
+    return value
   }
+  return ''
 }
 
-function setDataInFields(field, data) {
-  document.getElementById(field).value = localStorage.getItem(data)
-}
-
-$(document).ready(function () {
-  setDataInFields('activitySphere', 'actvitySphere')
-  setDataInFields('area', 'area')
-  chooseWhatChecked('soundlessYes', 'soundlessNo', localStorage.getItem('soundless') == 'true')
-  chooseWhatChecked('furnitureYes', 'furnitureNo', localStorage.getItem('furniture') == 'true')
-  setDataInFields('zones', 'zones')
-  chooseWhatChecked('replanYes', 'replanNo', localStorage.getItem('replane') == 'true')
-  setDataInFields('workPlaces', 'workPlaces')
-})
+let sphere = setDataInFields('actvitySphere')
+let area = setDataInFields('area')
+let zones = setDataInFields('zones')
+let workPlaces = setDataInFields('workPlaces')
+let soundless =
+  localStorage.getItem('soundless') == 'true' || localStorage.getItem('soundless') == undefined
+let furniture =
+  localStorage.getItem('furniture') == 'true' || localStorage.getItem('furniture') == undefined
+let replane =
+  localStorage.getItem('replane') == 'true' || localStorage.getItem('replane') == undefined
 
 function sendMainUserData(e) {
   e.preventDefault() // предотвращаем стандартное поведение формы
@@ -82,6 +80,7 @@ function sendMainUserData(e) {
         <div class="md:mr-16 md:w-[828px]">
           <p class="p4 Text mb-2">Сфера деятельности (магазин, офис, кафе, салон красоты и т.д)</p>
           <input
+            v-model="sphere"
             maxlength="50"
             id="activitySphere"
             class="input mb-4 md:mb-10"
@@ -90,6 +89,7 @@ function sendMainUserData(e) {
           />
           <p class="p4 Text mb-2">Площадь помещения в м²</p>
           <input
+            v-model="area"
             id="area"
             maxlength="50"
             class="input mb-5 md:mb-10"
@@ -101,18 +101,20 @@ function sendMainUserData(e) {
           <div class="md:flex mt-5 md:mt-1 mb-5 md:mb-8">
             <div class="mr-5 ms:mb-1">
               <input
+                v-model="soundless"
+                :checked="soundless"
                 maxlength="50"
                 class="radio"
                 id="soundlessYes"
                 type="radio"
                 name="soundless"
                 value="1"
-                checked="true"
               />
               <label for="soundlessYes" class="p3 Text">Звукоизоляция нужна</label>
             </div>
             <div>
               <input
+                v-model="soundless"
                 maxlength="50"
                 class="radio"
                 id="soundlessNo"
@@ -129,17 +131,19 @@ function sendMainUserData(e) {
             <div class="mr-5">
               <input
                 maxlength="50"
+                v-model="furniture"
                 id="furnitureYes"
                 class="radio"
                 type="radio"
                 name="furniture"
                 value="1"
-                checked="true"
+                :checked="furniture"
               />
               <label for="furnitureYes" class="p3 Text">Да</label>
             </div>
             <div>
               <input
+                v-model="furniture"
                 maxlength="50"
                 id="furnitureNo"
                 class="radio"
@@ -156,6 +160,7 @@ function sendMainUserData(e) {
             Особенности зонирования (например, отдельные кабинеты, открытая планировка, зоны отдыха)
           </p>
           <textarea
+            v-model="zones"
             id="zones"
             maxlength="800"
             type="text"
@@ -166,18 +171,20 @@ function sendMainUserData(e) {
           <div class="flex mt-4 md:mt-1.5 mb-4 md:mb-8">
             <div class="mr-5">
               <input
+                v-model="replane"
                 maxlength="50"
                 id="replanYes"
                 class="radio"
                 type="radio"
                 name="replane"
                 value="1"
-                checked="true"
+                :checked="replane"
               />
               <label for="replanYes" class="p3 Text">Да</label>
             </div>
             <div>
               <input
+                v-model="replane"
                 maxlength="50"
                 id="replanNo"
                 class="radio"
@@ -190,6 +197,7 @@ function sendMainUserData(e) {
           </div>
           <p class="H6 Accent mb-[14px]">Количество рабочих мест</p>
           <input
+            v-model="workPlaces"
             id="workPlaces"
             maxlength="50"
             class="input mb-4 md:mb-10"
