@@ -167,13 +167,13 @@ function checkBackLink() {
         class="cross absolute right-2 top-2 md:right-8 md:top-8 h-7 w-7"
       ></div>
       <p class="text-Text H2 md:text-center">ДОПОЛНИТЕЛЬНЫЕ ПОЖЕЛАНИЯ</p>
-      <p class="text-Text p3 md:p3 md:text-center md:my-8 mt-1.5 mb-6">
+      <p class="text-Text p5 md:text-center md:my-8 mt-1 mb-6">
         Вы можете поделиться примерами интерьеров, которые отражают ваши пожелания и предпочтения
       </p>
-      <p class="text-Text mb-2 p4">Добавьте ссылку на изображение, которое вам понравилось</p>
+      <p v-if="!fileInputValue && !textInputValue" class="text-Text mb-2 p4">Добавьте ссылку на изображение, которое вам понравилось</p>
       <input
         v-if="!fileInputValue"
-        class="input mb-8"
+        class="input mb-[15px] md:mb-8"
         placeholder="Вставьте ссылку"
         type="text"
         v-model="textInputValue"
@@ -184,13 +184,17 @@ function checkBackLink() {
         <p class="text-Text p3 ml-3 my-auto">{{ fileInputValue.name }}</p>
         <button @click="fileInputValue = ''" class="trash top-5 absolute right-3"></button>
       </div>
-      <p class="text-Text mb-2 p4">Или загрузите файл с вашего устройста</p>
-
+      <p v-if="!textInputValue && !fileInputValue" class="text-Text mb-2 p4">
+        Или загрузите файл с вашего устройста
+      </p>
+      <p v-if="textInputValue || fileInputValue" class="text-Text mb-2 mt-8 p4">
+        Комментарий к референсу
+      </p>
       <!-- fileInput -->
 
       <label
         v-if="!textInputValue && !fileInputValue"
-        class="bg-DarkAccent hover:bg-background active:bg-DarkAccent w-full flex justify-center cursor-pointer h-[210px] md:h-[220px] rounded-[10px]"
+        class="bg-DarkAccent hover:bg-background active:bg-DarkAccent w-full flex justify-center cursor-pointer h-[268px] md:h-[220px] rounded-[10px]"
       >
         <input
           accept=".jpg,.jpeg,.png,.webp"
@@ -211,12 +215,16 @@ function checkBackLink() {
         maxlength="800"
         v-model="textareaValue"
         placeholder="Опишите, что вам понравилось, а что, наоборот, не хотели бы реализовывать"
-        class="bg-DarkAccent hover:bg-background active:bg-DarkAccent w-full flex justify-center cursor-pointer h-[210px] max-h-[210px] md:max-h-[260px] md:h-full rounded-[10px] text-Text p-5 placeholder:text-QuietText p3 active:border-[1px] active:border-Accent outline-none focus:border-[1px] focus:border-Accent"
+        class="bg-DarkAccent hover:bg-background active:bg-DarkAccent w-full flex justify-center cursor-pointer h-[210px] max-h-[210px] md:max-h-[260px] md:h-full rounded-t-[10px] text-Text p-5 placeholder:text-QuietText p3 active:border-[1px] active:border-Accent outline-none mb-8 focus:border-[1px] focus:border-Accent"
         v-if="textInputValue || fileInputValue"
       ></textarea>
 
-      <p class="p5 text-QuietText mt-2">Максимальный размер 10 Мб</p>
-      <p class="p5 text-QuietText mb-8">Доступные форматы JPG, PNG, WEBP</p>
+      <p v-if="!textInputValue && !fileInputValue" class="p5 text-QuietText mt-2">
+        Максимальный размер 10 Мб
+      </p>
+      <p v-if="!textInputValue && !fileInputValue" class="p5 text-QuietText mb-8">
+        Доступные форматы JPG, PNG, WEBP
+      </p>
 
       <YellowButton text="Добавить" :arrow="false" class="w-full h-11"></YellowButton>
     </form>

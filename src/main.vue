@@ -140,7 +140,7 @@ let townStyle = ref(defaultStyle)
   <div class="flex px-[1.375rem] md:px-0">
     <div class="flex md:justify-between md:mx-auto max-w-[1920px] z-20">
       <div class="md:mx-6 lg:mx-[6.25rem] md:w-full">
-        <div class="mt-10 lg:w-[51.75rem] md:ml-5">
+        <div class=" lg:w-[51.75rem] md:ml-5">
           <h1 class="H1 Text uppercase text-justify">Бриф, подготовленный</h1>
           <h1 class="speciall text-justify text-[40px] lg:text-[104px] mb-6">специально для вас</h1>
         </div>
@@ -195,7 +195,22 @@ let townStyle = ref(defaultStyle)
   </div>
 </template>
 
+<style scoped>
+
+
+
+
+</style>
+
 <style>
+
+@media screen and (max-width: 768px) {
+  body {
+    padding-top: 40px;
+    background-size: contain;
+  }
+}
+
 .inputError {
   background-color: var(--DarkAccent);
   padding: 20px;

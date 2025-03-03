@@ -427,6 +427,7 @@ watch(() => customCounterI.value, updateStyles)
                 placeholder="Если есть другие пожелания, опишите их здесь"
               ></textarea>
             </div>
+            <hr v-if="index < roomCounter - 1" />
           </div>
         </div>
         <div class="w-full md:flex md:justify-between mt-5 md:mt-12">
