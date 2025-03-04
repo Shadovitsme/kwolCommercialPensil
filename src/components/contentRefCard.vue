@@ -17,6 +17,12 @@ const emits = defineEmits(['card-click', 'cross-click'])
 import { watch } from 'vue'
 
 watch(
+  () => props.href,
+  (newLink) => {
+      link = newLink
+  },
+)
+watch(
   () => props.file,
   (newFile) => {
     if (!props.haveLink) {
