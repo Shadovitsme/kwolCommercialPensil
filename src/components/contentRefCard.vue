@@ -1,5 +1,4 @@
 <script setup>
-import { type } from 'jquery'
 import { computed } from 'vue'
 
 const props = defineProps({
@@ -33,7 +32,7 @@ if (!props.haveLink) {
   link = props.href
 }
 const truncatedHref = computed(() => {
-  return props.href.length > 25 ? props.href.substring(0, 25) + '...' : props.href
+  return props.href.length > 20 ? props.href.substring(0, 17) + '...' : props.href
 })
 const truncatedComment = computed(() => {
   return props.comment.length > 110 ? props.comment.substring(0, 107) + '...' : props.comment

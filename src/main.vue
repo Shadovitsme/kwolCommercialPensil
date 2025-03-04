@@ -206,6 +206,10 @@ let townStyle = ref(defaultStyle)
 }
 
 .inputError {
+  font-family: 'Corsa Grotesk Regular';
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
   background-color: var(--DarkAccent);
   padding: 20px;
   width: 100%;
@@ -240,6 +244,10 @@ let townStyle = ref(defaultStyle)
 
 @media screen and (max-width: 1024px) {
   .inputError {
+    font-family: 'Corsa Grotesk Regular';
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 120%;
     border-color: #c63f3f;
     border-width: 1px;
     height: 58px;

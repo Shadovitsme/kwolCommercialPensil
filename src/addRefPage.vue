@@ -17,6 +17,7 @@ let changeIndex = ref()
 const modalVisible = ref(false)
 
 function toggleModal(data) {
+  error = ref('input mb-[15px] md:mb-8 overflow-hidden')
   if (data) {
     textInputValue.value = ''
     fileInputValue.value = ''
@@ -92,10 +93,16 @@ function changeInputCount(e) {
   })
 }
 let file = ref()
-
+const urlRegex = /^(https?:\/\/)?([\w-]+(\.[\w-]+)+)(\/[\w-./?%&=]*)?$/i
+let error = ref('input mb-[15px] md:mb-8 overflow-hidden')
 function addRef(e) {
   e.preventDefault()
   let description = textareaValue.value
+  if (!urlRegex.test(textInputValue)) {
+    error.value = 'inputError mb-[15px] md:mb-8 overflow-hidden'
+    return 1
+  }
+  error.value = 'input mb-[15px] md:mb-8 overflow-hidden'
   if (alreadyExist.value) {
     if (textInputValue.value) {
       file.value = textInputValue.value
@@ -122,6 +129,7 @@ function addRef(e) {
       refArray.value.push([file.value, description, file.value.name, haveLink.value])
     }
   }
+
   alreadyExist.value = NaN
   textInputValue.value = ''
   fileInputValue.value = ''
@@ -175,7 +183,7 @@ function checkBackLink() {
       </p>
       <input
         v-if="!fileInputValue"
-        class="input mb-[15px] md:mb-8"
+        :class="error"
         placeholder="Вставьте ссылку"
         type="text"
         v-model="textInputValue"
@@ -183,7 +191,13 @@ function checkBackLink() {
 
       <div v-if="fileInputValue" class="p-3 mb-2 rounded-[5px] flex bg-DarkAccent h-16 relative">
         <img :src="src" class="h-full my-auto rounded-[2px]" />
-        <p class="text-Text p3 ml-3 my-auto">{{ fileInputValue.name }}</p>
+        <p class="text-Text p3 ml-3 my-auto">
+          {{
+            fileInputValue.name.length > 55
+              ? fileInputValue.name.substring(0, 52) + '...'
+              : fileInputValue.name
+          }}
+        </p>
         <button @click="fileInputValue = ''" class="trash top-5 absolute right-3"></button>
       </div>
       <p v-if="!textInputValue && !fileInputValue" class="text-Text mb-2 p4">
@@ -214,7 +228,7 @@ function checkBackLink() {
       <!-- fileInput -->
 
       <textarea
-        maxlength="260"
+        maxlength="200"
         v-model="textareaValue"
         placeholder="Опишите, что вам понравилось, а что, наоборот, не хотели бы реализовывать"
         class="bg-DarkAccent hover:bg-background active:bg-DarkAccent w-full flex justify-center cursor-pointer h-[210px] max-h-[210px] md:max-h-[260px] md:h-full rounded-t-[10px] text-Text p-5 placeholder:text-QuietText p3 active:border-[1px] active:border-Accent outline-none mb-8 focus:border-[1px] focus:border-Accent"
