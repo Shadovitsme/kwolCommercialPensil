@@ -98,7 +98,7 @@ let error = ref('input mb-[15px] md:mb-8 overflow-hidden')
 function addRef(e) {
   e.preventDefault()
   let description = textareaValue.value
-  if (!urlRegex.test(textInputValue)) {
+  if (textInputValue.value!=='' && !urlRegex.test(textInputValue.value)) {
     error.value = 'inputError mb-[15px] md:mb-8 overflow-hidden'
     return 1
   }
@@ -135,6 +135,7 @@ function addRef(e) {
   fileInputValue.value = ''
   textareaValue.value = ''
   toggleModal(true)
+  return 0
 }
 
 let src = ref('')
@@ -153,7 +154,6 @@ function checkBackLink() {
   } else {
     const currentUrl = new URL(window.location.href)
     const params = currentUrl.searchParams.toString().replace(/=$/, '')
-    console.log(params)
     window.location.replace(`https://karandash.pro/brief/rooms/${params}`)
   }
 }
