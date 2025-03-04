@@ -72,7 +72,7 @@ function sendMainUserData(e) {
 
 <template>
   <div class="flex px-[22px] md:px-[100px]">
-    <div class="md:mx-auto w-full max-w-[1920px]">
+    <div class="md:mx-auto w-full max-w-[1720px]">
       <h1 class="H1 Text mb-11 md:mb-9 uppercase">Укажите необходимые данные</h1>
       <form id="page2" @submit.prevent="sendMainUserData" class="md:flex max-w-[1920px]">
         <div class="md:mr-16 md:w-[828px]">
@@ -160,7 +160,7 @@ function sendMainUserData(e) {
           <textarea
             v-model="zones"
             id="zones"
-            maxlength="800"
+            maxlength="298"
             type="text"
             class="textarea mb-10"
             placeholder="Перечислите особенности зонирования"

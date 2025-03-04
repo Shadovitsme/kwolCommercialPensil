@@ -160,7 +160,7 @@ function checkBackLink() {
 
     <form
       @submit.prevent="addRef"
-      class="md:h-[820px] relative z-50 w-full md:w-[47.9375rem] mx-auto pt-7 pb-5 px-5 md:p-[3.75rem] rounded-[0.625rem] border-[0.0625rem] bg-background border-Accent"
+      class="md:h-[820px] relative z-50 w-full md:w-[47.9375rem] mx-auto pt-7 pb-5 px-5 md:p-[3.75rem] rounded-t-[10px] md:rounded-[0.625rem] border-[0.0625rem] bg-background border-Accent"
     >
       <div
         @click="toggleModal"
@@ -170,7 +170,9 @@ function checkBackLink() {
       <p class="text-Text p5 md:text-center md:my-8 mt-1 mb-6">
         Вы можете поделиться примерами интерьеров, которые отражают ваши пожелания и предпочтения
       </p>
-      <p v-if="!fileInputValue && !textInputValue" class="text-Text mb-2 p4">Добавьте ссылку на изображение, которое вам понравилось</p>
+      <p v-if="!fileInputValue && !textInputValue" class="text-Text mb-2 p4">
+        Добавьте ссылку на изображение, которое вам понравилось
+      </p>
       <input
         v-if="!fileInputValue"
         class="input mb-[15px] md:mb-8"
@@ -212,7 +214,7 @@ function checkBackLink() {
       <!-- fileInput -->
 
       <textarea
-        maxlength="800"
+        maxlength="260"
         v-model="textareaValue"
         placeholder="Опишите, что вам понравилось, а что, наоборот, не хотели бы реализовывать"
         class="bg-DarkAccent hover:bg-background active:bg-DarkAccent w-full flex justify-center cursor-pointer h-[210px] max-h-[210px] md:max-h-[260px] md:h-full rounded-t-[10px] text-Text p-5 placeholder:text-QuietText p3 active:border-[1px] active:border-Accent outline-none mb-8 focus:border-[1px] focus:border-Accent"
@@ -231,7 +233,7 @@ function checkBackLink() {
   </div>
   <!-- modal -->
   <div class="flex relative px-[22px] md:px-[100px]">
-    <div class="md:mx-auto w-full max-w-[1920px]">
+    <div class="md:mx-auto w-full max-w-[1720px]">
       <form @submit.prevent="changeInputCount" id="page3" class="w-full h-full">
         <h1 class="H1 Text md:mb-10 mb-4 uppercase">ДОПОЛНИТЕЛЬНЫЕ ПОЖЕЛАНИЯ</h1>
         <p class="p3 Text">

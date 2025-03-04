@@ -387,7 +387,7 @@ watch(() => customCounterI.value, updateStyles)
 </script>
 <template>
   <div class="flex px-[22px] md:px-[100px]">
-    <div class="md:mx-auto w-full max-w-[1920px]">
+    <div class="md:mx-auto w-full max-w-[1720px]">
       <form @submit.prevent="sendRoomDetailData" id="bedroom" class="w-full">
         <div v-for="(item, index) in roomCounter" :key="index">
           <h1 class="H1 Text pb-10 uppercase">{{ roomName + ' ' + (index + 1) }}</h1>
@@ -396,19 +396,19 @@ watch(() => customCounterI.value, updateStyles)
             <div :class="testareaStyle">
               <p class="p4 Text mb-2">Пожелания по напольному покрытию</p>
               <textarea
-                maxlength="800"
+                maxlength="260"
                 class="textarea w-full mb-3 h-[140px]"
                 placeholder="Укажите тип покрытия для пола (плитка, ламинат и т. д.) "
               ></textarea>
               <p class="p4 Text mb-2">Пожелания по отделке стен</p>
               <textarea
-                maxlength="800"
+                maxlength="260"
                 class="textarea mb-3 h-[140px]"
                 placeholder="Укажите предпочтения по материалам и цвету. Если нужен декоративный элемент, уточните."
               ></textarea>
               <p class="p4 Text mb-2">Пожелания по отделке потолков</p>
               <textarea
-                maxlength="800"
+                maxlength="260"
                 class="textarea mb-3 h-[140px]"
                 placeholder="Опишите предпочтения по отделке потолков (натяжной, подвесной, многоуровневый, или просто окрашенный.) Укажите предпочтения по материалам и цвету. Если нужен декоративный элемент (карнизы, лепнина, балки), уточните."
               ></textarea>
@@ -422,7 +422,7 @@ watch(() => customCounterI.value, updateStyles)
               />
               <p class="p4 Text mb-2">Другое</p>
               <textarea
-                maxlength="800"
+                maxlength="260"
                 class="textarea h-[140px]"
                 placeholder="Если есть другие пожелания, опишите их здесь"
               ></textarea>

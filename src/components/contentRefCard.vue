@@ -36,7 +36,7 @@ const truncatedHref = computed(() => {
   return props.href.length > 25 ? props.href.substring(0, 25) + '...' : props.href
 })
 const truncatedComment = computed(() => {
-  return props.comment.length > 90 ? props.comment.substring(0, 90) + '...' : props.comment
+  return props.comment.length > 110 ? props.comment.substring(0, 107) + '...' : props.comment
 })
 function handleCardClick() {
   emits('card-click', {
@@ -65,7 +65,7 @@ function handleCrossClick() {
       @click.stop="handleCrossClick"
     ></div>
     <p class="p4 text-BrightAccent">{{ truncatedHref }}</p>
-    <img :src="link" class="h-[8.75rem] my-3" />
+    <img :src="link" class="h-[8.75rem] my-3 rounded-[5px]" />
     <p class="p3 text-Text text-balance break-all">{{ truncatedComment }}</p>
   </div>
 </template>

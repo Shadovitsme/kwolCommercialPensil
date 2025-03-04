@@ -30,8 +30,12 @@ const routes = [
   { path: '/brief_com/rooms', name: 'rooms', component: Rooms },
   { path: '/brief_com/addRefPage', name: 'linkDescribePage', component: addRefPage },
   { path: '/brief_com/thanksPage', name: 'thanksPage', component: ThanksPage },
-]
 
+  {
+    path: '/brief_com/:chapters+',
+    redirect: '/error',
+  },
+]
 const router = createRouter({
   history: createWebHistory(),
   routes,
